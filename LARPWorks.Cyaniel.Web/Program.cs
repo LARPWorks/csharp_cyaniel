@@ -1,15 +1,20 @@
 ﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
+using Nancy.Hosting.Self;
 
 namespace LARPWorks.Cyaniel.Web
 {
-    class Program
+    internal class Program
     {
-        static void Main(string[] args)
+        internal static void Main(string[] args)
         {
+#if DEBUG
+            using (var host = new NancyHost(new Uri("http://localhost:5000")))
+            {
+                host.Start();
+                Console.WriteLine("Running on http://localhost:5000");
+                Console.ReadLine();
+            }
+#endif
         }
     }
 }
