@@ -14,9 +14,9 @@
 8. Navigate to http://localhost:5000/
 
 <h3>Development Guidelines</h3>
-1. New features should go into feature branches.
+1. New features should go into feature branches.</br>
    `It's acceptable to just make a branch with your username for development.`
-2. Master branch is reserved for releases. Usually at milestone completion stages.
+2. Master branch is reserved for releases. Usually at milestone completion stages.</br>
    `Development branch is for active development.`</br>
    `Pull requests on feature branches go to development.`
 
