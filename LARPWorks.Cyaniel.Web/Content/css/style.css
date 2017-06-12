@@ -1,0 +1,139 @@
+body, html {
+    width: 100%;
+    height: 100%;
+}
+
+body, h1, h2, h3 {
+    font-family: "Lato", "Helvetica Neue", Helvetica, Arial, sans-serif;
+    font-weight: 700;
+}
+
+a, .navbar-default .navbar-brand, .navbar-default .navbar-nav>li>a {
+  color: #282727;
+}
+
+a:hover, .navbar-default .navbar-brand:hover, .navbar-default .navbar-nav>li>a:hover {
+  color: #282727;
+}
+
+footer {
+    padding: 50px 0;
+    background-color: #f8f8f8;
+}
+
+p.copyright {
+    margin: 15px 0 0;
+}
+
+.alert-info {
+    width: 50%;
+    margin: auto;
+    color: #282727;
+    background-color: #d5d6cf;
+    border-color: #282727;
+}
+
+.btn-default {
+    border-color: #282727;
+    color: #282727;
+}
+
+.btn-default:hover {
+    background-color: #d5d6cf;
+}
+
+.center {
+    margin: auto;
+    width: 50%;
+    padding: 10px;
+}
+
+.content-section {
+    padding: 50px 0;
+    border-top: 1px solid #e7e7e7;
+}
+
+.footer, .push {
+  clear: both;
+  height: 4em;
+}
+
+.intro-divider {
+    width: 400px;
+    border-top: 1px solid #f8f8f8;
+    border-bottom: 1px solid rgba(0,0,0,0.2);
+}
+
+.intro-header {
+    padding-top: 50px;
+    padding-bottom: 50px;
+    text-align: center;
+    color: #f8f8f8;
+    background: url(../img/background_1.jpg) no-repeat center center;
+    background-size: cover;
+    height: 100%;
+}
+
+.intro-message {
+    position: relative;
+    padding-top: 20%;
+    padding-bottom: 20%;
+}
+
+.intro-message > h1 {
+    margin: 0;
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+    font-size: 5em;
+}
+
+.intro-message > h3 {
+    text-shadow: 2px 2px 3px rgba(0,0,0,0.6);
+}
+
+.lead {
+    font-size: 18px;
+    font-weight: 400;
+}
+
+.topnav {
+    font-size: 14px;
+}
+
+.wrapper {
+  min-height: 100%;
+  height: auto !important;
+  height: 100%;
+  margin: 0 auto -4em;
+}
+
+.image1 {
+  position: relative;
+  top: 0;
+  left: 0;
+}
+.image2 {
+  position: absolute;
+  top: 125px;
+  left: 175px;
+}
+
+.parent {
+  position: relative;
+}
+
+.outer {
+    display: table;
+    position: absolute;
+    height: 70%;
+    width: 100%;
+}
+
+.middle {
+    display: table-cell;
+    vertical-align: middle;
+}
+
+.inner {
+    margin-left: auto;
+    margin-right: auto;
+}
