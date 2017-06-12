@@ -1,8 +1,8 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<System.Object>
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Web.Features.SharedViews.BaseCyanielViewModel>
 @using MySQL
 @functions {
     public string Title = "Gothic: The Lion Age";
-    public user CurrentUser = null;
+    //public user CurrentUser = null;
 }
 
 <html lang="en">
@@ -10,7 +10,7 @@
     <title>@Title</title>
     <link href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
     <link href="/Content/css/style.css" rel="stylesheet">
-    <!-- <link rel="shortcut icon" href="~/Content/img/favicon.ico">  -->
+    <!-- <link rel="shortcut icon" href="~/Content/img/favicon.ico"> -->
     <link href="https://maxcdn.bootstrapcdn.com/font-awesome/4.7.0/css/font-awesome.min.css" rel="stylesheet">
     <style>
         /* Style the tab */
@@ -20,26 +20,26 @@
             background-color: #f1f1f1;
         }
 
-            /* Style the buttons inside the tab */
-            div.tab button {
-                background-color: inherit;
-                float: left;
-                border: none;
-                outline: none;
-                cursor: pointer;
-                padding: 14px 16px;
-                transition: 0.3s;
-            }
+        /* Style the buttons inside the tab */
+        div.tab button {
+            background-color: inherit;
+            float: left;
+            border: none;
+            outline: none;
+            cursor: pointer;
+            padding: 14px 16px;
+            transition: 0.3s;
+        }
 
-                /* Change background color of buttons on hover */
-                div.tab button:hover {
-                    background-color: #ddd;
-                }
+        /* Change background color of buttons on hover */
+        div.tab button:hover {
+            background-color: #ddd;
+        }
 
-                /* Create an active/current tablink class */
-                div.tab button.active {
-                    background-color: #ccc;
-                }
+        /* Create an active/current tablink class */
+        div.tab button.active {
+            background-color: #ccc;
+        }
 
         /* Style the tab content */
         .tabcontent {
@@ -86,9 +86,9 @@
             </div>
             <div class="collapse navbar-collapse" id="bs-example-navbar-collapse-1">
                 <ul class="nav navbar-nav navbar-right">
-                    @if (CurrentUser != null)
+                    @if (Model.CurrentUser != null)
                     {
-                        if (CurrentUser.is_admin == 1)
+                        if (Model.CurrentUser.is_admin == 1)
                         {
                             <li><a href="{{ url_for('home.admin_dashboard') }}">Dashboard</a></li>
                             <li><a href="{{ url_for('admin.list_users') }}">Users</a></li>
@@ -101,14 +101,14 @@
                         {
                             <li><a href="{{ url_for('home.dashboard') }}">Dashboard</a></li>
                         }
-                        <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
-                        <li><a><i class="fa fa-user"></i> Hi, @CurrentUser.user_name!</a></li>
+                        <li><a href="/users/logout">Logout</a></li>
+                        <li><a><i class="fa fa-user"></i> Hi, @Model.CurrentUser.user_name!</a></li>
                     }
                     else
                     {
-                        <li><a href="{{ url_for('home.homepage') }}">Home</a></li>
-                        <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-                        <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                        <li><a href="/">Home</a></li>
+                        <li><a href="/users/register">Register</a></li>
+                        <li><a href="/users/login">Login</a></li>
                     }
                 </ul>
             </div>
@@ -123,17 +123,17 @@
             <div class="row">
                 <div class="col-lg-12">
                     <ul class="list-inline">
-                        <li><a href="{{ url_for('home.homepage') }}">Home</a></li>
+                        <li><a href="/">Home</a></li>
                         <li class="footer-menu-divider">⋅</li>
-                        @if (CurrentUser != null)
+                        @if (Model.CurrentUser != null)
                         {
-                            <li><a href="{{ url_for('auth.logout') }}">Logout</a></li>
+                            <li><a href="/users/logout">Logout</a></li>
                         }
                         else
                         {
-                            <li><a href="{{ url_for('auth.register') }}">Register</a></li>
-                            <li class="footer-menu-divider">⋅</li>
-                            <li><a href="{{ url_for('auth.login') }}">Login</a></li>
+                            <li><a href="/users/register">Register</a></li>
+                            <li class="footer-menu-divider">'</li>
+                            <li><a href="/users/login">Login</a></li>
                         }
                     </ul>
                     <p class="copyright text-muted small">Copyright LARPWorks © 2017. All Rights Reserved</p>

@@ -38,7 +38,7 @@ namespace LARPWorks.Cyaniel.Web
 
             nancyConventions.ViewLocationConventions.Add(
                 (viewName, model, viewLocationContext) =>
-                    "Features" + viewLocationContext.ModulePath + "/Views/" + viewName);
+                    "Features/" + viewLocationContext.ModulePath + "/Views/" + viewName);
 
             nancyConventions.ViewLocationConventions.Add(
                 (viewName, model, viewLocationContext) =>
