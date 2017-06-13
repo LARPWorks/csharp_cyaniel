@@ -1,13 +1,12 @@
 ﻿using LARPWorks.Cyaniel.Web.Features.SharedViews;
-using Nancy;
 
-namespace LARPWorks.Cyaniel.Web.Modules.Home
+namespace LARPWorks.Cyaniel.Web.Features.Home
 {
-    public class HomeModule : NancyModule
+    public class HomeModule : CyanielModule
     {
         public HomeModule()
-        {
-            Get["/"] = parameters => View["Index.cshtml", new BaseCyanielViewModel()];
+        {   
+            Get["/"] = parameters => View["Index.cshtml", GetViewModel<BaseCyanielViewModel>()];
         }
     }
 }
