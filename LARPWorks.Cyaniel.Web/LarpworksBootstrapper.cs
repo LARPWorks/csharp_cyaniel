@@ -1,6 +1,7 @@
 ﻿using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.StructureMap;
+using Nancy.Conventions;
 using StructureMap;
 
 namespace LARPWorks.Cyaniel.Web
@@ -27,6 +28,29 @@ namespace LARPWorks.Cyaniel.Web
         {
             // No registrations should be performed in here, however you may
             // resolve things that are needed during request startup.
+        }
+
+        protected override void ConfigureConventions(NancyConventions nancyConventions)
+        {
+            base.ConfigureConventions(nancyConventions);
+
+            nancyConventions.ViewLocationConventions.Clear();
+
+            nancyConventions.ViewLocationConventions.Add(
+                (viewName, model, viewLocationContext) =>
+                    "Features/" + viewLocationContext.ModulePath + "/Views/" + viewName);
+
+            nancyConventions.ViewLocationConventions.Add(
+                (viewName, model, viewLocationContext) =>
+                    "Features/Home/Views/" + viewName);
+
+            nancyConventions.ViewLocationConventions.Add(
+                (viewName, model, viewLocationContext) =>
+                    "Features/" + viewName);
+
+            nancyConventions.ViewLocationConventions.Add(
+                (viewName, model, viewLocationContext) =>
+                    "Features/SharedViews/" + viewName);
         }
     }
 }
