@@ -46,12 +46,6 @@ namespace LARPWorks.Cyaniel.Web.Features.Users
                     failedValidation = true;
                     validationError += e.Message;
                 }
-                 
-                //if (string.IsNullOrEmpty(newUser.Username))
-                //{
-                //    failedValidation = true;
-                //    validationError += string.Format("Must provide a username!<br>");
-                //}
 
                 if (failedValidation)
                 {
@@ -60,16 +54,6 @@ namespace LARPWorks.Cyaniel.Web.Features.Users
                 }
 
                 return this.LoginAndRedirect(new Guid(token.Id));
-                //return Response.AsRedirect("/");
-
-                //var accountName = Request.Form.AccountName;
-                //var password = Request.Form.Password;
-                //var password2 = Request.Form.Password2;
-
-                //if (password != password2) {
-
-                //}
-                //return View["Register.cshtml", baseCyanielViewModel];
             };
         }
     }
