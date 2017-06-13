@@ -1,0 +1,37 @@
+﻿@using MySQL
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Web.Features.Bucket.IndexViewModel>
+@{
+    Layout = "_Layout.cshtml";
+}
+
+
+<div class="content-section">
+    <div class="center">
+        <h1>Buckets</h1>
+        <p>Below are your active tickets, click one to see more information.</p>
+
+        @foreach (string bucket in Model.Tickets.Keys)
+        {
+            <h2>@bucket</h2>
+            <table class="table table-striped">
+                <thead>
+                <tr>
+                    <th>Ticket Subject</th>
+                    <th>Submitter</th>
+                    <th>Status</th>
+                </tr>
+                </thead>
+                <tbody>
+                @foreach (BucketTicket ticket in Model.Tickets[bucket])
+                {
+                    <tr>
+                        <td><b>@ticket.Title</b></td>
+                        <td>@ticket.CreatorId</td>
+                        <td>@ticket.Status</td>
+                    </tr>
+                }
+                </tbody>
+            </table>
+        }
+    </div>
+</div>

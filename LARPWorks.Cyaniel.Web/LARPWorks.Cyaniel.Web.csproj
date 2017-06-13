@@ -90,6 +90,8 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Buckets\BucketModule.cs" />
+    <Compile Include="Features\Buckets\IndexViewModel.cs" />
     <Compile Include="Features\CyanielModule.cs" />
     <Compile Include="Features\Users\Authentication\UserIdentity.cs" />
     <Compile Include="Features\Users\LoginModule.cs" />
@@ -130,6 +132,9 @@
     <Content Include="Content\img\larpworks_logo.png">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Features\Buckets\Views\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Features\Home\Views\Index.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
@@ -152,7 +157,6 @@
   </ItemGroup>
   <ItemGroup>
     <Folder Include="Features\Admin\" />
-    <Folder Include="Features\Bucket\" />
     <Folder Include="Features\Characters\" />
   </ItemGroup>
   <Import Project="$(MSBuildToolsPath)\Microsoft.CSharp.targets" />
