@@ -1,8 +1,8 @@
 ﻿using System;
-using LARPWorks.Cyaniel.Web.Features.SharedViews;
 using LARPWorks.Cyaniel.Web.Models.Factories;
 using MySQL;
 using Nancy;
+using Nancy.Authentication.Forms;
 using Nancy.ModelBinding;
 
 namespace LARPWorks.Cyaniel.Web.Features.Users
@@ -18,6 +18,11 @@ namespace LARPWorks.Cyaniel.Web.Features.Users
             {
                 viewModel = this.Bind<RegisterViewModel>();
                 var user = viewModel.BuildUser();
+                var token = new AuthenticationToken
+                {
+                    Id = Guid.NewGuid().ToByteArray(),
+                    CreatedOn = DateTime.UtcNow
+                };
                 var validationError = "";
                 var failedValidation = false;
 
@@ -32,7 +37,9 @@ namespace LARPWorks.Cyaniel.Web.Features.Users
                 {
                     using (var db = dbFactory.Create())
                     {
-                        db.Insert(user);
+                        var id = db.Insert(user);
+                        token.UserId = int.Parse(id.ToString());
+                        db.Insert(token);
                     }
                 }
                 catch (Exception e)
@@ -53,7 +60,8 @@ namespace LARPWorks.Cyaniel.Web.Features.Users
                     return View["Register.cshtml", viewModel];
                 }
 
-                return Response.AsRedirect("/");
+                return this.LoginAndRedirect(new Guid(token.Id));
+                //return Response.AsRedirect("/");
 
                 //var accountName = Request.Form.AccountName;
                 //var password = Request.Form.Password;

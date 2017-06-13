@@ -159,6 +159,16 @@ namespace MySQL
 		[Column] public int AttributeTypeId { get; set; }
 	}
     
+	[TableName("larpworks.AuthenticationTokens")]
+	[PrimaryKey("Id", AutoIncrement=false)]
+	[ExplicitColumns]
+    public partial class AuthenticationToken : LarpworksDatabase.Record<AuthenticationToken>  
+    {
+		[Column] public byte[] Id { get; set; }
+		[Column] public int UserId { get; set; }
+		[Column] public DateTime CreatedOn { get; set; }
+	}
+    
 	[TableName("larpworks.AwardLogs")]
 	[PrimaryKey("Id")]
 	[ExplicitColumns]

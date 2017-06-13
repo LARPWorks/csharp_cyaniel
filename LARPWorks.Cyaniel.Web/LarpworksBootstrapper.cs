@@ -1,5 +1,8 @@
-﻿using LARPWorks.Cyaniel.Web.Models.Factories;
+﻿using LARPWorks.Cyaniel.Web.Features.Users;
+using LARPWorks.Cyaniel.Web.Models.Factories;
+using LARPWorks.Cyaniel.Web.Modules.Home;
 using Nancy;
+using Nancy.Authentication.Forms;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.StructureMap;
 using Nancy.Conventions;
@@ -17,7 +20,18 @@ namespace LARPWorks.Cyaniel.Web
                 x =>
                 {
                     x.For<IDbFactory>().Use(new CyanielDatabaseFactory()).Singleton();
+                    x.For<IUserMapper>().Use<MySQLUserMapper>();
                 });
+
+            // This code exists to enable session-cookie authentication
+            // for the website.
+            var formsAuthConfiguration =
+                new FormsAuthenticationConfiguration()
+                {
+                    RedirectUrl = "~/login",
+                    UserMapper = container.GetInstance<IUserMapper>()
+                };
+            FormsAuthentication.Enable(pipelines, formsAuthConfiguration);
         }
 
         protected override void ConfigureApplicationContainer(IContainer existingContainer)
