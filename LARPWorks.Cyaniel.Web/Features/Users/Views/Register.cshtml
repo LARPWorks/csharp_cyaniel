@@ -14,7 +14,62 @@
                 <p>Error! @ViewBag.ValidationError</p>
             </div>
         }
-        <form class="form-horizontal" method="post">
+        <form class="form-horizontal" method="POST">
+            <fieldset>
+
+                <!-- Form Name -->
+                <legend>Form Name</legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">First Name</label>
+                    <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" required="">
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">Last Name</label>
+                    <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" required="">
+
+                    </div>
+                </div>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="textinput">Email Address</label>
+                    <div class="col-md-4">
+                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" required="">
+
+                    </div>
+                </div>
+
+                <!-- Password input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="password">Password</label>
+                    <div class="col-md-4">
+                        <input id="password" name="passwordinput" type="password" placeholder="" class="form-control input-md" required="">
+
+                    </div>
+                </div>
+
+                <!-- Password input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="password_verify">Re-Enter Password</label>
+                    <div class="col-md-4">
+                        <input id="password_verify" name="passwordinput" type="password" placeholder="" class="form-control input-md" required="">
+
+                    </div>
+                </div>
+
+                <input type="submit" class="submit" />
+            </fieldset>
+        </form>
+
+        @*<form class="form-horizontal" method="post">
             <fieldset>
                 <legend>Please provide your desired credentials</legend>
                 <label>User name</label>
@@ -25,6 +80,6 @@
                 <input type="text" name="password2" placeholder="Re-enter your password" />
                 <input type="submit" class="submit" />
             </fieldset>
-        </form>
+        </form>*@
     </div>
 </div>

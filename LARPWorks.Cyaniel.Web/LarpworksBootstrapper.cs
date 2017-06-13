@@ -1,4 +1,5 @@
-﻿using Nancy;
+﻿using LARPWorks.Cyaniel.Web.Models.Factories;
+using Nancy;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.StructureMap;
 using Nancy.Conventions;
@@ -12,6 +13,11 @@ namespace LARPWorks.Cyaniel.Web
         {
             // No registrations should be performed in here, however you may
             // resolve things that are needed during application startup.
+            container.Configure(
+                x =>
+                {
+                    x.For<IDbFactory>().Use(new CyanielDatabaseFactory()).Singleton();
+                });
         }
 
         protected override void ConfigureApplicationContainer(IContainer existingContainer)

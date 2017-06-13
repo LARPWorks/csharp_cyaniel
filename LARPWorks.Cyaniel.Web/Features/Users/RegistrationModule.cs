@@ -1,4 +1,6 @@
-﻿using LARPWorks.Cyaniel.Web.Features.SharedViews;
+﻿using System;
+using LARPWorks.Cyaniel.Web.Features.SharedViews;
+using LARPWorks.Cyaniel.Web.Models.Factories;
 using MySQL;
 using Nancy;
 using Nancy.ModelBinding;
@@ -7,23 +9,35 @@ namespace LARPWorks.Cyaniel.Web.Features.Users
 {
     public class RegistrationModule : NancyModule
     {
-        public RegistrationModule() : base("Users")
+        public RegistrationModule(IDbFactory dbFactory) : base("Users")
         {
             var baseCyanielViewModel = new BaseCyanielViewModel();
             Get["/register"] = parameters => View["Register.cshtml", baseCyanielViewModel];
-
-#pragma warning disable CS1998 // Async method lacks 'await' operators and will run synchronously
-            Post["/register", true] = async (x, ct) =>
+            
+            Post["/register"] = parameters =>
             {
                 User newUser = this.Bind<User>();
                 var validationError = "";
                 var failedValidation = false;
 
-                if (string.IsNullOrEmpty(newUser.Username))
+                try
+                {
+                    using (var db = dbFactory.Create())
+                    {
+                        db.Insert(newUser);
+                    }
+                }
+                catch (Exception e)
                 {
                     failedValidation = true;
-                    validationError += string.Format("Must provide a username!<br>");
+                    validationError += e.Message;
                 }
+                 
+                //if (string.IsNullOrEmpty(newUser.Username))
+                //{
+                //    failedValidation = true;
+                //    validationError += string.Format("Must provide a username!<br>");
+                //}
 
                 if (failedValidation)
                 {
@@ -42,7 +56,6 @@ namespace LARPWorks.Cyaniel.Web.Features.Users
                 //}
                 //return View["Register.cshtml", baseCyanielViewModel];
             };
-#pragma warning restore CS1998 // Async method lacks 'await' operators and will run synchronously
         }
     }
 }

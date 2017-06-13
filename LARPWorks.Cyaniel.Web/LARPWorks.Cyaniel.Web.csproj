@@ -89,6 +89,8 @@
     <Compile Include="Features\Users\RegistrationModule.cs" />
     <Compile Include="Features\SharedViews\BaseCyanielViewModel.cs" />
     <Compile Include="LarpworksBootstrapper.cs" />
+    <Compile Include="Models\Factories\CyanielDatabaseFactory.cs" />
+    <Compile Include="Models\Factories\IDbFactory.cs" />
     <Compile Include="Models\Generated\Database.cs">
       <AutoGen>True</AutoGen>
       <DesignTime>True</DesignTime>
