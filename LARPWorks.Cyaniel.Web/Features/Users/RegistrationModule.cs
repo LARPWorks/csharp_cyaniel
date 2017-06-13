@@ -7,7 +7,7 @@ using Nancy.ModelBinding;
 
 namespace LARPWorks.Cyaniel.Web.Features.Users
 {
-    public class RegistrationModule : NancyModule
+    public class RegistrationModule : CyanielModule
     {
         public RegistrationModule(IDbFactory dbFactory) : base("Users")
         {
@@ -28,7 +28,6 @@ namespace LARPWorks.Cyaniel.Web.Features.Users
 
                 if (viewModel.Password != viewModel.Password2)
                 {
-                    ViewBag.ValidationError = true;
                     ViewBag.ValidationError = "Passwords did not match.";
                     return View["Register.cshtml", viewModel];
                 }

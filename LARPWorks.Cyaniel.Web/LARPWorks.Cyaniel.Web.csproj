@@ -90,6 +90,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\CyanielModule.cs" />
     <Compile Include="Features\Users\Authentication\UserIdentity.cs" />
     <Compile Include="Features\Users\LoginModule.cs" />
     <Compile Include="Features\Users\LoginViewModel.cs" />

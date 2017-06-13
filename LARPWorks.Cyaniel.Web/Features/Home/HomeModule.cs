@@ -1,25 +1,12 @@
 ﻿using LARPWorks.Cyaniel.Web.Features.SharedViews;
-using LARPWorks.Cyaniel.Web.Features.Users.Authentication;
-using Nancy;
 
-namespace LARPWorks.Cyaniel.Web.Modules.Home
+namespace LARPWorks.Cyaniel.Web.Features.Home
 {
-    public class HomeModule : NancyModule
+    public class HomeModule : CyanielModule
     {
         public HomeModule()
         {   
-            Get["/"] = parameters =>
-            {
-                var viewModel = new BaseCyanielViewModel();
-
-                var user = Context.CurrentUser as UserIdentity;
-                if (user != null)
-                {
-                    viewModel.CurrentUser = user.GetUser();
-                }
-                
-                return View["Index.cshtml", viewModel];
-            };
+            Get["/"] = parameters => View["Index.cshtml", GetViewModel<BaseCyanielViewModel>()];
         }
     }
 }

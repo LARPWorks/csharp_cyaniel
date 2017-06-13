@@ -1,6 +1,5 @@
 ﻿using LARPWorks.Cyaniel.Web.Features.Users;
 using LARPWorks.Cyaniel.Web.Models.Factories;
-using LARPWorks.Cyaniel.Web.Modules.Home;
 using Nancy;
 using Nancy.Authentication.Forms;
 using Nancy.Bootstrapper;
