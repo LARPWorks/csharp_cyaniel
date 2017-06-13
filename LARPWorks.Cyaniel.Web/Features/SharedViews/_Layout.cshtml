@@ -88,7 +88,7 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (Model.CurrentUser != null)
                     {
-                        if (Model.CurrentUser.is_admin == 1)
+                        if (true)
                         {
                             <li><a href="{{ url_for('home.admin_dashboard') }}">Dashboard</a></li>
                             <li><a href="{{ url_for('admin.list_users') }}">Users</a></li>
@@ -102,7 +102,7 @@
                             <li><a href="{{ url_for('home.dashboard') }}">Dashboard</a></li>
                         }
                         <li><a href="/users/logout">Logout</a></li>
-                        <li><a><i class="fa fa-user"></i> Hi, @Model.CurrentUser.user_name!</a></li>
+                        <li><a><i class="fa fa-user"></i> Hi, @Model.CurrentUser.Username!</a></li>
                     }
                     else
                     {
