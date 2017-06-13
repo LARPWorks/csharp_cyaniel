@@ -1,4 +1,4 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Web.Features.SharedViews.BaseCyanielViewModel>
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Web.Features.Users.LoginViewModel>
 @{
     Layout = "_Layout.cshtml";
 }
@@ -10,6 +10,45 @@
     <div class="center">
         <h1>Login to Your Account</h1>
         <br />
-        <!--{{ wtf.quick_form(form) }}-->
+        @if (ViewBag.ValidationError != null)
+        {
+            <div class="alert alert-danger alert-dismissable fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Error!</strong> @ViewBag.ValidationError
+            </div>
+        }
+
+        <form class="form-horizontal" method="POST">
+            <fieldset>
+                <!-- Form Name -->
+                <legend>Form Name</legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Username">Username</label>
+                    <div class="col-md-4">
+                        <input id="Username" name="Username" type="text" value="@Model.Username" class="form-control input-md" required="">
+                    </div>
+                </div>
+
+                <!-- Password input-->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="Password">Password</label>
+                    <div class="col-md-4">
+                        <input id="Password" name="Password" type="password" value="@Model.Password" class="form-control input-md" required="">
+
+                    </div>
+                </div>
+
+                <!-- Button -->
+
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="singlebutton"></label>
+                    <div class="col-md-4">
+                        <button id="singlebutton" name="singlebutton" class="btn btn-primary">Login</button>
+                    </div>
+                </div>
+            </fieldset>
+        </form>
     </div>
 </div>
