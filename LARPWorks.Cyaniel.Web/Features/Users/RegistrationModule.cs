@@ -11,20 +11,28 @@ namespace LARPWorks.Cyaniel.Web.Features.Users
     {
         public RegistrationModule(IDbFactory dbFactory) : base("Users")
         {
-            var baseCyanielViewModel = new BaseCyanielViewModel();
-            Get["/register"] = parameters => View["Register.cshtml", baseCyanielViewModel];
+            var viewModel = new RegisterViewModel();
+            Get["/register"] = parameters => View["Register.cshtml", viewModel];
             
             Post["/register"] = parameters =>
             {
-                User newUser = this.Bind<User>();
+                viewModel = this.Bind<RegisterViewModel>();
+                var user = viewModel.BuildUser();
                 var validationError = "";
                 var failedValidation = false;
+
+                if (viewModel.Password != viewModel.Password2)
+                {
+                    ViewBag.ValidationError = true;
+                    ViewBag.ValidationError = "Passwords did not match.";
+                    return View["Register.cshtml", viewModel];
+                }
 
                 try
                 {
                     using (var db = dbFactory.Create())
                     {
-                        db.Insert(newUser);
+                        db.Insert(user);
                     }
                 }
                 catch (Exception e)
@@ -42,10 +50,10 @@ namespace LARPWorks.Cyaniel.Web.Features.Users
                 if (failedValidation)
                 {
                     ViewBag.ValidationError = validationError;
-                    return View["Register.cshtml", baseCyanielViewModel];
+                    return View["Register.cshtml", viewModel];
                 }
 
-                return View["Register.cshtml", baseCyanielViewModel];
+                return Response.AsRedirect("/");
 
                 //var accountName = Request.Form.AccountName;
                 //var password = Request.Form.Password;

@@ -1,4 +1,4 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Web.Features.SharedViews.BaseCyanielViewModel>
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Web.Features.Users.RegisterViewModel>
 @{
     Layout = "_Layout.cshtml";
 }
@@ -7,11 +7,11 @@
     <div class="center">
         <h1>Register for an Account</h1>
         <br />
-        <!--{{ wtf.quick_form(form) }}-->
         @if (ViewBag.ValidationError != null)
         {
-            <div class="alert-error">
-                <p>Error! @ViewBag.ValidationError</p>
+            <div class="alert alert-danger alert-dismissable fade in">
+                <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                <strong>Error!</strong> @ViewBag.ValidationError
             </div>
         }
         <form class="form-horizontal" method="POST">
@@ -20,29 +20,37 @@
                 <!-- Form Name -->
                 <legend>Form Name</legend>
 
+                <!-- Text Input -->
+                <div class="form-group">
+                    <label class="col-md-4 control-label" for="username">Username</label>
+                    <div class="col-md-4">
+                        <input id="username" name="Username" type="text" value="@Model.Username" class="form-control input-md" required=""/>
+                    </div>
+                </div>
+
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="textinput">First Name</label>
+                    <label class="col-md-4 control-label" for="firstname">First Name</label>
                     <div class="col-md-4">
-                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" required="">
+                        <input id="firstname" name="FirstName" type="text" value="@Model.FirstName" class="form-control input-md" required="">
 
                     </div>
                 </div>
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="textinput">Last Name</label>
+                    <label class="col-md-4 control-label" for="lastname">Last Name</label>
                     <div class="col-md-4">
-                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" required="">
+                        <input id="lastname" name="LastName" type="text" value="@Model.LastName" class="form-control input-md" required="">
 
                     </div>
                 </div>
 
                 <!-- Text input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="textinput">Email Address</label>
+                    <label class="col-md-4 control-label" for="email">Email Address</label>
                     <div class="col-md-4">
-                        <input id="textinput" name="textinput" type="text" placeholder="" class="form-control input-md" required="">
+                        <input id="email" name="Email" type="text" value="@Model.Email" class="form-control input-md" required="">
 
                     </div>
                 </div>
@@ -51,16 +59,16 @@
                 <div class="form-group">
                     <label class="col-md-4 control-label" for="password">Password</label>
                     <div class="col-md-4">
-                        <input id="password" name="passwordinput" type="password" placeholder="" class="form-control input-md" required="">
+                        <input id="password" name="Password" type="password" value="@Model.Password" class="form-control input-md" required="">
 
                     </div>
                 </div>
 
                 <!-- Password input-->
                 <div class="form-group">
-                    <label class="col-md-4 control-label" for="password_verify">Re-Enter Password</label>
+                    <label class="col-md-4 control-label" for="password2">Re-Enter Password</label>
                     <div class="col-md-4">
-                        <input id="password_verify" name="passwordinput" type="password" placeholder="" class="form-control input-md" required="">
+                        <input id="password2" name="Password2" type="password" value="@Model.Password2" class="form-control input-md" required="">
 
                     </div>
                 </div>

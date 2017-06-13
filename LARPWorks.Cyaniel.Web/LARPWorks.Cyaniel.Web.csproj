@@ -86,6 +86,7 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Features\Users\RegisterViewModel.cs" />
     <Compile Include="Features\Users\RegistrationModule.cs" />
     <Compile Include="Features\SharedViews\BaseCyanielViewModel.cs" />
     <Compile Include="LarpworksBootstrapper.cs" />
