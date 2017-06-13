@@ -8,5 +8,23 @@
         <h1>Register for an Account</h1>
         <br />
         <!--{{ wtf.quick_form(form) }}-->
+        @if (ViewBag.ValidationError != null)
+        {
+            <div class="alert-error">
+                <p>Error! @ViewBag.ValidationError</p>
+            </div>
+        }
+        <form class="form-horizontal" method="post">
+            <fieldset>
+                <legend>Please provide your desired credentials</legend>
+                <label>User name</label>
+                <input type="text" name="username" placeholder="Create your username" />
+                <label>Password</label>
+                <input type="text" name="password" placeholder="Create your password" />
+                <label>Re-enter your password</label>
+                <input type="text" name="password2" placeholder="Re-enter your password" />
+                <input type="submit" class="submit" />
+            </fieldset>
+        </form>
     </div>
 </div>
