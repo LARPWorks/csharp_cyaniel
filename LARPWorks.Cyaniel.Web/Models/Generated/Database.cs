@@ -6,7 +6,7 @@
 // 
 //     Connection String Name: `MySQL`
 //     Provider:               `MySql.Data.MySqlClient`
-//     Connection String:      `Server=localhost;Database=larpworks_db;Uid=larpworks_admin;Pwd=larpworks;`
+//     Connection String:      `Server=localhost;Database=larpworks;Uid=larpworks_admin;Pwd=larpworks;`
 //     Schema:                 ``
 //     Include Views:          `False`
 
@@ -107,227 +107,180 @@ namespace MySQL
 	
 
     
-	[TableName("larpworks_db.advancement_list_attributes")]
-	[PrimaryKey("id")]
+	[TableName("larpworks.AdvancementListAttributes")]
+	[PrimaryKey("Id")]
 	[ExplicitColumns]
-    public partial class advancement_list_attribute : LarpworksDatabase.Record<advancement_list_attribute>  
+    public partial class AdvancementListAttribute : LarpworksDatabase.Record<AdvancementListAttribute>  
     {
-		[Column] public int id { get; set; }
-		[Column] public int advancement_list_id { get; set; }
-		[Column] public int attribute_id { get; set; }
-		[Column] public sbyte is_staff_only { get; set; }
-		[Column] public sbyte is_free_with_requirements { get; set; }
+		[Column] public int Id { get; set; }
+		[Column] public int AdvancementListId { get; set; }
+		[Column] public int AttributeId { get; set; }
+		[Column] public bool IsStaffOnly { get; set; }
+		[Column] public bool IsFreeWithRequirements { get; set; }
 	}
     
-	[TableName("larpworks_db.advancement_list_requirements")]
+	[TableName("larpworks.AdvancementListRequirements")]
 	[ExplicitColumns]
-    public partial class advancement_list_requirement : LarpworksDatabase.Record<advancement_list_requirement>  
+    public partial class AdvancementListRequirement : LarpworksDatabase.Record<AdvancementListRequirement>  
     {
-		[Column] public int? advancement_list_attribute_id { get; set; }
-		[Column] public int? attribute_requirement_id { get; set; }
-		[Column] public int? requirement_rank { get; set; }
+		[Column] public int AdvancementListAttributeId { get; set; }
+		[Column] public int AttributeRequirementId { get; set; }
+		[Column] public int RequirementRank { get; set; }
 	}
     
-	[TableName("larpworks_db.advancement_lists")]
-	[PrimaryKey("id")]
+	[TableName("larpworks.AdvancementLists")]
+	[PrimaryKey("Id", AutoIncrement=false)]
 	[ExplicitColumns]
-    public partial class advancement_list : LarpworksDatabase.Record<advancement_list>  
+    public partial class AdvancementList : LarpworksDatabase.Record<AdvancementList>  
     {
-		[Column] public int id { get; set; }
-		[Column] public string name { get; set; }
-		[Column] public sbyte is_chargen_only { get; set; }
-		[Column] public sbyte is_staff_only { get; set; }
+		[Column] public int Id { get; set; }
+		[Column] public string Name { get; set; }
+		[Column] public bool IsChargenOnly { get; set; }
+		[Column] public bool IsStaffOnly { get; set; }
 	}
     
-	[TableName("larpworks_db.alembic_version")]
-	[PrimaryKey("version_num", AutoIncrement=false)]
+	[TableName("larpworks.AttributeTypes")]
+	[PrimaryKey("Id")]
 	[ExplicitColumns]
-    public partial class alembic_version : LarpworksDatabase.Record<alembic_version>  
+    public partial class AttributeType : LarpworksDatabase.Record<AttributeType>  
     {
-		[Column] public string version_num { get; set; }
+		[Column] public int Id { get; set; }
+		[Column] public string Name { get; set; }
 	}
     
-	[TableName("larpworks_db.attribute_types")]
-	[PrimaryKey("id")]
+	[TableName("larpworks.Attributes")]
+	[PrimaryKey("Id")]
 	[ExplicitColumns]
-    public partial class attribute_type : LarpworksDatabase.Record<attribute_type>  
+    public partial class Attribute : LarpworksDatabase.Record<Attribute>  
     {
-		[Column] public int id { get; set; }
-		[Column] public string name { get; set; }
+		[Column] public int Id { get; set; }
+		[Column] public string Name { get; set; }
+		[Column] public string Description { get; set; }
+		[Column] public int AttributeTypeId { get; set; }
 	}
     
-	[TableName("larpworks_db.attributes")]
-	[PrimaryKey("id")]
+	[TableName("larpworks.AwardLogs")]
+	[PrimaryKey("Id")]
 	[ExplicitColumns]
-    public partial class attribute : LarpworksDatabase.Record<attribute>  
+    public partial class AwardLog : LarpworksDatabase.Record<AwardLog>  
     {
-		[Column] public int id { get; set; }
-		[Column] public string attribute_name { get; set; }
-		[Column] public string description { get; set; }
-		[Column] public int attribute_type_id { get; set; }
+		[Column] public int Id { get; set; }
+		[Column] public int UserId { get; set; }
+		[Column] public int? CharacterId { get; set; }
+		[Column] public int AwardTypeId { get; set; }
+		[Column] public DateTime AwardDate { get; set; }
+		[Column] public int Amount { get; set; }
+		[Column] public string Reason { get; set; }
 	}
     
-	[TableName("larpworks_db.award_logs")]
-	[PrimaryKey("id")]
+	[TableName("larpworks.AwardTypes")]
+	[PrimaryKey("Id")]
 	[ExplicitColumns]
-    public partial class award_log : LarpworksDatabase.Record<award_log>  
+    public partial class AwardType : LarpworksDatabase.Record<AwardType>  
     {
-		[Column] public int id { get; set; }
-		[Column] public int user_id { get; set; }
-		[Column] public int? character_id { get; set; }
-		[Column] public int award_type_id { get; set; }
-		[Column] public DateTime award_date { get; set; }
-		[Column] public int amount { get; set; }
-		[Column] public string reason { get; set; }
+		[Column] public int Id { get; set; }
+		[Column] public string Name { get; set; }
 	}
     
-	[TableName("larpworks_db.award_types")]
-	[PrimaryKey("id")]
+	[TableName("larpworks.BucketTickets")]
+	[PrimaryKey("Id")]
 	[ExplicitColumns]
-    public partial class award_type : LarpworksDatabase.Record<award_type>  
+    public partial class BucketTicket : LarpworksDatabase.Record<BucketTicket>  
     {
-		[Column] public int id { get; set; }
-		[Column] public string name { get; set; }
+		[Column] public int Id { get; set; }
+		[Column] public int BucketId { get; set; }
+		[Column] public string Title { get; set; }
+		[Column] public int CreatorId { get; set; }
+		[Column] public int? AssigneeId { get; set; }
+		[Column] public int Status { get; set; }
+		[Column] public DateTime CreatedOn { get; set; }
+		[Column] public DateTime? LastModified { get; set; }
 	}
     
-	[TableName("larpworks_db.bucket_tickets")]
-	[PrimaryKey("id")]
+	[TableName("larpworks.Buckets")]
+	[PrimaryKey("Id")]
 	[ExplicitColumns]
-    public partial class bucket_ticket : LarpworksDatabase.Record<bucket_ticket>  
+    public partial class Bucket : LarpworksDatabase.Record<Bucket>  
     {
-		[Column] public int id { get; set; }
-		[Column] public int bucket_id { get; set; }
-		[Column] public string title { get; set; }
-		[Column] public int creator_id { get; set; }
-		[Column] public int? assignee_id { get; set; }
-		[Column] public int? status { get; set; }
-		[Column] public DateTime? created_on { get; set; }
-		[Column] public DateTime? last_modified { get; set; }
+		[Column] public int Id { get; set; }
+		[Column] public string Name { get; set; }
 	}
     
-	[TableName("larpworks_db.buckets")]
-	[PrimaryKey("id")]
+	[TableName("larpworks.CharacterAttributes")]
 	[ExplicitColumns]
-    public partial class bucket : LarpworksDatabase.Record<bucket>  
+    public partial class CharacterAttribute : LarpworksDatabase.Record<CharacterAttribute>  
     {
-		[Column] public int id { get; set; }
-		[Column] public string name { get; set; }
+		[Column] public int CharacterId { get; set; }
+		[Column] public int AttributeId { get; set; }
+		[Column] public int Rank { get; set; }
+		[Column] public DateTime? LastModified { get; set; }
+		[Column] public string Comments { get; set; }
 	}
     
-	[TableName("larpworks_db.character_attributes")]
+	[TableName("larpworks.Characters")]
+	[PrimaryKey("Id")]
 	[ExplicitColumns]
-    public partial class character_attribute : LarpworksDatabase.Record<character_attribute>  
+    public partial class Character : LarpworksDatabase.Record<Character>  
     {
-		[Column] public int? character_id { get; set; }
-		[Column] public int? attribute_id { get; set; }
-		[Column] public int? rank { get; set; }
-		[Column] public DateTime? last_modified { get; set; }
-		[Column] public string comments { get; set; }
+		[Column] public int Id { get; set; }
+		[Column] public string Name { get; set; }
+		[Column] public DateTime CreationDate { get; set; }
+		[Column] public DateTime? LastUpdate { get; set; }
+		[Column] public int UserId { get; set; }
 	}
     
-	[TableName("larpworks_db.character_notes")]
-	[PrimaryKey("id")]
+	[TableName("larpworks.Roles")]
+	[PrimaryKey("Id")]
 	[ExplicitColumns]
-    public partial class character_note : LarpworksDatabase.Record<character_note>  
+    public partial class Role : LarpworksDatabase.Record<Role>  
     {
-		[Column] public int id { get; set; }
-		[Column] public string title { get; set; }
-		[Column] public string body { get; set; }
-		[Column] public int character_id { get; set; }
+		[Column] public int Id { get; set; }
+		[Column] public string Name { get; set; }
 	}
     
-	[TableName("larpworks_db.characters")]
-	[PrimaryKey("id")]
+	[TableName("larpworks.TicketAccessLists")]
 	[ExplicitColumns]
-    public partial class character : LarpworksDatabase.Record<character>  
+    public partial class TicketAccessList : LarpworksDatabase.Record<TicketAccessList>  
     {
-		[Column] public int id { get; set; }
-		[Column] public string character_name { get; set; }
-		[Column] public DateTime? create_date { get; set; }
-		[Column] public DateTime? last_update { get; set; }
-		[Column] public int user_id { get; set; }
+		[Column] public int TicketId { get; set; }
+		[Column] public int UserId { get; set; }
+		[Column] public bool CanWrite { get; set; }
+		[Column] public bool CanRead { get; set; }
 	}
     
-	[TableName("larpworks_db.inventory")]
-	[PrimaryKey("id")]
+	[TableName("larpworks.TicketComments")]
 	[ExplicitColumns]
-    public partial class inventory : LarpworksDatabase.Record<inventory>  
+    public partial class TicketComment : LarpworksDatabase.Record<TicketComment>  
     {
-		[Column] public int id { get; set; }
-		[Column] public int quantity { get; set; }
-		[Column] public int character_id { get; set; }
-		[Column] public int item_id { get; set; }
+		[Column] public int TicketId { get; set; }
+		[Column] public int AuthorUserId { get; set; }
+		[Column] public string Comment { get; set; }
+		[Column] public DateTime CreatedOn { get; set; }
 	}
     
-	[TableName("larpworks_db.items")]
-	[PrimaryKey("id")]
+	[TableName("larpworks.UserRoles")]
 	[ExplicitColumns]
-    public partial class item : LarpworksDatabase.Record<item>  
+    public partial class UserRole : LarpworksDatabase.Record<UserRole>  
     {
-		[Column] public int id { get; set; }
-		[Column] public string item_name { get; set; }
-		[Column] public string description { get; set; }
-		[Column] public string item_attr { get; set; }
-		[Column] public DateTime? last_update { get; set; }
+		[Column] public int UserId { get; set; }
+		[Column] public int RoleId { get; set; }
 	}
     
-	[TableName("larpworks_db.roles")]
-	[PrimaryKey("id")]
+	[TableName("larpworks.Users")]
+	[PrimaryKey("Id")]
 	[ExplicitColumns]
-    public partial class role : LarpworksDatabase.Record<role>  
+    public partial class User : LarpworksDatabase.Record<User>  
     {
-		[Column] public int id { get; set; }
-		[Column] public string name { get; set; }
-		[Column] public string description { get; set; }
-	}
-    
-	[TableName("larpworks_db.ticket_access_lists")]
-	[ExplicitColumns]
-    public partial class ticket_access_list : LarpworksDatabase.Record<ticket_access_list>  
-    {
-		[Column] public int? ticket_id { get; set; }
-		[Column] public int? user_id { get; set; }
-		[Column] public sbyte? can_write { get; set; }
-		[Column] public sbyte? can_read { get; set; }
-	}
-    
-	[TableName("larpworks_db.ticket_comments")]
-	[ExplicitColumns]
-    public partial class ticket_comment : LarpworksDatabase.Record<ticket_comment>  
-    {
-		[Column] public int? ticket_id { get; set; }
-		[Column] public int? author_id { get; set; }
-		[Column] public string comment { get; set; }
-		[Column] public DateTime? created_on { get; set; }
-	}
-    
-	[TableName("larpworks_db.user_roles")]
-	[ExplicitColumns]
-    public partial class user_role : LarpworksDatabase.Record<user_role>  
-    {
-		[Column] public int? user_id { get; set; }
-		[Column] public int? role_id { get; set; }
-	}
-    
-	[TableName("larpworks_db.users")]
-	[PrimaryKey("id")]
-	[ExplicitColumns]
-    public partial class user : LarpworksDatabase.Record<user>  
-    {
-		[Column] public int id { get; set; }
-		[Column] public string email { get; set; }
-		[Column] public string phone { get; set; }
-		[Column] public string user_name { get; set; }
-		[Column] public string first_name { get; set; }
-		[Column] public string last_name { get; set; }
-		[Column] public string birth_month { get; set; }
-		[Column] public int? birth_day { get; set; }
-		[Column] public int? birth_year { get; set; }
-		[Column] public DateTime? join_date { get; set; }
-		[Column] public string emergency_contact_name { get; set; }
-		[Column] public string emergency_contact_number { get; set; }
-		[Column] public string password_hash { get; set; }
-		[Column] public DateTime? last_update { get; set; }
-		[Column] public sbyte is_admin { get; set; }
+		[Column] public int Id { get; set; }
+		[Column] public string Email { get; set; }
+		[Column] public string Phone { get; set; }
+		[Column] public string Username { get; set; }
+		[Column] public string FirstName { get; set; }
+		[Column] public string LastName { get; set; }
+		[Column] public string BirthDate { get; set; }
+		[Column] public string JoinDate { get; set; }
+		[Column] public string EmergencyContactName { get; set; }
+		[Column] public string EmergencyContactNumber { get; set; }
+		[Column] public string PasswordHash { get; set; }
 	}
 }
