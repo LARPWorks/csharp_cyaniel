@@ -21,7 +21,7 @@ namespace LARPWorks.Cyaniel.Web.Features.Users
         {
             using (var db = _dbFactory.Create())
             {
-                var token = db.SingleOrDefault<AuthenticationToken>("SELECT * FROM AuthenticationTokens WHERE Id=@0", identifier);
+                var token = db.SingleOrDefault<AuthenticationToken>("SELECT * FROM AuthenticationTokens WHERE Id=@0", identifier.ToByteArray());
                 if (token == null)
                 {
                     return null;

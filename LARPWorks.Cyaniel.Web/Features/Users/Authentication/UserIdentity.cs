@@ -16,5 +16,10 @@ namespace LARPWorks.Cyaniel.Web.Features.Users.Authentication
         {
             _user = user;
         }
+
+        public User GetUser()
+        {
+            return _user;
+        }
     }
 }
