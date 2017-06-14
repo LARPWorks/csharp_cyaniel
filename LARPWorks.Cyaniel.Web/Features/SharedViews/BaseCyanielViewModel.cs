@@ -6,9 +6,14 @@ namespace LARPWorks.Cyaniel.Web.Features.SharedViews
     {
         public User CurrentUser { get; set; }
 
-        public bool CanUserEdit()
+        public virtual bool CanUserEdit(string field = "")
         {
             return false;
+        }
+
+        public bool IsAdmin()
+        {
+            return true;
         }
     }
 }

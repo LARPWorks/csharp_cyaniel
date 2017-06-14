@@ -90,19 +90,19 @@
                 <ul class="nav navbar-nav navbar-right">
                     @if (Model.CurrentUser != null)
                     {
-                        if (true)
+                        if (Model.IsAdmin())
                         {
-                            <li><a href="{{ url_for('home.admin_dashboard') }}">Dashboard</a></li>
+                            <li><a href="/admin/dashboard">Dashboard</a></li>
                             <li><a href="{{ url_for('admin.list_users') }}">Users</a></li>
                             <li><a href="{{ url_for('admin.list_roles') }}">Roles</a></li>
-                            <li><a href="{{ url_for('admin.list_characters') }}">Characters</a></li>
-                            <li><a href="#">Items</a></li>
-                            <li><a href="#">Attributes and Skills</a></li>
                         }
                         else
                         {
-                            <li><a href="{{ url_for('home.dashboard') }}">Dashboard</a></li>
+                            <li><a href="/users/dashboard">Dashboard</a></li>
                         }
+
+                        <li><a href="/characters/index">Characters</a></li>
+                        <li><a href="/buckets/index">Tickets</a></li>
                         <li><a href="/users/logout">Logout</a></li>
                         <li><a><i class="fa fa-user"></i> Hi, @Model.CurrentUser.Username!</a></li>
                     }
