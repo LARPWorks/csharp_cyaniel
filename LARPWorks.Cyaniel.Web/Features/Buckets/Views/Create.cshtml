@@ -14,7 +14,7 @@
                 <!-- Text input-->
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="TicketSubject">Ticket Subject</label>
-                    <div class="col-md-4">
+                    <div class="col-md-8">
                         <input id="TicketSubject" name="TicketSubject" type="text" value="@Model.TicketSubject" 
                                class="form-control input-md" required="">
                         <span class="help-block">Enter a short summary of what this ticket is in regards to.</span>
@@ -24,7 +24,7 @@
                 <!-- Select Basic -->
                 <div class="form-group">
                     <label class="col-md-2 control-label" for="Bucket">Bucket</label>
-                    <div class="col-md-4">
+                    <div class="col-md-6">
                         <select id="Bucket" name="Bucket" class="form-control">
                             @foreach (Bucket bucket in Model.BucketChoices)
                             {
@@ -41,9 +41,10 @@
 
                 <!-- Textarea -->
                 <div class="form-group">
-                    <div>
+                    <div class="row">
                         <label class="col-md-2 control-label" for="Description">Description</label>
                     </div>
+                    <div class="col-md-2"></div>
                     <div class="col-md-8">
                         <textarea class="form-control" rows="10" id="Description" name="Description">@Model.Description</textarea>
                     </div>

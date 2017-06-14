@@ -16,6 +16,10 @@ namespace LARPWorks.Cyaniel.Web.Features.Bucket
             {
                 return View["Create.cshtml", GetViewModel<CreateViewModel>()];
             };
+            var vm = GetViewModel<TicketViewModel>();
+            vm.TicketSubject = "Test terst test";
+            Get["/view"] = parameters => View["View.cshtml", vm];
+            Post["/view"] = parameters => View["View.cshtml", vm];
         }
 
         private CreateViewModel BuildModel()
