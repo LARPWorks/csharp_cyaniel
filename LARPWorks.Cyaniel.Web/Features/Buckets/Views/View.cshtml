@@ -1,5 +1,4 @@
-﻿@using System.Linq
-@using LARPWorks.Cyaniel.Web.Models
+﻿@using LARPWorks.Cyaniel.Web.Models
 @using MySQL
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Web.Features.Buckets.TicketViewModel>
 @{
@@ -61,9 +60,7 @@
                         @if (Model.CanUserEdit())
                         {
                             <select id="Status" name="Status" class="form-control">
-                                @foreach (BucketTicketStatusEnum status in Enum.GetValues(typeof (BucketTicketStatusEnum)).Cast
-                                    <BucketTicketStatusEnum>
-                                    ())
+                                @foreach (BucketTicketStatusEnum status in Enum.GetValues(typeof (BucketTicketStatusEnum)))
                                 {
                                     <option name="Status" value="@status.ToString()">@status.ToString()</option>
                                 }
