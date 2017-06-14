@@ -1,0 +1,128 @@
+﻿@using System.Linq
+@using LARPWorks.Cyaniel.Web.Models
+@using MySQL
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Web.Features.Buckets.TicketViewModel>
+@{
+    Layout = "_Layout.cshtml";
+}
+
+
+<div class="content-section">
+    <div class="center">
+        <form class="form-horizontal" method="POST">
+            <fieldset>
+                <!-- Form Name -->
+                <legend>Viewing Ticket</legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="TicketSubject">Ticket Subject</label>
+                    <div class="col-md-8">
+                        @if (Model.CanUserEdit())
+                        {
+                            <input id="TicketSubject" name="TicketSubject" type="text" value="@Model.TicketSubject"
+                                   class="form-control input-md" required="">
+                        }
+                        else
+                        {
+                            <label class="form-control input-md">@Model.TicketSubject</label>
+                        }
+                        <span class="help-block">A short summary of what this ticket is in regards to.</span>
+                    </div>
+                </div>
+
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="Bucket">Bucket</label>
+                    <div class="col-md-4">
+                        @if (Model.CanUserEdit())
+                        {
+                            <select id="Bucket" name="Bucket" class="form-control">
+                                @foreach (Bucket bucket in Model.BucketChoices)
+                                {
+                                    <option name="Bucket" value="@bucket.Name">@bucket.Name</option>
+                                }
+                            </select>
+                        }
+                        else
+                        {
+                            <label class="form-control">@Model.Bucket</label>
+                        }
+                    </div>
+                    <label class="col-md-2 control-label" for="Creator">Creator</label>
+                    <div class="col-md-4">
+                        <label class="form-control">@Model.Creator</label>
+                    </div>
+                </div>
+
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="Status">Status</label>
+                    <div class="col-md-4">
+                        @if (Model.CanUserEdit())
+                        {
+                            <select id="Status" name="Status" class="form-control">
+                                @foreach (BucketTicketStatusEnum status in Enum.GetValues(typeof (BucketTicketStatusEnum)).Cast
+                                    <BucketTicketStatusEnum>
+                                    ())
+                                {
+                                    <option name="Status" value="@status.ToString()">@status.ToString()</option>
+                                }
+                            </select>
+                        }
+                        else
+                        {
+                            <label class="form-control">@Model.Status</label>
+                        }
+                    </div>
+                    <label class="col-md-2 control-label" for="Assignee">Assignee</label>
+                    <div class="col-md-4">
+                        @if (Model.CanUserEdit())
+                        {
+
+                        }
+                        else
+                        {
+                            <label class="form-control">@Model.Assignee</label>
+                        }
+                    </div>
+                </div>
+                <!-- Horizontal Rule Break -->
+                <p>
+                    <hr/>
+                </p>
+
+                <!-- Textarea -->
+                <div class="form-group">
+                    <div class="row">
+                        <label class="col-md-2 control-label" for="Description">Description</label>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        @if (Model.CanUserEdit())
+                        {
+                            <textarea class="form-control" rows="10" id="Description" name="Description">@Model.Description</textarea>
+                        }
+                        else
+                        {
+                            <textarea class="form-control" rows="10" id="Description" name="Description" readonly>@Model.Description</textarea>
+                        }
+                    </div>
+                </div>
+
+                @if (Model.CanUserEdit())
+                {
+                    <div class="form-group">
+                        <div class="col-md-8"></div>
+                        <div class="col-md-4">
+                            <button id="button2id" name="button2id" class="btn btn-primary">Save Changes</button>
+                        </div>
+                    </div>
+                }
+
+                <p>
+                    <hr/>
+                </p>
+            </fieldset>
+        </form>
+    </div>
+</div>

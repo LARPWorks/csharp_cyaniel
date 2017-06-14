@@ -1,0 +1,69 @@
+﻿@using MySQL
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Web.Features.Buckets.CreateViewModel>
+@{
+    Layout = "_Layout.cshtml";
+}
+
+<div class="content-section">
+    <div class="center">
+        <form class="form-horizontal" method="POST">
+            <fieldset>
+                <!-- Form Name -->
+                <legend>Create Ticket</legend>
+
+                <!-- Text input-->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="TicketSubject">Ticket Subject</label>
+                    <div class="col-md-8">
+                        <input id="TicketSubject" name="TicketSubject" type="text" value="@Model.TicketSubject" 
+                               class="form-control input-md" required="">
+                        <span class="help-block">Enter a short summary of what this ticket is in regards to.</span>
+                    </div>
+                </div>
+
+                <!-- Select Basic -->
+                <div class="form-group">
+                    <label class="col-md-2 control-label" for="Bucket">Bucket</label>
+                    <div class="col-md-6">
+                        <select id="Bucket" name="Bucket" class="form-control">
+                            @foreach (Bucket bucket in Model.BucketChoices)
+                            {
+                                <option name="Bucket" value="@bucket.Name">@bucket.Name</option>
+                            }
+                        </select>
+                    </div>
+                </div>
+
+                <!-- Horizontal Rule Break -->
+                <p>
+                    <hr/>
+                </p>
+
+                <!-- Textarea -->
+                <div class="form-group">
+                    <div class="row">
+                        <label class="col-md-2 control-label" for="Description">Description</label>
+                    </div>
+                    <div class="col-md-2"></div>
+                    <div class="col-md-8">
+                        <textarea class="form-control" rows="10" id="Description" name="Description">@Model.Description</textarea>
+                    </div>
+                </div>
+
+                <!-- Button (Double) -->
+                <div class="form-group">
+                    <div class="col-md-4">
+                        
+                    </div>
+                    <div class="col-md-4">
+                        <button id="button1id" name="button1id" class="btn btn-danger">Cancel</button>
+                    </div>
+                    <div class="col-md-4">
+                        <button id="button2id" name="button2id" class="btn btn-primary">Submit</button>
+                    </div>
+                </div>
+
+            </fieldset>
+        </form>
+    </div>
+</div>
