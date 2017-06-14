@@ -7,46 +7,82 @@
 @{ int i = 0; }
 
 <div class="content-section">
-    @*    <div class="center">*@
     <br/>
-    <div class="col-md-2"></div>
-        <div class="col-md-8">
-            <div class="panel with-nav-tabs panel-info">
-                <div class="panel-heading">
-                    <ul class="nav nav-tabs">
-                        @{ i = 0; }
-                        @foreach (string sectionName in Model.Sections)
-                        {
-                            if (i == 0)
-                            {
-                                <li class="active"><a href="@string.Format("#tab{0}", i)" data-toggle="tab">@sectionName</a></li>
-                            }
-                            else
-                            {
-                                <li><a href="@string.Format("#tab{0}", i)" data-toggle="tab">@sectionName</a></li>
-                            }
-                            i++;
-                        }
-                    </ul>
-                </div>
-                <div class="panel-body">
-                    <div class="tab-content">
-                        @{ i = 0; }
-                        @foreach (string sectionName in Model.Sections)
-                        {
-                            if (i == 0)
-                            {
-                                <div class="tab-pane fade in active" id="@string.Format("tab{0}", i)">Controls will go here for section @sectionName</div>
-                                i++;
-                                continue;
-                            }
+    <form class="form-horizontal" method="POST">
+        <fieldset>
+            <div class="center">
+                <!-- Form Name -->
+                <h2>Player Sheet</h2>
+                <hr/>
 
-                            <div class="tab-pane fade" id="@string.Format("tab{0}", i)">Controls will go here for section @sectionName</div>
-                            i++;
-                        }
+                <div class="row">
+                    <label class="col-md-2 control-label" for="CharacterName">Character Name</label>
+                    <div class="col-md-8">
+                        <input id="CharacterName" name="CharacterName" type="text" value=""
+                               class="form-control input-md" required="">
                     </div>
                 </div>
             </div>
-        </div>
-    </div>
-@*</div>*@
+
+            <div class="row">
+                <div class="col-md-2"></div>
+                <div class="col-md-8">
+                    <div class="panel with-nav-tabs panel-info">
+                        <div class="panel-heading">
+                            <ul class="nav nav-tabs">
+                                @{ i = 0; }
+                                @foreach (string sectionName in Model.Sections)
+                                {
+                                    if (i == 0)
+                                    {
+                                        <li class="active"><a href="@string.Format("#tab{0}", i)" data-toggle="tab">@sectionName</a></li>
+                                    }
+                                    else
+                                    {
+                                        <li><a href="@string.Format("#tab{0}", i)" data-toggle="tab">@sectionName</a></li>
+                                    }
+                                    i++;
+                                }
+                            </ul>
+                        </div>
+                        <div class="panel-body">
+                            <div class="tab-content">
+                                @{ i = 0; }
+                                @foreach (string sectionName in Model.Sections)
+                                {
+                                    if (i == 0)
+                                    {
+                                        <div class="tab-pane fade in active" id="@string.Format("tab{0}", i)">Controls will go here for section @sectionName</div>
+                                        i++;
+                                        continue;
+                                    }
+
+                                    <div class="tab-pane fade" id="@string.Format("tab{0}", i)">Controls will go here for section @sectionName</div>
+                                    i++;
+                                }
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+
+            <div class="center">
+                <!-- Button (Double) -->
+                <div class="form-group">
+                    <div class="col-md-2">
+                        <button id="button3id" name="button3id" class="btn btn-danger">!!! DELETE CHARACTER !!!</button>
+                    </div>
+                    <div class="col-md-6">
+
+                    </div>
+                    <div class="col-md-2">
+                        <button id="button1id" name="button1id" class="btn btn-danger">Cancel Changes</button>
+                    </div>
+                    <div class="col-md-2">
+                        <button id="button2id" name="button2id" class="btn btn-primary">Save Changes</button>
+                    </div>
+                </div>
+            </div>
+        </fieldset>
+    </form>
+</div>
