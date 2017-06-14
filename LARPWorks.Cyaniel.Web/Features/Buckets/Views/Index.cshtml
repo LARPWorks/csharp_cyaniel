@@ -13,7 +13,7 @@
         @foreach (string bucket in Model.Tickets.Keys)
         {
             <h2>@bucket</h2>
-            <table class="table table-striped">
+            <table class="table table-striped table-bordered table-hover">
                 <thead>
                 <tr>
                     <th>Ticket Subject</th>
@@ -21,11 +21,11 @@
                     <th>Status</th>
                 </tr>
                 </thead>
-                <tbody>
+                <tbody data-link="row" class="rowlink">
                 @foreach (BucketTicket ticket in Model.Tickets[bucket])
                 {
                     <tr>
-                        <td><b>@ticket.Title</b></td>
+                        <td><a href="#@ticket.Id"><b>@ticket.Title</b></a></td>
                         <td>@ticket.CreatorId</td>
                         <td>@ticket.Status</td>
                     </tr>

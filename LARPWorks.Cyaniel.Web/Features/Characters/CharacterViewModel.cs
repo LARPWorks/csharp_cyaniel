@@ -24,5 +24,10 @@ namespace LARPWorks.Cyaniel.Web.Features.Characters
                 "Notes"
             };
         }
+
+        public string SanitizeSectionName(string sectionName)
+        {
+            return sectionName.Replace(" ", string.Empty).Replace("&", string.Empty);
+        }
     }
 }

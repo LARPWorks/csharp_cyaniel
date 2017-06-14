@@ -8,6 +8,28 @@
 
 <div class="content-section">
     <br/>
+
+    <div id="myModal" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Modal Header</h4>
+                </div>
+                <div class="modal-body">
+                    <p>Some text in the modal.</p>
+                </div>
+                <div class="modal-footer">
+                    <button data-dismiss="modal" class="btn btn-danger">Cancel Changes</button>
+                    <button data-dismiss="modal" class="btn btn-primary">Save Changes</button>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <form class="form-horizontal" method="POST">
         <fieldset>
             <div class="center">
@@ -33,7 +55,8 @@
                                 @{ i = 0; }
                                 @foreach (string sectionName in Model.Sections)
                                 {
-                                    if (i == 0)
+                                    if (ViewBag.SelectedSection == sectionName 
+                                        || (string.IsNullOrEmpty(ViewBag.SelectedSection) && i == 0))
                                     {
                                         <li class="active"><a href="@string.Format("#tab{0}", i)" data-toggle="tab">@sectionName</a></li>
                                     }
@@ -50,14 +73,20 @@
                                 @{ i = 0; }
                                 @foreach (string sectionName in Model.Sections)
                                 {
-                                    if (i == 0)
+                                    if (ViewBag.SelectedSection == sectionName
+                                        || (string.IsNullOrEmpty(ViewBag.SelectedSection) && i == 0))
                                     {
                                         <div class="tab-pane fade in active" id="@string.Format("tab{0}", i)">Controls will go here for section @sectionName</div>
                                         i++;
                                         continue;
                                     }
 
-                                    <div class="tab-pane fade" id="@string.Format("tab{0}", i)">Controls will go here for section @sectionName</div>
+                                    <div class="tab-pane fade" id="@string.Format("tab{0}", i)">
+                                        @*@RenderSection(sectionName, false)*@
+                                        @Html.Partial("Sheets/" + Model.SanitizeSectionName(sectionName), Model)
+
+                                        <a href="#" data-toggle="modal" data-target="#myModal">Edit This Sheet</a>
+                                    </div>
                                     i++;
                                 }
                             </div>
@@ -71,15 +100,6 @@
                 <div class="form-group">
                     <div class="col-md-2">
                         <button id="button3id" name="button3id" class="btn btn-danger">!!! DELETE CHARACTER !!!</button>
-                    </div>
-                    <div class="col-md-6">
-
-                    </div>
-                    <div class="col-md-2">
-                        <button id="button1id" name="button1id" class="btn btn-danger">Cancel Changes</button>
-                    </div>
-                    <div class="col-md-2">
-                        <button id="button2id" name="button2id" class="btn btn-primary">Save Changes</button>
                     </div>
                 </div>
             </div>
