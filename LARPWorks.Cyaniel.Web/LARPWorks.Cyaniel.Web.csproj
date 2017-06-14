@@ -91,6 +91,7 @@
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Features\Buckets\BucketModule.cs" />
+    <Compile Include="Features\Buckets\CreateViewModel.cs" />
     <Compile Include="Features\Buckets\IndexViewModel.cs" />
     <Compile Include="Features\CyanielModule.cs" />
     <Compile Include="Features\Users\Authentication\UserIdentity.cs" />
@@ -131,6 +132,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\img\larpworks_logo.png">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Features\Buckets\Views\Create.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Features\Buckets\Views\Index.cshtml">
