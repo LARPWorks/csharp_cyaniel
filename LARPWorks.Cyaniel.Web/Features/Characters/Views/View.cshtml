@@ -1,0 +1,52 @@
+﻿@using LARPWorks.Cyaniel.Web.Models
+@using MySQL
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Web.Features.Characters.CharacterViewModel>
+@{
+    Layout = "_Layout.cshtml";
+}
+@{ int i = 0; }
+
+<div class="content-section">
+    @*    <div class="center">*@
+    <br/>
+    <div class="col-md-2"></div>
+        <div class="col-md-8">
+            <div class="panel with-nav-tabs panel-info">
+                <div class="panel-heading">
+                    <ul class="nav nav-tabs">
+                        @{ i = 0; }
+                        @foreach (string sectionName in Model.Sections)
+                        {
+                            if (i == 0)
+                            {
+                                <li class="active"><a href="@string.Format("#tab{0}", i)" data-toggle="tab">@sectionName</a></li>
+                            }
+                            else
+                            {
+                                <li><a href="@string.Format("#tab{0}", i)" data-toggle="tab">@sectionName</a></li>
+                            }
+                            i++;
+                        }
+                    </ul>
+                </div>
+                <div class="panel-body">
+                    <div class="tab-content">
+                        @{ i = 0; }
+                        @foreach (string sectionName in Model.Sections)
+                        {
+                            if (i == 0)
+                            {
+                                <div class="tab-pane fade in active" id="@string.Format("tab{0}", i)">Controls will go here for section @sectionName</div>
+                                i++;
+                                continue;
+                            }
+
+                            <div class="tab-pane fade" id="@string.Format("tab{0}", i)">Controls will go here for section @sectionName</div>
+                            i++;
+                        }
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+@*</div>*@
