@@ -1,4 +1,4 @@
-﻿using LARPWorks.Cyaniel.Web.Features.SharedViews;
+﻿using LARPWorks.Cyaniel.Features.SharedViews;
 
 namespace LARPWorks.Cyaniel.Web.Features.Characters
 {

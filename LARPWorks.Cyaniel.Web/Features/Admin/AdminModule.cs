@@ -1,4 +1,5 @@
-﻿using LARPWorks.Cyaniel.Web.Features.SharedViews;
+﻿using LARPWorks.Cyaniel.Features;
+using LARPWorks.Cyaniel.Features.SharedViews;
 using Nancy;
 
 namespace LARPWorks.Cyaniel.Web.Features.Admin
