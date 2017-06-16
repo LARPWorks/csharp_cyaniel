@@ -1,9 +1,8 @@
-﻿using System;
-using System.Collections.Generic;
-using MySQL;
+﻿using System.Collections.Generic;
+using LARPWorks.Cyaniel.Models;
 using Nancy.Security;
 
-namespace LARPWorks.Cyaniel.Web.Features.Users.Authentication
+namespace LARPWorks.Cyaniel.Features.Users.Authentication
 {
     public class UserIdentity : IUserIdentity
     {

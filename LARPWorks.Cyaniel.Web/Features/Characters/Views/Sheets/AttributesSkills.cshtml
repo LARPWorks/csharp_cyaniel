@@ -1,1 +1,58 @@
 ﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Web.Features.Characters.CharacterViewModel>
+
+@helper RenderSkillColumn(string skillName, int value, bool isWriteable)
+{
+    <label class="col-md-2 control-label" for="@skillName">@skillName</label>
+    <div class="col-md-2">
+        @if (isWriteable)
+        {
+            <input id="TicketSubject" name="@skillName" type="text" value="0"
+                   class="form-control input-md" required="">
+        }
+        else
+        {
+            <label class="form-control input-md">0</label>
+        }
+    </div>
+}
+
+@helper Render(bool isWriteable)
+{
+    string skillName;
+    for (int i = 0; i < Model.SkillChoices.Length; i++)
+    {
+        skillName = Model.SkillChoices[i];
+        <!-- Text input-->
+        <div class="form-group">
+            @RenderSkillColumn(skillName, 0, isWriteable)
+
+            @{
+                i++;
+                if (i >= Model.SkillChoices.Length)
+                {
+                    break;
+                }
+                skillName = Model.SkillChoices[i];
+            }
+
+            @RenderSkillColumn(skillName, 0, isWriteable)
+
+            @{
+                i++;
+                if (i >= Model.SkillChoices.Length)
+                {
+                    break;
+                }
+                skillName = Model.SkillChoices[i];
+            }
+
+            @RenderSkillColumn(skillName, 0, isWriteable)
+        </div>
+    }
+}
+
+<div class="content-section">
+    <form class="form-horizontal">
+        @Render(false)   
+    </form>
+</div>

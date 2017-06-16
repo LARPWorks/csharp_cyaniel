@@ -14,23 +14,22 @@
 // --------------------------WARNING--------------------------------
 
 
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Configuration;
-using System.Data.Common;
 using System.Data;
+using System.Data.Common;
 using System.Dynamic;
-using System.Linq.Expressions;
 using System.Linq;
-using System.Reflection.Emit;
+using System.Linq.Expressions;
 using System.Reflection;
-using System.Runtime.InteropServices;
-using System.Text.RegularExpressions;
+using System.Reflection.Emit;
 using System.Text;
+using System.Text.RegularExpressions;
 using System.Threading;
-using System;
 
-namespace PetaPoco
+namespace LARPWorks.Cyaniel.Models
 {
 #pragma warning disable 1066,1570,1573,1591
 
@@ -4073,7 +4072,7 @@ namespace PetaPoco
     ///     supply the DB column name.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class ColumnAttribute : Attribute
+    public class ColumnAttribute : System.Attribute
     {
         /// <summary>
         ///     The SQL name of the column
@@ -4126,7 +4125,7 @@ namespace PetaPoco
     ///     <seealso cref="ColumnAttribute" /> or <seealso cref="ResultColumnAttribute" />.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class ExplicitColumnsAttribute : Attribute
+    public class ExplicitColumnsAttribute : System.Attribute
     {
     }
 
@@ -4136,7 +4135,7 @@ namespace PetaPoco
     ///     ignores the column.
     /// </summary>
     [AttributeUsage(AttributeTargets.Property)]
-    public class IgnoreAttribute : Attribute
+    public class IgnoreAttribute : System.Attribute
     {
     }
 
@@ -4146,7 +4145,7 @@ namespace PetaPoco
     ///     the column is auto incrementing and the optional sequence name for Oracle sequence columns.
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class PrimaryKeyAttribute : Attribute
+    public class PrimaryKeyAttribute : System.Attribute
     {
         /// <summary>
         ///     The column name.
@@ -4213,7 +4212,7 @@ namespace PetaPoco
     ///     Represents an attribute, which when applied to a Poco class, specifies the the DB table name which it maps to
     /// </summary>
     [AttributeUsage(AttributeTargets.Class)]
-    public class TableNameAttribute : Attribute
+    public class TableNameAttribute : System.Attribute
     {
         /// <summary>
         ///     The table nane of the database that this entity maps to.

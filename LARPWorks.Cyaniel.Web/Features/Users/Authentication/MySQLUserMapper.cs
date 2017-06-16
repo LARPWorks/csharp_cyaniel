@@ -1,12 +1,11 @@
 ﻿using System;
-using LARPWorks.Cyaniel.Web.Features.Users.Authentication;
-using LARPWorks.Cyaniel.Web.Models.Factories;
-using MySQL;
-using Nancy;
+using LARPWorks.Cyaniel.Models;
+using LARPWorks.Cyaniel.Models.Factories;
 using Nancy.Authentication.Forms;
+using Nancy;
 using Nancy.Security;
 
-namespace LARPWorks.Cyaniel.Web.Features.Users
+namespace LARPWorks.Cyaniel.Features.Users.Authentication
 {
     public class MySQLUserMapper : IUserMapper
     {

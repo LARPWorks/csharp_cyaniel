@@ -1,6 +1,6 @@
-﻿using MySQL;
+﻿using LARPWorks.Cyaniel.Models;
 
-namespace LARPWorks.Cyaniel.Web.Features.SharedViews
+namespace LARPWorks.Cyaniel.Features.SharedViews
 {
     public class BaseCyanielViewModel
     {

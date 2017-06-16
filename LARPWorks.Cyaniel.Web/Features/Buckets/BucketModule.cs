@@ -1,7 +1,7 @@
-﻿using LARPWorks.Cyaniel.Web.Features.Buckets;
-using LARPWorks.Cyaniel.Web.Models.Factories;
+﻿using LARPWorks.Cyaniel.Models;
+using LARPWorks.Cyaniel.Models.Factories;
 
-namespace LARPWorks.Cyaniel.Web.Features.Bucket
+namespace LARPWorks.Cyaniel.Features.Buckets
 {
     public class BucketModule : CyanielModule
     {
@@ -27,7 +27,7 @@ namespace LARPWorks.Cyaniel.Web.Features.Bucket
             var baseModel = GetViewModel<CreateViewModel>();
             using (var db = _dbFactory.Create())
             {
-                var buckets = db.Fetch<MySQL.Bucket>("SELECT * FROM Buckets");
+                var buckets = db.Fetch<Bucket>("SELECT * FROM Buckets");
                 if (buckets == null)
                 {
                     return baseModel;

@@ -1,14 +1,10 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
-using LARPWorks.Cyaniel.Web.Features.SharedViews;
-using LARPWorks.Cyaniel.Web.Features.Users.Authentication;
-using MySQL;
+﻿using System.Runtime.Remoting.Contexts;
+using LARPWorks.Cyaniel.Features.SharedViews;
+using LARPWorks.Cyaniel.Features.Users.Authentication;
+using LARPWorks.Cyaniel.Models;
 using Nancy;
 
-namespace LARPWorks.Cyaniel.Web.Features
+namespace LARPWorks.Cyaniel.Features
 {
     public abstract class CyanielModule : NancyModule
     {

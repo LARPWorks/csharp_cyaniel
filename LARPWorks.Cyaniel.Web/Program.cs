@@ -1,7 +1,7 @@
-﻿using System;
-using Nancy.Hosting.Self;
+﻿using Nancy.Hosting.Self;
+using System;
 
-namespace LARPWorks.Cyaniel.Web
+namespace LARPWorks.Cyaniel
 {
     internal class Program
     {

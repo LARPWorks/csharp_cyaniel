@@ -1,4 +1,4 @@
-﻿namespace LARPWorks.Cyaniel.Web.Models
+﻿namespace LARPWorks.Cyaniel.Models
 {
     public enum BucketTicketStatusEnum : ushort
     {
