@@ -1,11 +1,10 @@
 ﻿using System;
-using LARPWorks.Cyaniel.Web.Models.Factories;
-using MySQL;
-using Nancy;
+using LARPWorks.Cyaniel.Models;
+using LARPWorks.Cyaniel.Models.Factories;
 using Nancy.Authentication.Forms;
 using Nancy.ModelBinding;
 
-namespace LARPWorks.Cyaniel.Web.Features.Users
+namespace LARPWorks.Cyaniel.Features.Users
 {
     public class RegistrationModule : CyanielModule
     {

@@ -1,7 +1,6 @@
-﻿using LARPWorks.Cyaniel.Web.Features.SharedViews;
-using LARPWorks.Cyaniel.Web.Models;
+﻿using LARPWorks.Cyaniel.Models;
 
-namespace LARPWorks.Cyaniel.Web.Features.Buckets
+namespace LARPWorks.Cyaniel.Features.Buckets
 {
     public class TicketViewModel : CreateViewModel
     {

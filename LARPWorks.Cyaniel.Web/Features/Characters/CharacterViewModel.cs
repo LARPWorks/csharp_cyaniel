@@ -1,10 +1,15 @@
-﻿using LARPWorks.Cyaniel.Web.Features.SharedViews;
+﻿using LARPWorks.Cyaniel.Features.SharedViews;
+using LARPWorks.Cyaniel.Models.Characters;
 
-namespace LARPWorks.Cyaniel.Web.Features.Characters
+namespace LARPWorks.Cyaniel.Features.Characters
 {
     public class CharacterViewModel : BaseCyanielViewModel
     {
+        public CharacterModel Character { get; set; }
+
         public string[] Sections { get; set; }
+
+        public string[] SkillChoices { get; set; }
 
         public CharacterViewModel()
         {
@@ -23,6 +28,8 @@ namespace LARPWorks.Cyaniel.Web.Features.Characters
                 "Biography",
                 "Notes"
             };
+
+            Character = new CharacterModel();
         }
     }
 }

@@ -1,8 +1,8 @@
 ﻿using System.Collections.Generic;
-using LARPWorks.Cyaniel.Web.Features.SharedViews;
-using MySQL;
+using LARPWorks.Cyaniel.Features.SharedViews;
+using LARPWorks.Cyaniel.Models;
 
-namespace LARPWorks.Cyaniel.Web.Features.Bucket
+namespace LARPWorks.Cyaniel.Features.Buckets
 {
     public class IndexViewModel : BaseCyanielViewModel
     {

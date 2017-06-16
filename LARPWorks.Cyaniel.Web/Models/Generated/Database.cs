@@ -15,9 +15,8 @@ using System;
 using System.Collections.Generic;
 using System.Linq;
 using System.Web;
-using PetaPoco;
 
-namespace MySQL
+namespace LARPWorks.Cyaniel.Models
 {
 	public partial class LarpworksDatabase : Database
 	{

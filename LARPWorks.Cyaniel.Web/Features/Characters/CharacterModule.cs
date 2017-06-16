@@ -1,7 +1,5 @@
 ﻿
-using LARPWorks.Cyaniel.Web.Features.Buckets;
-
-namespace LARPWorks.Cyaniel.Web.Features.Characters
+namespace LARPWorks.Cyaniel.Features.Characters
 {
     public class CharacterModule : CyanielModule
     {

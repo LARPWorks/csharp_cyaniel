@@ -2,10 +2,10 @@
 using System.Linq;
 using System.Security.Cryptography;
 using System.Text;
-using LARPWorks.Cyaniel.Web.Features.SharedViews;
-using MySQL;
+using LARPWorks.Cyaniel.Features.SharedViews;
+using LARPWorks.Cyaniel.Models;
 
-namespace LARPWorks.Cyaniel.Web.Features.Users
+namespace LARPWorks.Cyaniel.Features.Users
 {
     public class RegisterViewModel : BaseCyanielViewModel
     {

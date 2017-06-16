@@ -2,7 +2,7 @@
 <#
 	// Settings
     ConnectionStringName = "MySQL";			// Uses last connection string in config if not specified
-    Namespace = ConnectionStringName;
+    Namespace = "LARPWorks.Cyaniel.Models";
     RepoName = "LarpworksDatabase";
     GenerateOperations = true;
 	GeneratePocos = true;

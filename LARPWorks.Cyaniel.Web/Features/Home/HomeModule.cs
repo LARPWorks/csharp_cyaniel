@@ -1,6 +1,6 @@
-﻿using LARPWorks.Cyaniel.Web.Features.SharedViews;
+﻿using LARPWorks.Cyaniel.Features.SharedViews;
 
-namespace LARPWorks.Cyaniel.Web.Features.Home
+namespace LARPWorks.Cyaniel.Features.Home
 {
     public class HomeModule : CyanielModule
     {

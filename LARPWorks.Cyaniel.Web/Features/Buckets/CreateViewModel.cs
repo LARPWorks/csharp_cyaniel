@@ -1,6 +1,7 @@
-﻿using LARPWorks.Cyaniel.Web.Features.SharedViews;
+﻿using LARPWorks.Cyaniel.Features.SharedViews;
+using LARPWorks.Cyaniel.Models;
 
-namespace LARPWorks.Cyaniel.Web.Features.Buckets
+namespace LARPWorks.Cyaniel.Features.Buckets
 {
     public class CreateViewModel : BaseCyanielViewModel
     {
@@ -8,11 +9,11 @@ namespace LARPWorks.Cyaniel.Web.Features.Buckets
         public string Description { get; set; }
         public string Bucket { get; set; }
 
-        public MySQL.Bucket[] BucketChoices { get; set; }
+        public Bucket[] BucketChoices { get; set; }
 
         public CreateViewModel()
         {
-            BucketChoices = new MySQL.Bucket[0];
+            BucketChoices = new Bucket[0];
         }
     }
 }

@@ -1,14 +1,7 @@
-﻿using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Security.Cryptography.X509Certificates;
-using System.Text;
-using System.Threading.Tasks;
-
-namespace LARPWorks.Cyaniel.Web.Models.Factories
+﻿namespace LARPWorks.Cyaniel.Models.Factories
 {
     public interface IDbFactory
     {
-        PetaPoco.Database Create();
+        Database Create();
     }
 }

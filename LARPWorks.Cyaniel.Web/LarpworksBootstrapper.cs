@@ -1,5 +1,5 @@
-﻿using LARPWorks.Cyaniel.Web.Features.Users;
-using LARPWorks.Cyaniel.Web.Models.Factories;
+﻿using LARPWorks.Cyaniel.Features.Users.Authentication;
+using LARPWorks.Cyaniel.Models.Factories;
 using Nancy;
 using Nancy.Authentication.Forms;
 using Nancy.Bootstrapper;
@@ -7,7 +7,7 @@ using Nancy.Bootstrappers.StructureMap;
 using Nancy.Conventions;
 using StructureMap;
 
-namespace LARPWorks.Cyaniel.Web
+namespace LARPWorks.Cyaniel
 {
     public class LarpworksBootstrapper : StructureMapNancyBootstrapper
     {
