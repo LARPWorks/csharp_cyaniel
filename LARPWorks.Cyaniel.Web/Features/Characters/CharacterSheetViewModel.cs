@@ -3,7 +3,7 @@ using LARPWorks.Cyaniel.Models.Characters;
 
 namespace LARPWorks.Cyaniel.Features.Characters
 {
-    public class CharacterViewModel : BaseCyanielViewModel
+    public class CharacterSheetViewModel : BaseCyanielViewModel
     {
         public CharacterModel Character { get; set; }
 
@@ -11,7 +11,7 @@ namespace LARPWorks.Cyaniel.Features.Characters
 
         public string[] SkillChoices { get; set; }
 
-        public CharacterViewModel()
+        public CharacterSheetViewModel()
         {
             Sections = new []
             {

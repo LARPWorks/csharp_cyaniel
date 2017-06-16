@@ -93,7 +93,7 @@
     <Compile Include="Features\Buckets\TicketViewModel.cs" />
     <Compile Include="Features\Characters\CharacterListViewModel.cs" />
     <Compile Include="Features\Characters\CharacterModule.cs" />
-    <Compile Include="Features\Characters\CharacterViewModel.cs" />
+    <Compile Include="Features\Characters\CharacterSheetViewModel.cs" />
     <Compile Include="Features\CyanielModule.cs" />
     <Compile Include="Features\Users\Authentication\UserIdentity.cs" />
     <Compile Include="Features\Users\LoginModule.cs" />

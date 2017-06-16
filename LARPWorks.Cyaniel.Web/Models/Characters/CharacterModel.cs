@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using LARPWorks.Cyaniel.Models.Factories;
 
@@ -6,9 +7,18 @@ namespace LARPWorks.Cyaniel.Models.Characters
 {
     public class CharacterModel
     {
+        public int Id { get; set; }
+        public string Name { get; set; }
         public List<SkillModel> Skills { get; protected set; }
+        public DateTime CreationDate { get; }
+        public int ExperienceTotal { get; set; }
 
-        public CharacterModel() { }
+        public CharacterModel()
+        {
+            Name = "Blank Character";
+            Id = -1;
+            CreationDate = DateTime.UtcNow;
+        }
         
         public static CharacterModel BuildFromDatabase(IDbFactory factory, int characterId)
         {

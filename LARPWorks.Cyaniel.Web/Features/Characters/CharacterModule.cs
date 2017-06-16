@@ -4,7 +4,7 @@
     {
         public CharacterModule() : base("Characters")
         {
-            Get["/view"] = parameters => View["View.cshtml", GetViewModel<CharacterViewModel>()];
+            Get["/view"] = parameters => View["View.cshtml", GetViewModel<CharacterSheetViewModel>()];
             Get["/index"] = parameters => View["Index.cshtml", GetViewModel<CharacterListViewModel>()];
         }
     }
