@@ -8,6 +8,9 @@ namespace LARPWorks.Cyaniel.Web.Features.Buckets
         public string Creator { get; set; }
         public string Assignee { get; set; }
         public string Status { get; set; }
+        public string BucketName { get; set; }
+        public MySQL.BucketTicket Ticket { get; set; }
+        public MySQL.TicketComment[] Comments { get; set; }
 
         public TicketViewModel()
         {

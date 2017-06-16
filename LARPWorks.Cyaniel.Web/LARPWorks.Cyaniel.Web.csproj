@@ -118,6 +118,7 @@
     </Compile>
     <Compile Include="Models\PetaPoco.cs" />
     <Compile Include="Features\Home\HomeModule.cs" />
+    <Compile Include="Models\UserRoleIDEnum.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
   </ItemGroup>

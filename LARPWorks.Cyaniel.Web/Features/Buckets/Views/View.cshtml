@@ -19,12 +19,12 @@
                     <div class="col-md-8">
                         @if (Model.CanUserEdit())
                         {
-                            <input id="TicketSubject" name="TicketSubject" type="text" value="@Model.TicketSubject"
+                            <input id="TicketSubject" name="TicketSubject" type="text" value="@Model.Ticket.Title"
                                    class="form-control input-md" required="">
                         }
                         else
                         {
-                            <label class="form-control input-md">@Model.TicketSubject</label>
+                            <label class="form-control input-md">@Model.Ticket.Title</label>
                         }
                         <span class="help-block">A short summary of what this ticket is in regards to.</span>
                     </div>
@@ -45,12 +45,12 @@
                         }
                         else
                         {
-                            <label class="form-control">@Model.Bucket</label>
+                            <label class="form-control">@Model.BucketName</label>
                         }
                     </div>
                     <label class="col-md-2 control-label" for="Creator">Creator</label>
                     <div class="col-md-4">
-                        <label class="form-control">@Model.Creator</label>
+                        <label class="form-control">@Model.Ticket.CreatorId</label>
                     </div>
                 </div>
 
@@ -101,7 +101,7 @@
                         }
                         else
                         {
-                            <textarea class="form-control" rows="10" id="Description" name="Description" readonly>@Model.Description</textarea>
+                            <textarea class="form-control" rows="10" id="Description" name="Description" readonly>@Model.Comments[0].Comment</textarea>
                         }
                     </div>
                 </div>
