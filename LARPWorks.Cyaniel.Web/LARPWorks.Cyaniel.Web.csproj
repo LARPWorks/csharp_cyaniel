@@ -93,7 +93,7 @@
     <Compile Include="Features\Buckets\TicketViewModel.cs" />
     <Compile Include="Features\Characters\CharacterListViewModel.cs" />
     <Compile Include="Features\Characters\CharacterModule.cs" />
-    <Compile Include="Features\Characters\CharacterViewModel.cs" />
+    <Compile Include="Features\Characters\CharacterSheetViewModel.cs" />
     <Compile Include="Features\CyanielModule.cs" />
     <Compile Include="Features\Users\Authentication\UserIdentity.cs" />
     <Compile Include="Features\Users\LoginModule.cs" />
@@ -104,8 +104,9 @@
     <Compile Include="Features\SharedViews\BaseCyanielViewModel.cs" />
     <Compile Include="Features\Users\UserModule.cs" />
     <Compile Include="LarpworksBootstrapper.cs" />
-    <Compile Include="Models\BucketTicketStatusEnum.cs" />
+    <Compile Include="Models\Characters\AttributeModel.cs" />
     <Compile Include="Models\Characters\CharacterModel.cs" />
+    <Compile Include="Models\Characters\PerkAndFlawModel.cs" />
     <Compile Include="Models\Characters\SkillModel.cs" />
     <Compile Include="Models\Factories\CyanielDatabaseFactory.cs" />
     <Compile Include="Models\Factories\IDbFactory.cs" />
@@ -118,6 +119,7 @@
     <Compile Include="Features\Home\HomeModule.cs" />
     <Compile Include="Program.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Constants.cs" />
   </ItemGroup>
   <ItemGroup>
     <None Include="App.config" />

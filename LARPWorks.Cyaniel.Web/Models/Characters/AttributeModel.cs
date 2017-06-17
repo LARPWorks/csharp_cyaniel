@@ -1,9 +1,8 @@
 ﻿namespace LARPWorks.Cyaniel.Models.Characters
 {
-    public class SkillModel
+    public class AttributeModel
     {
         public string Name { get; set; }
         public int Rank { get; set; }
-        public string Category { get; set; }
     }
 }

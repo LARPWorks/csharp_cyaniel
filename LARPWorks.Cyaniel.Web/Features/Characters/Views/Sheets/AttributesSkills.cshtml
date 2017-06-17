@@ -1,4 +1,4 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Web.Features.Characters.CharacterViewModel>
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Features.Characters.CharacterSheetViewModel>
 
 @helper RenderSkillColumn(string skillName, int value, bool isWriteable)
 {
@@ -18,32 +18,43 @@
 
 @helper Render(bool isWriteable)
 {
-    string skillName;
-    for (int i = 0; i < Model.SkillChoices.Length; i++)
+    <h2>Attributes</h2>
+    <p><hr/></p>
+    for (int i = 0; i < Model.Attributes.Length; i++)
     {
-        skillName = Model.SkillChoices[i];
+        var attributeName = Model.Attributes[i];
+        <div class="form-group">
+            @RenderSkillColumn(attributeName, 0, isWriteable)
+        </div>
+    }
+
+    <h2>Skills</h2>
+    <p><hr/></p>
+    for (int i = 0; i < Model.Skills.Length; i++)
+    {
+        var skillName = Model.Skills[i];
         <!-- Text input-->
         <div class="form-group">
             @RenderSkillColumn(skillName, 0, isWriteable)
 
             @{
                 i++;
-                if (i >= Model.SkillChoices.Length)
+                if (i >= Model.Skills.Length)
                 {
                     break;
                 }
-                skillName = Model.SkillChoices[i];
+                skillName = Model.Skills[i];
             }
 
             @RenderSkillColumn(skillName, 0, isWriteable)
 
             @{
                 i++;
-                if (i >= Model.SkillChoices.Length)
+                if (i >= Model.Skills.Length)
                 {
                     break;
                 }
-                skillName = Model.SkillChoices[i];
+                skillName = Model.Skills[i];
             }
 
             @RenderSkillColumn(skillName, 0, isWriteable)

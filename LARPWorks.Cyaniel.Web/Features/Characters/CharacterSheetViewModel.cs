@@ -3,15 +3,16 @@ using LARPWorks.Cyaniel.Models.Characters;
 
 namespace LARPWorks.Cyaniel.Features.Characters
 {
-    public class CharacterViewModel : BaseCyanielViewModel
+    public class CharacterSheetViewModel : BaseCyanielViewModel
     {
         public CharacterModel Character { get; set; }
 
         public string[] Sections { get; set; }
 
-        public string[] SkillChoices { get; set; }
+        public string[] Skills { get; set; }
+        public string[] Attributes { get; set; }
 
-        public CharacterViewModel()
+        public CharacterSheetViewModel()
         {
             Sections = new []
             {
