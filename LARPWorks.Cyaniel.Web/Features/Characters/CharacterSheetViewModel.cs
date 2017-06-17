@@ -9,7 +9,8 @@ namespace LARPWorks.Cyaniel.Features.Characters
 
         public string[] Sections { get; set; }
 
-        public string[] SkillChoices { get; set; }
+        public string[] Skills { get; set; }
+        public string[] Attributes { get; set; }
 
         public CharacterSheetViewModel()
         {

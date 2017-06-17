@@ -30,9 +30,9 @@ namespace LARPWorks.Cyaniel.Features
         protected CyanielModule() : base() { }
         protected CyanielModule(string modulePath) : base(modulePath) { }
 
-        protected TViewModel GetViewModel<TViewModel>() where TViewModel : BaseCyanielViewModel, new()
+        protected TViewModel GetViewModel<TViewModel>(TViewModel instance = null) where TViewModel : BaseCyanielViewModel, new()
         {
-            var viewModel = new TViewModel();
+            var viewModel = instance ?? new TViewModel();
             viewModel.CurrentUser = CurrentUser;
 
             return viewModel;

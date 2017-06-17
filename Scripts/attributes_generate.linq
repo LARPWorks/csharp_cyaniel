@@ -1,4 +1,21 @@
 <Query Kind="Program">
+  <Connection>
+    <ID>780a5fca-a9eb-4015-ba0f-381245357914</ID>
+    <Persist>true</Persist>
+    <Driver Assembly="IQDriver" PublicKeyToken="5b59726538a49684">IQDriver.IQDriver</Driver>
+    <Provider>Devart.Data.MySql</Provider>
+    <CustomCxString>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA9vIgmFIZjkuJxyxk79aCwAAAAAACAAAAAAAQZgAAAAEAACAAAAAamztetYQLKgihLAowakSjXV+TrTU+arzzLM+7FkrBzAAAAAAOgAAAAAIAACAAAADik8mBfG4g5TsSs2IVBZ7vvT8HUh1oSoQLqhCuSndR5lAAAADRmnANIkqX6KVNQCv7++ehnYgCC0BQg9KzukWxnuUh2QL6RUk466ob9v3edPwdQQqIzc8Naq/MaLJTm65k22ELUjLOkAvwfrU56Z6jxzsZhUAAAAAsKOdYkNjNddqKyFqFAoflII8/ZlwyAH53ggH993uvoSRjFDCf95IgNjp5xSkWNJfQ7lLk1wS4sV3VupU5RzgN</CustomCxString>
+    <Server>localhost</Server>
+    <Database>larpworks</Database>
+    <UserName>larpworks_admin</UserName>
+    <Password>AQAAANCMnd8BFdERjHoAwE/Cl+sBAAAA9vIgmFIZjkuJxyxk79aCwAAAAAACAAAAAAAQZgAAAAEAACAAAACkbL6pEVqwHIA9YZxgc3UuJNHwnhWVQuGhZGx1hiqP1AAAAAAOgAAAAAIAACAAAAD8Z6i9oj2qMVT6g2FOq/oonm8Xre4HaHNFFaFyE5BsVhAAAACNxVo+n1k221U2+Y/MDJ+hQAAAAKOik2WmAxxxGtKanBZJV8TXWAtrsokZXBliosuBV/NLHJwlEAYwTQc7vO7RJg2788AvIvU9/D4E4ihQ9FwNCXQ=</Password>
+    <EncryptCustomCxString>true</EncryptCustomCxString>
+    <DisplayName>LARPWorks</DisplayName>
+    <DriverData>
+      <StripUnderscores>false</StripUnderscores>
+      <QuietenAllCaps>false</QuietenAllCaps>
+    </DriverData>
+  </Connection>
   <Namespace>System.Linq</Namespace>
 </Query>
 
@@ -486,12 +503,12 @@ void Main()
 		}}
 	};
 	
-	string.Format("INSERT INTO attribute_types(id, name) VALUES {0};", string.Join(", ", attributes.Keys.Select((key, id) => string.Format("({0}, \"{1}\")", id + 1, key)))).Dump();
-	string.Format("INSERT INTO attribute_types(name) VALUES('Esoterics'), ('Exoterics');").Dump();
+	string.Format("INSERT INTO AttributeTypes(Id, Name) VALUES {0};", string.Join(", ", attributes.Keys.Select((key, id) => string.Format("({0}, \"{1}\")", id + 1, key)))).Dump();
+	string.Format("INSERT INTO AttributeTypes(Name) VALUES('Esoterics'), ('Exoterics');").Dump();
 	
 	int currentIndex = 1;
 	foreach(var key in attributes.Keys) {
-		string.Format("INSERT INTO attributes(attribute_name, attribute_type_id) VALUES {0};",
+		string.Format("INSERT INTO Attributes(Name, AttributeTypeId) VALUES {0};",
 			string.Join(", ", attributes[key].Select(val => string.Format("(\"{0}\", {1})", val, currentIndex.ToString())))).Dump();
 		currentIndex++;
 	}
@@ -499,15 +516,15 @@ void Main()
 	Console.Write("Paste what's currently in the console to the DB, press enter when ready to continue...");
 	Console.Read();
 	"".Dump();
-	"INSERT INTO advancement_lists(name,is_chargen_only) VALUES('Social Status', 1), ('Culture', 1), ('Social Status Skills', 1), ('Culture Skills', 1), ('Esoterics', 0), ('Exoterics', 0);".Dump();
+	"INSERT INTO AdvancementLists(Name, IsChargenOnly) VALUES('Social Status', 1), ('Culture', 1), ('Social Status Skills', 1), ('Culture Skills', 1), ('Esoterics', 0), ('Exoterics', 0);".Dump();
 	"".Dump();
 	
-	var exoteric_id = Attribute_types.FirstOrDefault (a => a.Name == "Exoterics");
-	string.Format("INSERT INTO attributes(attribute_name, attribute_type_id) VALUES {0};",
+	var exoteric_id = AttributeTypes.FirstOrDefault (a => a.Name == "Exoterics");
+	string.Format("INSERT INTO Attributes(Name, AttributeTypeId) VALUES {0};",
 		string.Join(", ", exoterics.Select (e => string.Format("(\"{0}\", {1})", e, exoteric_id.Id)))).Dump();
 		
-	var esoteric_id = Attribute_types.FirstOrDefault(a => a.Name == "Esoterics");
-	string.Format("INSERT INTO attributes(attribute_name, attribute_type_id) VALUES {0};",
+	var esoteric_id = AttributeTypes.FirstOrDefault(a => a.Name == "Esoterics");
+	string.Format("INSERT INTO Attributes(Name, AttributeTypeId) VALUES {0};",
 		string.Join(", ", esoterics.Keys.Select(e => string.Format("(\"{0}\", {1})", e, esoteric_id.Id)))).Dump();
 		
 	Console.Write("Paste what's currently in the console to the DB, press enter when ready to continue...");
@@ -516,57 +533,57 @@ void Main()
 		
 	int last_list_attribute_id = 1;
 	foreach(var social in socialClassSkills.Keys) {
-		var social_row = Attributes.FirstOrDefault (s => s.Attribute_name == social);
+		var social_row = Attributes.FirstOrDefault (s => s.Name == social);
 		if(social_row == null) {
 			throw new Exception("Unable to find social status: " + social);
 		}
 		
-		string.Format("INSERT INTO advancement_list_attributes (id, advancement_list_id, attribute_id) VALUES({0}, {1}, {2});", last_list_attribute_id,
+		string.Format("INSERT INTO AdvancementListAttributes (Id, AdvancementListId, AttributeId) VALUES({0}, {1}, {2});", last_list_attribute_id,
 			1, social_row.Id).Dump();
 		last_list_attribute_id++;
 	}
 	
 	foreach(var culture in cultureSkills.Keys) {
-		var culture_row = Attributes.FirstOrDefault(a => a.Attribute_name == culture);
+		var culture_row = Attributes.FirstOrDefault(a => a.Name == culture);
 		if(culture_row == null) {
 			throw new Exception("Unable to find culture: " + culture);
 		}
-		string.Format("INSERT INTO advancement_list_attributes (id, advancement_list_id, attribute_id) VALUES({0}, {1}, {2});", last_list_attribute_id,
+		string.Format("INSERT INTO AdvancementListAttributes (Id, AdvancementListId, AttributeId) VALUES({0}, {1}, {2});", last_list_attribute_id,
 			2, culture_row.Id).Dump();
 		last_list_attribute_id++;
 	}
 	
 	foreach(var culture in cultureSkills.Keys) {
-		var culture_row = Attributes.FirstOrDefault(a => a.Attribute_name == culture);
+		var culture_row = Attributes.FirstOrDefault(a => a.Name == culture);
 		if(culture_row == null) {
 			throw new Exception("Unable to find culture: " + culture);
 		}
 		foreach(var skill in cultureSkills[culture]) {
-			var skill_id = Attributes.FirstOrDefault (s => s.Attribute_name == skill);
+			var skill_id = Attributes.FirstOrDefault (s => s.Name == skill);
 			if(skill_id == null) {
 				throw new Exception("Unable to find skill: " + skill);
 			}
-			string.Format("INSERT INTO advancement_list_attributes (id, advancement_list_id, attribute_id) VALUES({0}, 4, {1});", last_list_attribute_id, skill_id.Id).Dump();
-			string.Format("INSERT INTO advancement_list_requirements(advancement_list_attribute_id, attribute_requirement_id) VALUES({0}, {1});", last_list_attribute_id, culture_row.Id).Dump();
+			string.Format("INSERT INTO AdvancementListAttributes (Id, AdvancementListId, AttributeId) VALUES({0}, 4, {1});", last_list_attribute_id, skill_id.Id).Dump();
+			string.Format("INSERT INTO AdvancementListRequirements(AdvancementListAttributeId, AttributeRequirementId) VALUES({0}, {1});", last_list_attribute_id, culture_row.Id).Dump();
 			
 			last_list_attribute_id++;			
 		}
 	}
 		
 	foreach(var social in socialClassSkills.Keys) {
-		var social_row = Attributes.FirstOrDefault (s => s.Attribute_name == social);
+		var social_row = Attributes.FirstOrDefault (s => s.Name == social);
 		if(social_row == null) {
 			throw new Exception("Unable to find social status: " + social);
 		}
 		
 		foreach(var skill in socialClassSkills[social]) {
-			var skill_id = Attributes.FirstOrDefault (s => s.Attribute_name == skill);
+			var skill_id = Attributes.FirstOrDefault (s => s.Name == skill);
 			if(skill_id == null) {
 				throw new Exception("Unable to find skill: " + skill);
 			}
 			
-			string.Format("INSERT INTO advancement_list_attributes (id, advancement_list_id, attribute_id) VALUES({0}, 4, {1});", last_list_attribute_id, skill_id.Id).Dump();
-			string.Format("INSERT INTO advancement_list_requirements(advancement_list_attribute_id, attribute_requirement_id) VALUES({0}, {1});", last_list_attribute_id, social_row.Id).Dump();
+			string.Format("INSERT INTO AdvancementListAttributes (Id, AdvancementListId, AttributeId) VALUES({0}, 4, {1});", last_list_attribute_id, skill_id.Id).Dump();
+			string.Format("INSERT INTO AdvancementListRequirements(AdvancementListAttributeId, AttributeRequirementId) VALUES({0}, {1});", last_list_attribute_id, social_row.Id).Dump();
 			
 			last_list_attribute_id++;
 		}
@@ -575,17 +592,17 @@ void Main()
 	(new string('=', 40) + "Esoterics" + new string('=', 40)).Dump();
 	
 	foreach(var esoteric in esoterics.Keys) {
-		var esoteric_ids = Attributes.FirstOrDefault (e => e.Attribute_name == esoteric);
+		var esoteric_ids = Attributes.FirstOrDefault (e => e.Name == esoteric);
 		if(esoteric_ids == null) {
 			throw new Exception("Unable to find esoteric: " + esoteric);
 		}
-		string.Format("INSERT INTO advancement_list_attributes (id, advancement_list_id, attribute_id) VALUES({0}, 5, {1});", last_list_attribute_id, esoteric_ids.Id).Dump();
+		string.Format("INSERT INTO AdvancementListAttributes (Id, AdvancementListId, AttributeId) VALUES({0}, 5, {1});", last_list_attribute_id, esoteric_ids.Id).Dump();
 		foreach(var req in esoterics[esoteric]) {
-			var requirement_id = Attributes.FirstOrDefault(s => s.Attribute_name == req);
+			var requirement_id = Attributes.FirstOrDefault(s => s.Name == req);
 			if(requirement_id == null) {
 				throw new Exception("Unable to find requirement: " + req);
 			}
-			string.Format("INSERT INTO advancement_list_requirements(advancement_list_attribute_id, attribute_requirement_id) VALUES({0}, {1});", last_list_attribute_id, requirement_id.Id).Dump();
+			string.Format("INSERT INTO AdvancementListRequirements(AdvancementListAttributeId, AttributeRequirementId) VALUES({0}, {1});", last_list_attribute_id, requirement_id.Id).Dump();
 		}
 		
 		last_list_attribute_id++;
@@ -593,8 +610,8 @@ void Main()
 	
 	(new string('=', 40) + "Exoterics" + new string('=', 40)).Dump();
 	foreach(var exoteric in exoterics) {
-		var exoteric_ids = Attributes.FirstOrDefault (e => e.Attribute_name == exoteric);
-		string.Format("INSERT INTO advancement_list_attributes(id, advancement_list_id, attribute_id) VALUES({0}, 6, {1});", last_list_attribute_id, exoteric_ids.Id).Dump();
+		var exoteric_ids = Attributes.FirstOrDefault (e => e.Name == exoteric);
+		string.Format("INSERT INTO AdvancementListAttributes (Id, AdvancementListId, AttributeId) VALUES({0}, 6, {1});", last_list_attribute_id, exoteric_ids.Id).Dump();
 		last_list_attribute_id++;
 	}
 	

@@ -7,15 +7,11 @@ namespace LARPWorks.Cyaniel.Features.Characters
     public class CharacterListViewModel : BaseCyanielViewModel
     {
         public List<CharacterModel> Characters { get; set; }
+        public string NewCharacterName { get; set; }
 
         public CharacterListViewModel()
         {
             Characters = new List<CharacterModel>();
-        }
-
-        public string CreateCharacter()
-        {
-            return "Success!";
         }
     }
 }
