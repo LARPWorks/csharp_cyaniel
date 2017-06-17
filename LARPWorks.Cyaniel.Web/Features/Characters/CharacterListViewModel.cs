@@ -12,5 +12,10 @@ namespace LARPWorks.Cyaniel.Features.Characters
         {
             Characters = new List<CharacterModel>();
         }
+
+        public string CreateCharacter()
+        {
+            return "Success!";
+        }
     }
 }
