@@ -16,16 +16,16 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
--- Table structure for table `AdvancementListAttributes`
+-- Table structure for table `AdvancementListFacts`
 --
 
-DROP TABLE IF EXISTS `AdvancementListAttributes`;
+DROP TABLE IF EXISTS `AdvancementListFacts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `AdvancementListAttributes` (
+CREATE TABLE `AdvancementListFacts` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `AdvancementListId` int(11) NOT NULL,
-  `AttributeId` int(11) NOT NULL,
+  `FactId` int(11) NOT NULL,
   `IsStaffOnly` bit(1) NOT NULL DEFAULT b'0',
   `IsFreeWithRequirements` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`Id`)
@@ -40,8 +40,8 @@ DROP TABLE IF EXISTS `AdvancementListRequirements`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `AdvancementListRequirements` (
-  `AdvancementListAttributeId` int(11) NOT NULL,
-  `AttributeRequirementId` int(11) NOT NULL,
+  `AdvancementListFactId` int(11) NOT NULL,
+  `FactRequirementId` int(11) NOT NULL,
   `RequirementRank` int(11) NOT NULL DEFAULT '0'
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
@@ -60,36 +60,6 @@ CREATE TABLE `AdvancementLists` (
   `IsStaffOnly` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `AttributeTypes`
---
-
-DROP TABLE IF EXISTS `AttributeTypes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `AttributeTypes` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(200) NOT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `Attributes`
---
-
-DROP TABLE IF EXISTS `Attributes`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `Attributes` (
-  `Id` int(11) NOT NULL AUTO_INCREMENT,
-  `Name` varchar(200) NOT NULL,
-  `Description` varchar(1024) DEFAULT NULL,
-  `AttributeTypeId` int(11) NOT NULL,
-  PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -175,15 +145,15 @@ CREATE TABLE `Buckets` (
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
--- Table structure for table `CharacterAttributes`
+-- Table structure for table `CharacterFacts`
 --
 
-DROP TABLE IF EXISTS `CharacterAttributes`;
+DROP TABLE IF EXISTS `CharacterFacts`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `CharacterAttributes` (
+CREATE TABLE `CharacterFacts` (
   `CharacterId` int(11) NOT NULL,
-  `AttributeId` int(11) NOT NULL,
+  `FactId` int(11) NOT NULL,
   `Rank` int(11) NOT NULL DEFAULT '0',
   `LastModified` datetime DEFAULT NULL,
   `Comments` varchar(1024) DEFAULT NULL
@@ -206,6 +176,36 @@ CREATE TABLE `Characters` (
   `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `FactTypes`
+--
+
+DROP TABLE IF EXISTS `FactTypes`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `FactTypes` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(200) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `Facts`
+--
+
+DROP TABLE IF EXISTS `Facts`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `Facts` (
+  `Id` int(11) NOT NULL AUTO_INCREMENT,
+  `Name` varchar(200) NOT NULL,
+  `Description` varchar(1024) DEFAULT NULL,
+  `FactTypeId` int(11) NOT NULL,
+  PRIMARY KEY (`Id`)
+) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -302,4 +302,4 @@ CREATE TABLE `Users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-17 16:00:37
+-- Dump completed on 2017-06-17 16:26:41

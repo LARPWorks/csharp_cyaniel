@@ -6,7 +6,6 @@ using LARPWorks.Cyaniel.Models.Characters;
 using LARPWorks.Cyaniel.Models.Factories;
 using Nancy;
 using Nancy.ModelBinding;
-using Attribute = LARPWorks.Cyaniel.Models.Attribute;
 
 namespace LARPWorks.Cyaniel.Features.Characters
 {
@@ -84,24 +83,42 @@ namespace LARPWorks.Cyaniel.Features.Characters
             var model = GetViewModel<CharacterSheetViewModel>();
             using (var db = _dbFactory.Create())
             {
-                var attributeTypes = db.Fetch<AttributeType>("SELECT * FROM AttributeTypes").ToArray();
-                var skillAttributeTypes = attributeTypes.Where(at => at.Name.Contains("Skills")).ToArray();
-                var attributeAttributeType = attributeTypes.FirstOrDefault(at => at.Name == "Attributes");
+                var factTypes = db.Fetch<FactType>("SELECT * FROM FactTypes").ToArray();
+                var skillFactTypes = factTypes.Where(at => at.Name.Contains("Skills")).ToArray();
 
                 var skillAttributes =
-                    db.Fetch<Attribute>(Sql.Builder.Select("*")
-                        .From("Attributes")
-                        .Where("AttributeTypeId IN (@ids)", new { ids =  skillAttributeTypes.Select(ca => ca.Id).Distinct().ToArray() }))
+                    db.Fetch<Fact>(Sql.Builder.Select("*")
+                        .From("Facts")
+                        .Where("FactTypeId IN (@ids)", new { ids =  skillFactTypes.Select(ca => ca.Id).Distinct().ToArray() }))
                     .ToArray();
-                model.Skills = skillAttributes.Select(sa => new GameStatisticModel { Name = sa.Name }).ToArray();
+                model.Skills = skillAttributes.Select(sa => new GameStatisticModel { Name = sa.Name,
+                    Category = sa.FactTypeId.ToString() }).ToArray();
 
-                var attributeAttributes =
-                    db.Fetch<Attribute>(Sql.Builder.Select("*")
-                        .From("Attributes")
-                        .Where("AttributeTypeId=@id", new {id = attributeAttributeType.Id}))
+                // Reconciling the category with our cached list of skill types.
+                foreach (var skill in model.Skills)
+                {
+                    var skillAttributeType = skillFactTypes.First(at => at.Id.ToString() == skill.Category);
+                    skill.Category = skillAttributeType.Name;
+                }
+
+                var attributeFacts =
+                    db.Fetch<Fact>(Sql.Builder.Select("*")
+                        .From("Facts")
+                        .Where("FactTypeId=@id", new {id = FactTypeEnum.Attributes}))
                         .ToArray();
-                model.Attributes = attributeAttributes.Select(sa => 
+                model.Attributes = attributeFacts.Select(sa => 
                     new GameStatisticModel {Name = sa.Name, Category = "Attributes"}).ToArray();
+
+                var perkFacts =
+                    db.Fetch<Fact>("SELECT * FROM Facts WHERE FactTypeId=@0", FactTypeEnum.Perks);
+                var flawFacts =
+                    db.Fetch<Fact>("SELECT * From Facts WHERE FactTypeId=@0", FactTypeEnum.Flaws);
+
+                model.Perks =
+                    perkFacts.Select(f => new GameStatisticModel {Name = f.Name, Category = "Perks"}).ToArray();
+                model.Flaws =
+                    flawFacts.Select(f => new GameStatisticModel {Name = f.Name, Category = "Flaws"}).ToArray();
+
             }
 
             return model;

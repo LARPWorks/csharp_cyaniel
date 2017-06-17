@@ -49,9 +49,9 @@ namespace LARPWorks.Cyaniel.Models.Characters
 
                 model._backingCharacter = character;
 
-                var attributeTypes = db.Fetch<AttributeType>("SELECT * FROM AttributeTypes").ToArray();
+                var attributeTypes = db.Fetch<FactType>("SELECT * FROM FactTypes").ToArray();
                 var characterAttributes =
-                    db.Fetch<CharacterAttribute>("SELECT * FROM CharacterAttributes WHERE CharacterId=@0", characterId)
+                    db.Fetch<CharacterFact>("SELECT * FROM CharacterFacts WHERE CharacterId=@0", characterId)
                     .ToArray();
 
                 if (characterAttributes.Length == 0)
@@ -60,9 +60,9 @@ namespace LARPWorks.Cyaniel.Models.Characters
                 }
                 
                 var attributes =
-                    db.Fetch<Attribute>(Sql.Builder.Select("*")
-                        .From("Attributes")
-                        .Where("Id IN (@ids)", characterAttributes.Select(ca => ca.AttributeId).Distinct().ToArray()))
+                    db.Fetch<Fact>(Sql.Builder.Select("*")
+                        .From("Facts")
+                        .Where("Id IN (@ids)", characterAttributes.Select(ca => ca.FactId).Distinct().ToArray()))
                     .ToArray();
 
                 model.Skills = LoadSkills(attributeTypes, characterAttributes, attributes);
@@ -72,9 +72,9 @@ namespace LARPWorks.Cyaniel.Models.Characters
             return model;
         }
 
-        private static List<AttributeModel> LoadAttributes(AttributeType[] dbAttributeTypes,
-            CharacterAttribute[] dbCharacterAttributes,
-            Attribute[] dbAttributes)
+        private static List<AttributeModel> LoadAttributes(FactType[] dbAttributeTypes,
+            CharacterFact[] dbCharacterAttributes,
+            Fact[] dbAttributes)
         {
             var attributes = new List<AttributeModel>();
 
@@ -84,12 +84,12 @@ namespace LARPWorks.Cyaniel.Models.Characters
                 return attributes;
             }
 
-            var attributeAttributes = dbAttributes.Where(a => a.AttributeTypeId == attributeTypes.Id).ToArray();
+            var attributeAttributes = dbAttributes.Where(a => a.FactTypeId == attributeTypes.Id).ToArray();
             var characterAttributes =
-                dbCharacterAttributes.Where(ca => attributeAttributes.Any(aa => aa.Id == ca.AttributeId)).ToArray();
+                dbCharacterAttributes.Where(ca => attributeAttributes.Any(aa => aa.Id == ca.FactId)).ToArray();
             foreach (var characterAttribute in characterAttributes)
             {
-                var dbAttribute = attributeAttributes.First(aa => aa.Id == characterAttribute.AttributeId);
+                var dbAttribute = attributeAttributes.First(aa => aa.Id == characterAttribute.FactId);
                 var attribute = new AttributeModel
                 {
                     Rank = characterAttribute.Rank,
@@ -102,28 +102,28 @@ namespace LARPWorks.Cyaniel.Models.Characters
             return attributes;
         }
 
-        private static List<SkillModel> LoadSkills(AttributeType[] attributeTypes, CharacterAttribute[] characterAttributes,
-            Attribute[] attributes)
+        private static List<SkillModel> LoadSkills(FactType[] factTypes, CharacterFact[] characterFacts,
+            Fact[] facts)
         {
             var skills = new List<SkillModel>();
 
-            var skillTypes = attributeTypes.Where(at => at.Name.Contains("Skills")).ToArray();
+            var skillTypes = factTypes.Where(at => at.Name.Contains("Skills")).ToArray();
             if (!skillTypes.Any())
             {
                 return skills;
             }
 
-            var skillAttributes = attributes.Where(a => skillTypes.Any(st => st.Id == a.AttributeTypeId)).ToArray();
+            var skillAttributes = facts.Where(a => skillTypes.Any(st => st.Id == a.FactTypeId)).ToArray();
             var characterSkills =
-                characterAttributes.Where(ca => skillAttributes.Any(sa => sa.Id == ca.AttributeId)).ToArray();
+                characterFacts.Where(ca => skillAttributes.Any(sa => sa.Id == ca.FactId)).ToArray();
             foreach (var characterSkill in characterSkills)
             {
-                var attribute = skillAttributes.First(sa => sa.Id == characterSkill.AttributeId);
+                var attribute = skillAttributes.First(sa => sa.Id == characterSkill.FactId);
                 var skill = new SkillModel
                 {
                     Rank = characterSkill.Rank,
                     Name = attribute.Name,
-                    Category = skillTypes.First(st => st.Id == attribute.AttributeTypeId).Name
+                    Category = skillTypes.First(st => st.Id == attribute.FactTypeId).Name
                 };
 
                 skills.Add(skill);
