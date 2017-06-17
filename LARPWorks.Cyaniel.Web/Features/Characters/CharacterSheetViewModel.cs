@@ -1,4 +1,5 @@
-﻿using LARPWorks.Cyaniel.Features.SharedViews;
+﻿using System.Collections.Generic;
+using LARPWorks.Cyaniel.Features.SharedViews;
 using LARPWorks.Cyaniel.Models.Characters;
 
 namespace LARPWorks.Cyaniel.Features.Characters
@@ -9,9 +10,18 @@ namespace LARPWorks.Cyaniel.Features.Characters
 
         public string[] Sections { get; set; }
 
-        public string[] Skills { get; set; }
-        public string[] Attributes { get; set; }
-
+        public GameStatisticModel[] Skills { get; set; }
+        public GameStatisticModel[] Attributes { get; set; }
+        public GameStatisticModel[] Esoterics { get; set; }
+        public GameStatisticModel[] Perks { get; set; }
+        public GameStatisticModel[] Flaws { get; set; }
+        public GameStatisticModel[] Exoterics { get; set; }
+        public GameStatisticModel[] FamilyJobAndHometownSkills { get; set; }
+        public GameStatisticModel[] Cultures { get; set; }
+        public GameStatisticModel[] SocialStatuses { get; set; }
+        public Dictionary<string, GameStatisticModel[]> CultureSkills { get; set; }
+        public Dictionary<string, GameStatisticModel[]> SocialStatusSkills { get; set; }
+        
         public CharacterSheetViewModel()
         {
             Sections = new []

@@ -93,14 +93,15 @@ namespace LARPWorks.Cyaniel.Features.Characters
                         .From("Attributes")
                         .Where("AttributeTypeId IN (@ids)", new { ids =  skillAttributeTypes.Select(ca => ca.Id).Distinct().ToArray() }))
                     .ToArray();
-                model.Skills = skillAttributes.Select(sa => sa.Name).ToArray();
+                model.Skills = skillAttributes.Select(sa => new GameStatisticModel { Name = sa.Name }).ToArray();
 
                 var attributeAttributes =
                     db.Fetch<Attribute>(Sql.Builder.Select("*")
                         .From("Attributes")
                         .Where("AttributeTypeId=@id", new {id = attributeAttributeType.Id}))
                         .ToArray();
-                model.Attributes = attributeAttributes.Select(sa => sa.Name).ToArray();
+                model.Attributes = attributeAttributes.Select(sa => 
+                    new GameStatisticModel {Name = sa.Name, Category = "Attributes"}).ToArray();
             }
 
             return model;
