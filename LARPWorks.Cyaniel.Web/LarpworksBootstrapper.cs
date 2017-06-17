@@ -5,6 +5,7 @@ using Nancy.Authentication.Forms;
 using Nancy.Bootstrapper;
 using Nancy.Bootstrappers.StructureMap;
 using Nancy.Conventions;
+using Nancy.Cryptography;
 using StructureMap;
 
 namespace LARPWorks.Cyaniel
@@ -24,11 +25,18 @@ namespace LARPWorks.Cyaniel
 
             // This code exists to enable session-cookie authentication
             // for the website.
+            var cryptographyConfiguration = new CryptographyConfiguration(
+                new RijndaelEncryptionProvider(new PassphraseKeyGenerator("SuperSecretPass",
+                    new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 })),
+                new DefaultHmacProvider(new PassphraseKeyGenerator("UberSuperSecure",
+                    new byte[] { 1, 2, 3, 4, 5, 6, 7, 8 })));
+
             var formsAuthConfiguration =
                 new FormsAuthenticationConfiguration()
                 {
-                    RedirectUrl = "~/login",
-                    UserMapper = container.GetInstance<IUserMapper>()
+                    RedirectUrl = "/login",
+                    UserMapper = container.GetInstance<IUserMapper>(),
+                    CryptographyConfiguration = cryptographyConfiguration
                 };
             FormsAuthentication.Enable(pipelines, formsAuthConfiguration);
         }
