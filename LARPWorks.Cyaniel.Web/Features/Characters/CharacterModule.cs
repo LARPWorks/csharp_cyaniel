@@ -1,6 +1,5 @@
 ﻿using System;
 using System.Linq;
-using System.Net.Sockets;
 using LARPWorks.Cyaniel.Models;
 using LARPWorks.Cyaniel.Models.Characters;
 using LARPWorks.Cyaniel.Models.Factories;
@@ -21,7 +20,9 @@ namespace LARPWorks.Cyaniel.Features.Characters
             Post["/index"] = parameters =>
             {
                 var model = GetViewModel(this.Bind<CharacterListViewModel>());
-                
+
+                UInt64 newCharacterID;
+
                 using (var db = dbFactory.Create())
                 {
                     var newCharacter = new Character
@@ -32,7 +33,7 @@ namespace LARPWorks.Cyaniel.Features.Characters
                         UserId = model.CurrentUser.Id
                     };
 
-                    db.Insert(newCharacter);
+                    newCharacterID = (UInt64) db.Insert(newCharacter);
                 }
 
                 using (var db = _dbFactory.Create())
@@ -45,7 +46,8 @@ namespace LARPWorks.Cyaniel.Features.Characters
                 }
 
                 model.NewCharacterName = string.Empty;
-                return View["Index.cshtml", model];
+                //return View["Index.cshtml", model];
+                return Response.AsRedirect("/characters/view/" + newCharacterID);
             };
             Post["/delete/{characterId}"] = parameters =>
             {

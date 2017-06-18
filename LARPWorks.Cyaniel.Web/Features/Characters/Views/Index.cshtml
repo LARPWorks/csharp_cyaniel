@@ -66,7 +66,7 @@
                                 <td>@character.ExperienceTotal</td>
                                 <td>@character.CreationDate</td>
                                 <td>
-                                    <button class="btn btn-primary" formmethod="GET" formaction="/characters/view">Edit</button>
+                                    <button class="btn btn-primary" formmethod="GET" formaction="/characters/view/@character.Id">Edit</button>
                                     <button class="btn btn-danger" formmethod="POST" formaction="/characters/delete/@character.Id">Delete</button>
                                 </td>
                             </tr>
