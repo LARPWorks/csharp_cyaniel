@@ -16,6 +16,35 @@
 /*!40111 SET @OLD_SQL_NOTES=@@SQL_NOTES, SQL_NOTES=0 */;
 
 --
+-- Table structure for table `AdvancementListFactGates`
+--
+
+DROP TABLE IF EXISTS `AdvancementListFactGates`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `AdvancementListFactGates` (
+  `AdvancementListFact` int(11) NOT NULL AUTO_INCREMENT,
+  `RequiredFactId` int(11) NOT NULL,
+  `MinimumRankRequired` int(11) DEFAULT NULL,
+  PRIMARY KEY (`AdvancementListFact`)
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='All gates must be passed for an AdvancementListFact for it to be available for purchase.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
+-- Table structure for table `AdvancementListFactModifiers`
+--
+
+DROP TABLE IF EXISTS `AdvancementListFactModifiers`;
+/*!40101 SET @saved_cs_client     = @@character_set_client */;
+/*!40101 SET character_set_client = utf8 */;
+CREATE TABLE `AdvancementListFactModifiers` (
+  `AdvancementListFactId` int(11) NOT NULL,
+  `FactRequirementId` int(11) NOT NULL,
+  `RequirementRank` int(11) NOT NULL DEFAULT '0'
+) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='Only one modifier needs to be passed on a advancement list for that fact to be available for selection.';
+/*!40101 SET character_set_client = @saved_cs_client */;
+
+--
 -- Table structure for table `AdvancementListFacts`
 --
 
@@ -27,23 +56,8 @@ CREATE TABLE `AdvancementListFacts` (
   `AdvancementListId` int(11) NOT NULL,
   `FactId` int(11) NOT NULL,
   `IsStaffOnly` bit(1) NOT NULL DEFAULT b'0',
-  `IsFreeWithRequirements` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`Id`)
 ) ENGINE=InnoDB AUTO_INCREMENT=168 DEFAULT CHARSET=latin1;
-/*!40101 SET character_set_client = @saved_cs_client */;
-
---
--- Table structure for table `AdvancementListRequirements`
---
-
-DROP TABLE IF EXISTS `AdvancementListRequirements`;
-/*!40101 SET @saved_cs_client     = @@character_set_client */;
-/*!40101 SET character_set_client = utf8 */;
-CREATE TABLE `AdvancementListRequirements` (
-  `AdvancementListFactId` int(11) NOT NULL,
-  `FactRequirementId` int(11) NOT NULL,
-  `RequirementRank` int(11) NOT NULL DEFAULT '0'
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -302,4 +316,4 @@ CREATE TABLE `Users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-17 16:40:39
+-- Dump completed on 2017-06-18 16:09:16

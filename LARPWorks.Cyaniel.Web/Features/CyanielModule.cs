@@ -2,6 +2,7 @@
 using LARPWorks.Cyaniel.Features.SharedViews;
 using LARPWorks.Cyaniel.Features.Users.Authentication;
 using LARPWorks.Cyaniel.Models;
+using LARPWorks.Cyaniel.Models.Factories;
 using Nancy;
 
 namespace LARPWorks.Cyaniel.Features
@@ -34,6 +35,15 @@ namespace LARPWorks.Cyaniel.Features
         {
             var viewModel = instance ?? new TViewModel();
             viewModel.CurrentUser = CurrentUser;
+
+            return viewModel;
+        }
+
+        protected TViewModel GetViewModel<TViewModel>(IDbFactory dbFactory)
+            where TViewModel : BaseCyanielViewModel, new()
+        {
+            var viewModel = GetViewModel<TViewModel>();
+            viewModel.LoadFromDatabase(dbFactory);
 
             return viewModel;
         }

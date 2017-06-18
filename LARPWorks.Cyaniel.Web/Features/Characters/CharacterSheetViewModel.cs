@@ -1,11 +1,15 @@
 ﻿using System.Collections.Generic;
+using System.Linq;
 using LARPWorks.Cyaniel.Features.SharedViews;
+using LARPWorks.Cyaniel.Models;
 using LARPWorks.Cyaniel.Models.Characters;
+using LARPWorks.Cyaniel.Models.Factories;
 
 namespace LARPWorks.Cyaniel.Features.Characters
 {
     public class CharacterSheetViewModel : BaseCyanielViewModel
     {
+
         public CharacterModel Character { get; set; }
 
         public string[] Sections { get; set; }
@@ -19,25 +23,28 @@ namespace LARPWorks.Cyaniel.Features.Characters
         public GameStatisticModel[] FamilyJobAndHometownSkills { get; set; }
         public GameStatisticModel[] Cultures { get; set; }
         public GameStatisticModel[] SocialStatuses { get; set; }
-        public Dictionary<string, GameStatisticModel[]> CultureSkills { get; set; }
-        public Dictionary<string, GameStatisticModel[]> SocialStatusSkills { get; set; }
+        public Dictionary<string, List<GameStatisticModel>> CultureSkills { get; set; }
+        public Dictionary<string, List<GameStatisticModel>> SocialStatusSkills { get; set; }
         
         public CharacterSheetViewModel()
         {
+            CultureSkills = new Dictionary<string, List<GameStatisticModel>>();
+            SocialStatusSkills = new Dictionary<string, List<GameStatisticModel>>();
+
             Sections = new []
             {
                 "Character Sheet",
                 "Attributes & Skills",
-                "Perks & Flaws",
-                "Foci & Languages",
-                "Maneuvers",
-                "Priest Rituals",
-                "Magic",
-                "Knight Rank & Oaths",
-                "Paladin Powers",
-                "Leadership",
-                "Biography",
-                "Notes"
+                //"Perks & Flaws",
+                //"Foci & Languages",
+                //"Maneuvers",
+                //"Priest Rituals",
+                //"Magic",
+                //"Knight Rank & Oaths",
+                //"Paladin Powers",
+                //"Leadership",
+                //"Biography",
+                //"Notes"
             };
 
             Character = new CharacterModel();
@@ -46,6 +53,91 @@ namespace LARPWorks.Cyaniel.Features.Characters
         public string SanitizeSectionName(string sectionName)
         {
             return sectionName.Replace(" ", string.Empty).Replace("&", string.Empty);
+        }
+
+        public override void LoadFromDatabase(IDbFactory dbFactory)
+        {
+            using (var db = dbFactory.Create())
+            {
+                Skills = LoadGameStatistics(db, AdvancementListEnum.Skills);
+                Esoterics = LoadGameStatistics(db, AdvancementListEnum.Esoterics);
+                Exoterics = LoadGameStatistics(db, AdvancementListEnum.Exoterics);
+                Perks = LoadGameStatistics(db, AdvancementListEnum.Perks);
+                Flaws = LoadGameStatistics(db, AdvancementListEnum.Flaws);
+                Cultures = LoadGameStatistics(db, AdvancementListEnum.Cultures);
+                SocialStatuses = LoadGameStatistics(db, AdvancementListEnum.SocialStatuses);
+
+                var cultureSkillFacts =
+                    db.Fetch<AdvancementListFact>(
+                        "SELECT * FROM AdvancementListFacts WHERE AdvancementListFacts.AdvancementListId=@0",
+                        (int) AdvancementListEnum.CultureSkills);
+                if (cultureSkillFacts.Any())
+                {
+                    var cultureSkillModifiers =
+                        db.Fetch<AdvancementListFactModifier>(Sql.Builder
+                            .Select("*")
+                            .From("AdvancementListFactModifiers")
+                            .Where("AdvancementListFactId IN (@ids)",
+                                new {ids = cultureSkillFacts.Select(s => s.Id).ToArray()}));
+                    foreach (var culture in Cultures)
+                    {
+                        CultureSkills.Add(culture.Name, new List<GameStatisticModel>());
+                        foreach (var cultureSkill in cultureSkillFacts)
+                        {
+                            var modifiers =
+                                cultureSkillModifiers.Where(csm => csm.AdvancementListFactId == cultureSkill.Id);
+                            if (modifiers.Any(csm => csm.FactRequirementId == culture.PrimaryKey))
+                            {
+                                CultureSkills[culture.Name].Add(
+                                    Skills.FirstOrDefault(s => s.PrimaryKey == cultureSkill.FactId));
+                            }
+                        }
+                    }
+                }
+
+                var socialStatusSkillFacts =
+                    db.Fetch<AdvancementListFact>(
+                        "SELECT * FROM AdvancementListFacts WHERE AdvancementListFacts.AdvancementListId=@0",
+                        (int)AdvancementListEnum.SocialStatusSkills);
+                if (socialStatusSkillFacts.Any())
+                {
+                    var socialStatusSkillModifiers =
+                        db.Fetch<AdvancementListFactModifier>(Sql.Builder
+                            .Select("*")
+                            .From("AdvancementListFactModifiers")
+                            .Where("AdvancementListFactId IN (@ids)",
+                                new {ids = socialStatusSkillFacts.Select(s => s.Id).ToArray()}));
+                    foreach (var socialStatus in SocialStatuses)
+                    {
+                        SocialStatusSkills.Add(socialStatus.Name, new List<GameStatisticModel>());
+                        foreach (var socialStatusSkill in socialStatusSkillFacts)
+                        {
+                            var modifiers =
+                                socialStatusSkillModifiers.Where(
+                                    csm => csm.AdvancementListFactId == socialStatusSkill.Id);
+                            if (modifiers.Any(csm => csm.FactRequirementId == socialStatus.PrimaryKey))
+                            {
+                                SocialStatusSkills[socialStatus.Name].Add(
+                                    Skills.FirstOrDefault(s => s.PrimaryKey == socialStatusSkill.FactId));
+                            }
+                        }
+                    }
+                }
+            }
+        }
+
+        private GameStatisticModel[] LoadGameStatistics(Database database, AdvancementListEnum list)
+        {
+            var sql = "SELECT f.Id AS Id,f.Name AS Name,ft.Name AS Category " +
+                      "FROM AdvancementListFacts AS alf " +
+                      "LEFT JOIN Facts AS f ON f.Id=alf.FactId " +
+                      "LEFT JOIN FactTypes AS ft ON ft.Id=f.FactTypeId " +
+                      "WHERE alf.AdvancementListId=@0 " +
+                      "AND alf.IsStaffOnly=0";
+
+            var models = database.Fetch<GameStatisticModel>(sql, (int) list);
+
+            return models.ToArray();
         }
     }
 }

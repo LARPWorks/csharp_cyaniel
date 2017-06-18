@@ -3,6 +3,11 @@
     public class GameStatisticModel
     {
         /// <summary>
+        /// The primary key this model is based on. This will be contextual and up to the developer
+        /// to know which table this key refers to.
+        /// </summary>
+        public int PrimaryKey { get; set; }
+        /// <summary>
         /// Gets or sets the name of the statistic.
         /// 
         /// For skills, this would be the name of the skill.

@@ -30,4 +30,22 @@ namespace LARPWorks.Cyaniel
         BasicManeuvers = 15,
         AdvancedManeuvers = 16
     }
+
+    public enum AdvancementListEnum : ushort
+    {
+        SocialStatuses = 1,
+        Cultures = 2,
+        SocialStatusSkills = 3,
+        CultureSkills = 4,
+        Esoterics = 5,
+        Exoterics = 6,
+        Perks = 7,
+        Flaws = 8,
+        Traits = 9,
+        MageTechniques = 10,
+        PaladinPowers = 11,
+        BasicManeuvers = 12,
+        AdvancedManeuvers = 13,
+        Skills = 14
+    }
 }

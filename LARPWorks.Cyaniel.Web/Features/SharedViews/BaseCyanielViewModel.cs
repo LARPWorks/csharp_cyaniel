@@ -1,4 +1,5 @@
 ﻿using LARPWorks.Cyaniel.Models;
+using LARPWorks.Cyaniel.Models.Factories;
 
 namespace LARPWorks.Cyaniel.Features.SharedViews
 {
@@ -14,6 +15,11 @@ namespace LARPWorks.Cyaniel.Features.SharedViews
         public bool IsAdmin()
         {
             return true;
+        }
+
+        public virtual void LoadFromDatabase(IDbFactory dbFactory)
+        {
+            
         }
     }
 }
