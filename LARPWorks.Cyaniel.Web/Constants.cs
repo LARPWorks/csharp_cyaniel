@@ -23,12 +23,12 @@ namespace LARPWorks.Cyaniel
         Traits = 8,
         Cultures = 9,
         SocialClasses = 10,
-        Esoterics = 11,
-        Exoterics = 12,
-        MageTechniques = 13,
-        PaladinPowers = 14,
-        BasicManeuvers = 15,
-        AdvancedManeuvers = 16
+        BasicFoci = 11,
+        MageTechniques = 12,
+        PaladinPowers = 13,
+        BasicManeuvers = 14,
+        AdvancedManeuvers = 15,
+        Achievements = 16
     }
 
     public enum AdvancementListEnum : ushort

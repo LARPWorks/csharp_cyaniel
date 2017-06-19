@@ -10,6 +10,9 @@ namespace LARPWorks.Cyaniel.Features.Debug
         public Dictionary<string, string[]> SocialStatusSkills;
         public Dictionary<string, string[]> CultureSkills;
         public Dictionary<string, string[]> EsotericGates;
+        public Dictionary<string, string[]> SkillGates;
+        public Dictionary<string, string[]> PerkGates;
+        public Dictionary<string, string[]> FlawGates;
     }
 #endif
 }

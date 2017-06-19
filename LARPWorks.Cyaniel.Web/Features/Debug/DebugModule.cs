@@ -55,8 +55,13 @@ namespace LARPWorks.Cyaniel.Features.Debug
                             ulong primaryKey = (ulong) db.Insert(new AdvancementList {Name = advancementList});
                             foreach (var fact in data.AdvancementLists[advancementList])
                             {
+                                if (!factMappings.ContainsKey(fact))
+                                {
+                                    throw new Exception(string.Format("Unable to find key {0} in fact dictionary", fact));
+                                }
+
                                 var factKey = factMappings[fact];
-                                db.Insert(new AdvancementListFact
+                                ulong advancementFactId = (ulong)db.Insert(new AdvancementListFact
                                 {
                                     AdvancementListId = (int) primaryKey,
                                     FactId = factKey,
@@ -107,30 +112,18 @@ namespace LARPWorks.Cyaniel.Features.Debug
                             }
                         }
 
-                        // This code is for adding the gates to the initial esoterics
-                        // list.
-                        foreach (var esoteric in data.EsotericGates.Keys)
-                        {
-                            var factKey = factMappings[esoteric];
-                            var advancementFactKey =
-                                db.Single<AdvancementListFact>(
-                                    "SELECT * FROM AdvancementListFacts WHERE FactId=@0 AND AdvancementListId=@1",
-                                    factKey, (int) AdvancementListEnum.Esoterics).Id;
-                            foreach (var requirement in data.EsotericGates[esoteric])
-                            {
-                                var requirementKey = factMappings[requirement];
-                                db.Insert(new AdvancementListFactGate
-                                {
-                                    AdvancementListFactId = advancementFactKey,
-                                    RequiredFactId = requirementKey
-                                });
-                            }
-                        }
+                        // This code is for adding all the gates.
+                        AddGates(db, factMappings, data.EsotericGates, AdvancementListEnum.Esoterics);
+                        AddGates(db, factMappings, data.PerkGates, AdvancementListEnum.Perks);
+                        AddGates(db, factMappings, data.FlawGates, AdvancementListEnum.Flaws);
+                        AddGates(db, factMappings, data.SkillGates, AdvancementListEnum.Skills);
                     }
                 }
                 catch (Exception e)
                 {
-                    ViewBag.ValidationError = e.Message;
+                    ViewBag.ValidationError = e.Message
+                        + Environment.NewLine
+                        + e.StackTrace;
                     return View["Index.cshtml", model];
                 }
 
@@ -169,6 +162,33 @@ namespace LARPWorks.Cyaniel.Features.Debug
                 ViewBag.ValidationMessage = "New character generated with ID: " + 0;
                 return View["Index.cshtml", model];
             };
+        }
+
+        public void AddGates(Database db, Dictionary<string, int> factMappings, 
+            Dictionary<string, string[]> gates, AdvancementListEnum advancementList)
+        {
+            foreach (var fact in gates.Keys)
+            {
+                var factKey = factMappings[fact];
+                var advancementFactKey =
+                    db.Single<AdvancementListFact>(
+                        "SELECT * FROM AdvancementListFacts WHERE FactId=@0 AND AdvancementListId=@1",
+                        factKey, (int)advancementList).Id;
+                foreach (var requirement in gates[fact])
+                {
+                    if (!factMappings.ContainsKey(requirement))
+                    {
+                        throw new Exception("Unable to find fact mapping for " + requirement);
+                    }
+
+                    var requirementKey = factMappings[requirement];
+                    db.Insert(new AdvancementListFactGate
+                    {
+                        AdvancementListFactId = advancementFactKey,
+                        RequiredFactId = requirementKey
+                    });
+                }
+            }
         }
     }
 #endif

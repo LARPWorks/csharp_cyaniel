@@ -163,13 +163,16 @@
       "Merchant",
       "Gentry"
     ],
-    "Oaths": [],
-    "Rituals": [],
-    "Mage Techniques": [],
-    "Paladin Abilities": [],
-    "Basic Maneuvers": [],
-    "Advanced Maneuvers": [],
-    "Exoterics": [
+    "Oaths": [ ],
+    "Rituals": [ ],
+    "Mage Techniques": [
+      "Fundamentals",
+      "Torus Elementum"
+    ],
+    "Paladin Abilities": [ ],
+    "Basic Maneuvers": [ ],
+    "Advanced Maneuvers": [ ],
+    "Basic Foci": [
       "Architecture",
       "Astrology",
       "Anatomy",
@@ -200,9 +203,7 @@
       "Law",
       "Pneumatics",
       "Logistics",
-      "Strategy"
-    ],
-    "Esoterics": [
+      "Strategy",
       "Circumlocution",
       "Ergodocity",
       "Celestial Geometry",
@@ -264,7 +265,13 @@
       "Thanatology",
       "Ontology",
       "Semiosis",
-      "Salience"
+      "Salience",
+      "Magic"
+    ],
+    "Achievements": [
+      "Mage Order Initiation",
+      "Knight Initiation",
+      "Greater Nobility"
     ]
   },
   "SocialStatusSkills": {
@@ -617,10 +624,11 @@
       "Heavy Handed",
       "Renegade"
     ],
-    "Mage Techniques": [],
-    "Paladin Powers": [],
-    "Basic Maneuvers": [],
-    "Advanced Maneuvers": [],
+    "Mage Techniques": [
+    ],
+    "Paladin Powers": [ ],
+    "Basic Maneuvers": [ ],
+    "Advanced Maneuvers": [ ],
     "Skills": [
       "Archery",
       "Brawl",
@@ -661,6 +669,138 @@
       "Academics",
       "Leadership",
       "Liturgy"
+    ]
+  },
+  "SkillGates": {
+    "Grit": [
+      "Fortitude"
+    ],
+    "Mobility": [
+      "Speed"
+    ],
+    "Liturgy": [
+      "Faith"
+    ],
+    "Academics": [
+      "Intelligence"
+    ],
+    "Discipline": [
+      "Resolve"
+    ],
+    "Heavy Weapons": [
+      "Strength"
+    ]
+  },
+  "PerkGates": {
+    "Respected": [
+      "Peasant"
+    ],
+    "Hardy": [
+      "Peasant"
+    ],
+    "Light Sleeper": [
+      "Scum"
+    ],
+    "Street Savvy": [
+      "Scum"
+    ],
+    "Entrepreneur": [
+      "Merchant"
+    ],
+    "Connections": [
+      "Merchant"
+    ],
+    "Classical Education": [
+      "Gentry"
+    ],
+    "Highborn": [
+      "Gentry"
+    ],
+    "Ice-Hardened": [
+      "Njordic"
+    ],
+    "Branded": [
+      "Njordic"
+    ],
+    "Tough as Nails": [
+      "Njordic"
+    ],
+    "Collected": [
+      "Rogalian"
+    ],
+    "Veteran": [
+      "Rogalian"
+    ],
+    "Loyalty": [
+      "Rogalian"
+    ],
+    "Humorless": [
+      "Gothic"
+    ],
+    "Gnosis": [
+      "Gothic"
+    ],
+    "Pious": [
+      "Gothic"
+    ],
+    "Hard Drinker": [
+      "Dunnick"
+    ],
+    "Oral Tradition": [
+      "Dunnick"
+    ],
+    "Ancestral Moorsword": [
+      "Dunnick"
+    ],
+    "Trade Guild Amici": [
+      "Hestrali"
+    ],
+    "In Flagrante": [
+      "Hestrali"
+    ],
+    "Daredevil": [
+      "Hestrali"
+    ],
+    "Silver Tongue": [
+      "Capacionne"
+    ],
+    "Elitist": [
+      "Capacionne"
+    ],
+    "Pistolier": [
+      "Capacionne"
+    ]
+  },
+  "FlawGates": {
+    "Hayseed": [
+      "Peasant"
+    ],
+    "Odious": [
+      "Scum"
+    ],
+    "Debt": [
+      "Merchant"
+    ],
+    "Entitlement": [
+      "Gentry"
+    ],
+    "Thrall of the Old Gods": [
+      "Njordic"
+    ],
+    "Pig-Headed": [
+      "Rogalian"
+    ],
+    "Bigoted": [
+      "Gothic"
+    ],
+    "Harsh Temper": [
+      "Dunnick"
+    ],
+    "Vendetta": [
+      "Hestrali"
+    ],
+    "Fop": [
+      "Capacionne"
     ]
   },
   "EsotericGates": {
@@ -901,4 +1041,3 @@
     ]
   }
 }
-
