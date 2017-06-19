@@ -23,10 +23,10 @@ DROP TABLE IF EXISTS `AdvancementListFactGates`;
 /*!40101 SET @saved_cs_client     = @@character_set_client */;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `AdvancementListFactGates` (
-  `AdvancementListFact` int(11) NOT NULL AUTO_INCREMENT,
+  `AdvancementListFactId` int(11) NOT NULL,
   `RequiredFactId` int(11) NOT NULL,
   `MinimumRankRequired` int(11) DEFAULT NULL,
-  PRIMARY KEY (`AdvancementListFact`)
+  PRIMARY KEY (`AdvancementListFactId`)
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='All gates must be passed for an AdvancementListFact for it to be available for purchase.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -57,7 +57,7 @@ CREATE TABLE `AdvancementListFacts` (
   `FactId` int(11) NOT NULL,
   `IsStaffOnly` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=168 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +73,7 @@ CREATE TABLE `AdvancementLists` (
   `IsChargenOnly` bit(1) NOT NULL DEFAULT b'0',
   `IsStaffOnly` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=7 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +155,7 @@ CREATE TABLE `Buckets` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=12 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -189,7 +189,7 @@ CREATE TABLE `Characters` (
   `UserId` int(11) NOT NULL,
   `IsDeleted` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -203,7 +203,7 @@ CREATE TABLE `FactTypes` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(200) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=17 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,7 +219,7 @@ CREATE TABLE `Facts` (
   `Description` varchar(1024) DEFAULT NULL,
   `FactTypeId` int(11) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=237 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -233,7 +233,7 @@ CREATE TABLE `Roles` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(45) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB AUTO_INCREMENT=2 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -275,11 +275,7 @@ DROP TABLE IF EXISTS `UserRoles`;
 /*!40101 SET character_set_client = utf8 */;
 CREATE TABLE `UserRoles` (
   `UserId` int(11) NOT NULL,
-  `RoleId` int(11) NOT NULL,
-  KEY `Fk_UserRoles_User_idx` (`UserId`),
-  KEY `Fk_UserRolers_Role_idx` (`RoleId`),
-  CONSTRAINT `Fk_UserRolers_Role` FOREIGN KEY (`RoleId`) REFERENCES `Roles` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION,
-  CONSTRAINT `Fk_UserRoles_User` FOREIGN KEY (`UserId`) REFERENCES `Users` (`Id`) ON DELETE NO ACTION ON UPDATE NO ACTION
+  `RoleId` int(11) NOT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -304,7 +300,7 @@ CREATE TABLE `Users` (
   `PasswordHash` varchar(512) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Email_UNIQUE` (`Email`)
-) ENGINE=InnoDB AUTO_INCREMENT=11 DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -316,4 +312,4 @@ CREATE TABLE `Users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-18 16:09:16
+-- Dump completed on 2017-06-18 22:42:02

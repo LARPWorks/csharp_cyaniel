@@ -95,6 +95,8 @@
     <Compile Include="Features\Characters\CharacterModule.cs" />
     <Compile Include="Features\Characters\CharacterSheetViewModel.cs" />
     <Compile Include="Features\CyanielModule.cs" />
+    <Compile Include="Features\Debug\DebugFactsData.cs" />
+    <Compile Include="Features\Debug\DebugModule.cs" />
     <Compile Include="Features\Users\Authentication\UserIdentity.cs" />
     <Compile Include="Features\Users\LoginModule.cs" />
     <Compile Include="Features\Users\LoginViewModel.cs" />
@@ -172,6 +174,10 @@
     <Content Include="Features\Characters\Views\Sheets\Notes.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <Content Include="Features\Debug\Views\Index.cshtml">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <EmbeddedResource Include="Features\Debug\FactsData.json" />
     <None Include="Models\Generated\PetaPoco.Core.ttinclude" />
     <None Include="Models\Generated\PetaPoco.Generator.ttinclude" />
     <None Include="packages.config" />

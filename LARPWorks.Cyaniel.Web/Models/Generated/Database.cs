@@ -136,13 +136,11 @@ namespace LARPWorks.Cyaniel.Models
 
     
 
-	[TableName("larpworks.AdvancementListFactGate")]
+	[TableName("larpworks.AdvancementListFactGates")]
 
 
 
-	[PrimaryKey("AdvancementListFact")]
-
-
+	[PrimaryKey("AdvancementListFactId", AutoIncrement=false)]
 
 
 	[ExplicitColumns]
@@ -152,7 +150,7 @@ namespace LARPWorks.Cyaniel.Models
 
 
 
-		[Column] public int AdvancementListFact { get; set; }
+		[Column] public int AdvancementListFactId { get; set; }
 
 
 
@@ -172,7 +170,7 @@ namespace LARPWorks.Cyaniel.Models
 
     
 
-	[TableName("larpworks.AdvancementListFactModifier")]
+	[TableName("larpworks.AdvancementListFactModifiers")]
 
 
 
