@@ -1,0 +1,904 @@
+﻿{
+  "Facts": {
+    "Attributes": [
+      "Strength",
+      "Speed",
+      "Fortitude",
+      "Resolve",
+      "Faith",
+      "Intelligence"
+    ],
+    "Combat Skills": [
+      "Archery",
+      "Brawl",
+      "Dodge",
+      "Firearms",
+      "Heavy Weapons",
+      "Light Weapons",
+      "Medium Weapons",
+      "Parry",
+      "Shields",
+      "Steady"
+    ],
+    "Physical Skills": [
+      "Finesse",
+      "Grit",
+      "Stealth",
+      "Mobility"
+    ],
+    "Professional Skills": [
+      "Mercantile",
+      "Farming",
+      "Forestry",
+      "Herbalism",
+      "Mining",
+      "Trapping",
+      "Leatherworking",
+      "Woodworking",
+      "Metalworking",
+      "Tailoring",
+      "Mechanics",
+      "Apothecary"
+    ],
+    "Life Skills": [
+      "Sincerity",
+      "Intimidate",
+      "Seduce",
+      "Discipline",
+      "Persuade",
+      "Performance",
+      "Streetwise",
+      "Survival",
+      "Etiquette",
+      "Perception",
+      "Academics",
+      "Leadership",
+      "Liturgy"
+    ],
+    "Perks": [
+      "Alacrity",
+      "Ally",
+      "Backing",
+      "Boon",
+      "Fame",
+      "Impeccable Memory",
+      "Journeyman",
+      "Magnetism",
+      "Nobody's Fool",
+      "Quick Healer",
+      "Quiet",
+      "Retainer",
+      "Slow Bleeder",
+      "Spiritual Prodigy",
+      "Wealth",
+      "Well-Equipped",
+      "Workhorse",
+      "The Spark",
+      "Respected",
+      "Hardy",
+      "Light Sleeper",
+      "Street Savvy",
+      "Entrepreneur",
+      "Connections",
+      "Classical Education",
+      "Highborn",
+      "Ice-Hardened",
+      "Branded",
+      "Tough as Nails",
+      "Collected",
+      "Veteran",
+      "Loyalty",
+      "Humorless",
+      "Gnosis",
+      "Pious",
+      "Natural Linguist",
+      "Caravanserai",
+      "Magical Wonder",
+      "Hard Drinker",
+      "Oral Tradition",
+      "Ancestral Moorsword",
+      "Trade Guild Amici",
+      "In Flagrante",
+      "Daredevil",
+      "Silver Tongue",
+      "Elitist",
+      "Pistolier"
+    ],
+    "Flaws": [
+      "Beholden",
+      "Corpse in the Closet",
+      "Dirt Poor",
+      "Duty",
+      "Enemy",
+      "Craven",
+      "Cursed",
+      "Hedonist",
+      "Honor Code",
+      "Infamy",
+      "Memorable",
+      "Naive",
+      "Old Wounds",
+      "One Eyed Jack",
+      "One Foot in the Grave",
+      "Pure of Heart",
+      "Sick in the Head",
+      "Vainglorious",
+      "Ward",
+      "Wicked",
+      "Dainty",
+      "Hayseed",
+      "Odious",
+      "Debt",
+      "Entitlement",
+      "Thrall of the Old Gods",
+      "Pig-Headed",
+      "Bigoted",
+      "Outspoken Heathen",
+      "Harsh Temper",
+      "Vendetta",
+      "Fop"
+    ],
+    "Traits": [
+      "Abhorrent",
+      "Alcoholic",
+      "Bravado",
+      "Foolish Heart",
+      "Death Wish",
+      "Finesse Fighter",
+      "Heavy Handed",
+      "Renegade"
+    ],
+    "Cultures": [
+      "Capacionne",
+      "Dunnick",
+      "Gothic",
+      "Hestrali",
+      "Njordic",
+      "Rogalian",
+      "Shariqyn"
+    ],
+    "Social Classes": [
+      "Scum",
+      "Peasant",
+      "Merchant",
+      "Gentry"
+    ],
+    "Oaths": [],
+    "Rituals": [],
+    "Mage Techniques": [],
+    "Paladin Abilities": [],
+    "Basic Maneuvers": [],
+    "Advanced Maneuvers": [],
+    "Exoterics": [
+      "Architecture",
+      "Astrology",
+      "Anatomy",
+      "Sociology",
+      "Zoology",
+      "Physics",
+      "Geology",
+      "Philosophy",
+      "Mathematics",
+      "Logic",
+      "Rhetoric",
+      "Physiology",
+      "Ecology",
+      "Theology",
+      "Hydraulics",
+      "Meteorology",
+      "Horology",
+      "Economics",
+      "Botany",
+      "Archaelogy",
+      "Geography",
+      "Linguistics",
+      "Civics",
+      "History",
+      "Psychology",
+      "Metallurgy",
+      "Library Science",
+      "Law",
+      "Pneumatics",
+      "Logistics",
+      "Strategy"
+    ],
+    "Esoterics": [
+      "Circumlocution",
+      "Ergodocity",
+      "Celestial Geometry",
+      "Metric Tensors",
+      "Tectonics",
+      "Thermionics",
+      "Solipsism",
+      "Astromantics",
+      "Capacitance",
+      "Kairos",
+      "Scalar Forces",
+      "Epitaxy",
+      "Syllogistics",
+      "Homology",
+      "Hermeneutics",
+      "Metagraphy",
+      "Thyristors",
+      "Fetishism",
+      "Chirology",
+      "Angular Frequency",
+      "Exegesis",
+      "Tautology",
+      "Teleology",
+      "Pyroclastics",
+      "Cthonics",
+      "Bathylics",
+      "Fulminology",
+      "Arrondissement",
+      "Resonance",
+      "Sidereal Time",
+      "Epiphenomina",
+      "Energetics",
+      "Irregular Recursions",
+      "Polymathematics",
+      "Eisegesis",
+      "Metanymics",
+      "Interior Encoding",
+      "Derivative Geometrics",
+      "Quaternion Invocations",
+      "Memetic Resonance",
+      "Identity Negotiation",
+      "Photonics",
+      "Deimotics",
+      "Radial Reactions",
+      "Tension",
+      "Impetus",
+      "Seismology",
+      "Confabulonics",
+      "Dolor",
+      "Nihilistics",
+      "Pyrolysis",
+      "Tellurics",
+      "Sempiternity",
+      "Turbidity",
+      "Eigenvalues",
+      "Eschatology",
+      "Spectrasonics",
+      "Umbral Calculus",
+      "Thanatology",
+      "Ontology",
+      "Semiosis",
+      "Salience"
+    ]
+  },
+  "SocialStatusSkills": {
+    "Scum": [
+      "Streetwise",
+      "Sincerity",
+      "Intimidate",
+      "Finesse",
+      "Stealth"
+    ],
+    "Peasant": [
+      "Perception",
+      "Liturgy",
+      "Grit",
+      "Survival",
+      "Farming",
+      "Forestry",
+      "Herbalism",
+      "Trapping",
+      "Mining"
+    ],
+    "Merchant": [
+      "Mercantile",
+      "Perception",
+      "Survival",
+      "Sincerity",
+      "Leatherworking",
+      "Woodworking",
+      "Metalworking",
+      "Tailoring",
+      "Mechanics"
+    ],
+    "Gentry": [
+      "Medium Weapons",
+      "Etiquette",
+      "Academics",
+      "Intimidate",
+      "Leadership"
+    ]
+  },
+  "CultureSkills": {
+    "Capacionne": [
+      "Firearms",
+      "Trapping",
+      "Mechanics",
+      "Seduce",
+      "Persuade"
+    ],
+    "Dunnick": [
+      "Brawl",
+      "Grit",
+      "Herbalism",
+      "Mining",
+      "Apothecary"
+    ],
+    "Gothic": [
+      "Discipline",
+      "Farming",
+      "Medium Weapons",
+      "Leadership",
+      "Liturgy"
+    ],
+    "Hestrali": [
+      "Mercantile",
+      "Mobility",
+      "Seduce",
+      "Finesse",
+      "Performance"
+    ],
+    "Njordic": [
+      "Survival",
+      "Grit",
+      "Intimidate",
+      "Performance",
+      "Forestry"
+    ],
+    "Rogalian": [
+      "Archery",
+      "Etiquette",
+      "Metalworking",
+      "Discipline",
+      "Perception"
+    ],
+    "Shariqyn": [
+      "Academics",
+      "Mercantile",
+      "Survival",
+      "Persuade",
+      "Liturgy"
+    ]
+  },
+  "AdvancementLists": {
+    "Social Statuses": [
+      "Scum",
+      "Peasant",
+      "Merchant",
+      "Gentry"
+    ],
+    "Cultures": [
+      "Capacionne",
+      "Dunnick",
+      "Gothic",
+      "Hestrali",
+      "Njordic",
+      "Rogalian",
+      "Shariqyn"
+    ],
+    "Social Status Skills": [
+      "Streetwise",
+      "Sincerity",
+      "Intimidate",
+      "Finesse",
+      "Stealth",
+      "Perception",
+      "Liturgy",
+      "Grit",
+      "Survival",
+      "Farming",
+      "Forestry",
+      "Herbalism",
+      "Trapping",
+      "Mining",
+      "Mercantile",
+      "Leatherworking",
+      "Woodworking",
+      "Metalworking",
+      "Tailoring",
+      "Mechanics",
+      "Medium Weapons",
+      "Etiquette",
+      "Academics",
+      "Leadership"
+    ],
+    "Culture Skills": [
+      "Firearms",
+      "Trapping",
+      "Mechanics",
+      "Seduce",
+      "Persuade",
+      "Brawl",
+      "Grit",
+      "Herbalism",
+      "Mining",
+      "Apothecary",
+      "Discipline",
+      "Farming",
+      "Medium Weapons",
+      "Leadership",
+      "Liturgy",
+      "Mercantile",
+      "Mobility",
+      "Finesse",
+      "Performance",
+      "Survival",
+      "Intimidate",
+      "Forestry",
+      "Archery",
+      "Etiquette",
+      "Metalworking",
+      "Perception",
+      "Academics"
+    ],
+    "Esoterics": [
+      "Circumlocution",
+      "Ergodocity",
+      "Celestial Geometry",
+      "Metric Tensors",
+      "Tectonics",
+      "Thermionics",
+      "Solipsism",
+      "Astromantics",
+      "Capacitance",
+      "Kairos",
+      "Scalar Forces",
+      "Epitaxy",
+      "Syllogistics",
+      "Homology",
+      "Hermeneutics",
+      "Metagraphy",
+      "Thyristors",
+      "Fetishism",
+      "Chirology",
+      "Angular Frequency",
+      "Exegesis",
+      "Tautology",
+      "Teleology",
+      "Pyroclastics",
+      "Cthonics",
+      "Bathylics",
+      "Fulminology",
+      "Arrondissement",
+      "Resonance",
+      "Sidereal Time",
+      "Epiphenomina",
+      "Energetics",
+      "Irregular Recursions",
+      "Polymathematics",
+      "Eisegesis",
+      "Metanymics",
+      "Interior Encoding",
+      "Derivative Geometrics",
+      "Quaternion Invocations",
+      "Memetic Resonance",
+      "Identity Negotiation",
+      "Photonics",
+      "Deimotics",
+      "Radial Reactions",
+      "Tension",
+      "Impetus",
+      "Seismology",
+      "Confabulonics",
+      "Dolor",
+      "Nihilistics",
+      "Pyrolysis",
+      "Tellurics",
+      "Sempiternity",
+      "Turbidity",
+      "Eigenvalues",
+      "Eschatology",
+      "Spectrasonics",
+      "Umbral Calculus",
+      "Thanatology",
+      "Ontology",
+      "Semiosis",
+      "Salience"
+    ],
+    "Exoterics": [
+      "Architecture",
+      "Astrology",
+      "Anatomy",
+      "Sociology",
+      "Zoology",
+      "Physics",
+      "Geology",
+      "Philosophy",
+      "Mathematics",
+      "Logic",
+      "Rhetoric",
+      "Physiology",
+      "Ecology",
+      "Theology",
+      "Hydraulics",
+      "Meteorology",
+      "Horology",
+      "Economics",
+      "Botany",
+      "Archaelogy",
+      "Geography",
+      "Linguistics",
+      "Civics",
+      "History",
+      "Psychology",
+      "Metallurgy",
+      "Library Science",
+      "Law",
+      "Pneumatics",
+      "Logistics",
+      "Strategy"
+    ],
+    "Perks": [
+      "Alacrity",
+      "Ally",
+      "Backing",
+      "Boon",
+      "Fame",
+      "Impeccable Memory",
+      "Journeyman",
+      "Magnetism",
+      "Nobody's Fool",
+      "Quick Healer",
+      "Quiet",
+      "Retainer",
+      "Slow Bleeder",
+      "Spiritual Prodigy",
+      "Wealth",
+      "Well-Equipped",
+      "Workhorse",
+      "The Spark",
+      "Respected",
+      "Hardy",
+      "Light Sleeper",
+      "Street Savvy",
+      "Entrepreneur",
+      "Connections",
+      "Classical Education",
+      "Highborn",
+      "Ice-Hardened",
+      "Branded",
+      "Tough as Nails",
+      "Collected",
+      "Veteran",
+      "Loyalty",
+      "Humorless",
+      "Gnosis",
+      "Pious",
+      "Natural Linguist",
+      "Caravanserai",
+      "Magical Wonder",
+      "Hard Drinker",
+      "Oral Tradition",
+      "Ancestral Moorsword",
+      "Trade Guild Amici",
+      "In Flagrante",
+      "Daredevil",
+      "Silver Tongue",
+      "Elitist",
+      "Pistolier"
+    ],
+    "Flaws": [
+      "Beholden",
+      "Corpse in the Closet",
+      "Dirt Poor",
+      "Duty",
+      "Enemy",
+      "Craven",
+      "Cursed",
+      "Hedonist",
+      "Honor Code",
+      "Infamy",
+      "Memorable",
+      "Naive",
+      "Old Wounds",
+      "One Eyed Jack",
+      "One Foot in the Grave",
+      "Pure of Heart",
+      "Sick in the Head",
+      "Vainglorious",
+      "Ward",
+      "Wicked",
+      "Dainty",
+      "Hayseed",
+      "Odious",
+      "Debt",
+      "Entitlement",
+      "Thrall of the Old Gods",
+      "Pig-Headed",
+      "Bigoted",
+      "Outspoken Heathen",
+      "Harsh Temper",
+      "Vendetta",
+      "Fop"
+    ],
+    "Traits": [
+      "Abhorrent",
+      "Alcoholic",
+      "Bravado",
+      "Foolish Heart",
+      "Death Wish",
+      "Finesse Fighter",
+      "Heavy Handed",
+      "Renegade"
+    ],
+    "Mage Techniques": [],
+    "Paladin Powers": [],
+    "Basic Maneuvers": [],
+    "Advanced Maneuvers": [],
+    "Skills": [
+      "Archery",
+      "Brawl",
+      "Dodge",
+      "Firearms",
+      "Heavy Weapons",
+      "Light Weapons",
+      "Medium Weapons",
+      "Parry",
+      "Shields",
+      "Steady",
+      "Finesse",
+      "Grit",
+      "Stealth",
+      "Mobility",
+      "Mercantile",
+      "Farming",
+      "Forestry",
+      "Herbalism",
+      "Mining",
+      "Trapping",
+      "Leatherworking",
+      "Woodworking",
+      "Metalworking",
+      "Tailoring",
+      "Mechanics",
+      "Apothecary",
+      "Sincerity",
+      "Intimidate",
+      "Seduce",
+      "Discipline",
+      "Persuade",
+      "Performance",
+      "Streetwise",
+      "Survival",
+      "Etiquette",
+      "Perception",
+      "Academics",
+      "Leadership",
+      "Liturgy"
+    ]
+  },
+  "EsotericGates": {
+    "Circumlocution": [
+      "Rhetoric",
+      "Linguistics"
+    ],
+    "Ergodocity": [
+      "Mathematics",
+      "Philosophy"
+    ],
+    "Celestial Geometry": [
+      "Mathematics",
+      "Astrology"
+    ],
+    "Metric Tensors": [
+      "Mathematics",
+      "Physics"
+    ],
+    "Tectonics": [
+      "Geology",
+      "Physics"
+    ],
+    "Thermionics": [
+      "Physics",
+      "Psychology"
+    ],
+    "Solipsism": [
+      "Psychology",
+      "Philosophy"
+    ],
+    "Astromantics": [
+      "Pneumatics",
+      "Psychology"
+    ],
+    "Capacitance": [
+      "Physics",
+      "Hydraulics"
+    ],
+    "Kairos": [
+      "Horology",
+      "Astrology"
+    ],
+    "Scalar Forces": [
+      "Physics",
+      "Architecture"
+    ],
+    "Epitaxy": [
+      "Geology",
+      "Architecture"
+    ],
+    "Syllogistics": [
+      "Logic",
+      "Rhetoric"
+    ],
+    "Homology": [
+      "Logic",
+      "Mathematics"
+    ],
+    "Hermeneutics": [
+      "Philosophy",
+      "Theology",
+      "Linguistics"
+    ],
+    "Metagraphy": [
+      "Linguistics",
+      "Psychology"
+    ],
+    "Thyristors": [
+      "Physics",
+      "Pneumatics"
+    ],
+    "Fetishism": [
+      "Theology",
+      "Psychology"
+    ],
+    "Chirology": [
+      "Physiology",
+      "Anatomy"
+    ],
+    "Angular Frequency": [
+      "Celestial Geometry"
+    ],
+    "Exegesis": [
+      "Hermeneutics"
+    ],
+    "Tautology": [
+      "Homology",
+      "Syllogistics"
+    ],
+    "Teleology": [
+      "Hermeneutics"
+    ],
+    "Pyroclastics": [
+      "Thermionics",
+      "Psychology"
+    ],
+    "Cthonics": [
+      "Tectonics",
+      "Psychology"
+    ],
+    "Bathylics": [
+      "Solipsism",
+      "Horology"
+    ],
+    "Fulminology": [
+      "Astromantics",
+      "Meteorology"
+    ],
+    "Arrondissement": [
+      "Homology",
+      "Tectonics"
+    ],
+    "Resonance": [
+      "Capacitance"
+    ],
+    "Sidereal Time": [
+      "Celestial Geometry",
+      "Horology"
+    ],
+    "Epiphenomina": [
+      "Resonance"
+    ],
+    "Energetics": [
+      "Scalar Forces"
+    ],
+    "Irregular Recursions": [
+      "Angular Frequency"
+    ],
+    "Polymathematics": [
+      "Angular Frequency",
+      "Metric Tensors"
+    ],
+    "Eisegesis": [
+      "Exegesis"
+    ],
+    "Metanymics": [
+      "Teleology"
+    ],
+    "Interior Encoding": [
+      "Circumlocution",
+      "Solipsism"
+    ],
+    "Derivative Geometrics": [
+      "Sidereal Time"
+    ],
+    "Quaternion Invocations": [
+      "Sidereal Time",
+      "Angular Frequency"
+    ],
+    "Memetic Resonance": [
+      "Fetishism",
+      "Resonance"
+    ],
+    "Identity Negotiation": [
+      "Metagraphy",
+      "Exegesis"
+    ],
+    "Photonics": [
+      "Physics"
+    ],
+    "Deimotics": [
+      "Psychology"
+    ],
+    "Radial Reactions": [
+      "Angular Frequency",
+      "Thermionics"
+    ],
+    "Tension": [
+      "Geology"
+    ],
+    "Impetus": [
+      "Meteorology"
+    ],
+    "Seismology": [
+      "Geology"
+    ],
+    "Confabulonics": [
+      "Psychology"
+    ],
+    "Dolor": [
+      "Philosophy"
+    ],
+    "Nihilistics": [
+      "Theology"
+    ],
+    "Pyrolysis": [
+      "Pyroclastics",
+      "Physiology"
+    ],
+    "Tellurics": [
+      "Cthonics",
+      "Architecture"
+    ],
+    "Sempiternity": [
+      "Bathylics",
+      "Kairos"
+    ],
+    "Turbidity": [
+      "Fulminology",
+      "Ergodocity"
+    ],
+    "Eigenvalues": [
+      "Irregular Recursions",
+      "Quaternion Invocations"
+    ],
+    "Eschatology": [
+      "Deimotics",
+      "Sempiternity"
+    ],
+    "Spectrasonics": [
+      "Resonance",
+      "Quaternion Invocations",
+      "Energetics"
+    ],
+    "Umbral Calculus": [
+      "Polymathematics",
+      "Epiphenomina",
+      "Syllogistics"
+    ],
+    "Thanatology": [
+      "Deimotics",
+      "Memetic Resonance"
+    ],
+    "Ontology": [
+      "Metanymics",
+      "Eisegesis",
+      "Identity Negotiation"
+    ],
+    "Semiosis": [
+      "Logic",
+      "Memetic Resonance"
+    ],
+    "Salience": [
+      "Interior Encoding",
+      "Confabulonics",
+      "Identity Negotiation"
+    ]
+  }
+}
+

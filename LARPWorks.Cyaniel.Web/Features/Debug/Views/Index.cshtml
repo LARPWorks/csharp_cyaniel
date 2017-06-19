@@ -1,0 +1,45 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Features.SharedViews.BaseCyanielViewModel>
+@{
+    Layout = "_Layout.cshtml";
+}
+
+<div class="content-section">
+    <div class="center">
+        <form class="form-horizontal" method="POST">
+            <fieldset>
+                @if (ViewBag.ValidationError != null)
+                {
+                    <div class="alert alert-danger alert-dismissable fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Error!</strong> @ViewBag.ValidationError
+                    </div>
+                }
+
+                @if (ViewBag.ValidationMessage != null)
+                {
+                    <div class="alert alert-info alert-dismissable fade in">
+                        <a href="#" class="close" data-dismiss="alert" aria-label="close">&times;</a>
+                        <strong>Success!</strong> @ViewBag.ValidationMessage
+                    </div>
+                }
+
+                <!-- Form Name -->
+                <legend>Debug Commands</legend>
+                <p>Handle with care, these are possibly destructive.</p>
+
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <button class="btn btn-primary" formaction="/Debug/populate_db">Populate Database</button>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <button class="btn btn-danger" formaction="/Debug/clear_db">Clear Database</button>
+                </div>
+                <div class="form-group">
+                    <div class="col-md-2"></div>
+                    <button class="btn-primary btn" formaction="/Debug/random_character">Generate Random Character</button>
+                </div>
+            </fieldset>
+        </form>
+    </div>
+</div>
