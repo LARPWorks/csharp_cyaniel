@@ -1,4 +1,6 @@
-﻿namespace LARPWorks.Cyaniel.Models.Characters
+﻿using System.Collections.Generic;
+
+namespace LARPWorks.Cyaniel.Models.Characters
 {
     public class GameStatisticModel
     {
@@ -7,6 +9,8 @@
         /// to know which table this key refers to.
         /// </summary>
         public int PrimaryKey { get; set; }
+
+        public int AdvancementFactId { get; set; }
         /// <summary>
         /// Gets or sets the name of the statistic.
         /// 
@@ -23,10 +27,23 @@
         /// <summary>
         /// The value of the statistic.
         /// </summary>
-        public int Rank { get; set; }
+        public int? Rank { get; set; }
         /// <summary>
         /// Gets or sets the notes attached to this statistic model.
         /// </summary>
         public string Notes { get; set; }
+
+        /// <summary>
+        /// Gates that are required to acquire this GameStatistic.
+        /// 
+        /// It is wise to test all gates (in that they meet the expected rank, or exist on a charactermodel)
+        /// to see if this GameStatistic is available for selection.
+        /// </summary>
+        public List<GameStatisticModel> Gates { get; set; }
+
+        public GameStatisticModel()
+        {
+            Gates = new List<GameStatisticModel>();
+        }
     }
 }

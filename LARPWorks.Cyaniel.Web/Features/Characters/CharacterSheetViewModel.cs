@@ -59,6 +59,8 @@ namespace LARPWorks.Cyaniel.Features.Characters
         {
             using (var db = dbFactory.Create())
             {
+                Attributes = db.Fetch<GameStatisticModel>(
+                    "SELECT Id AS PrimaryKey, Name FROM Facts WHERE FactTypeId=@0", FactTypeEnum.Attributes).ToArray();
                 Skills = LoadGameStatistics(db, AdvancementListEnum.Skills);
                 Esoterics = LoadGameStatistics(db, AdvancementListEnum.Esoterics);
                 Exoterics = LoadGameStatistics(db, AdvancementListEnum.Exoterics);
@@ -128,14 +130,35 @@ namespace LARPWorks.Cyaniel.Features.Characters
 
         private GameStatisticModel[] LoadGameStatistics(Database database, AdvancementListEnum list)
         {
-            var sql = "SELECT f.Id AS Id,f.Name AS Name,ft.Name AS Category " +
+            var sql = "SELECT f.Id AS PrimaryKey,alf.Id AS AdvancementFactId,f.Name AS Name,ft.Name AS Category " +
                       "FROM AdvancementListFacts AS alf " +
                       "LEFT JOIN Facts AS f ON f.Id=alf.FactId " +
                       "LEFT JOIN FactTypes AS ft ON ft.Id=f.FactTypeId " +
-                      "WHERE alf.AdvancementListId=@0 " +
-                      "AND alf.IsStaffOnly=0";
+                      "WHERE alf.AdvancementListId=@0";
+
+            if (!IsAdmin())
+            {
+                sql += " AND alf.IsStaffOnly=0";
+            }
 
             var models = database.Fetch<GameStatisticModel>(sql, (int) list);
+            if (models.Any())
+            {
+                var gates = database.Fetch<GameStatisticModel>(Sql.Builder
+                    .Select("alfg.RequiredFactId AS PrimaryKey," +
+                            "alfg.AdvancementListFactId AS AdvancementFactId," +
+                            "f.Name")
+                    .From("AdvancementListFactGates AS alfg")
+                    .LeftJoin("Facts AS f").On("f.Id=alfg.RequiredFactId")
+                    .Where("alfg.AdvancementListFactId IN (@ids)", new
+                    {
+                        ids = models.Select(m => m.AdvancementFactId)
+                    }));
+                foreach (var model in models)
+                {
+                    model.Gates.AddRange(gates.Where(g => g.AdvancementFactId == model.AdvancementFactId));
+                }
+            }
 
             return models.ToArray();
         }
