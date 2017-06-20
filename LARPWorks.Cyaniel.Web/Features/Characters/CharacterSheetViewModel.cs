@@ -19,6 +19,7 @@ namespace LARPWorks.Cyaniel.Features.Characters
         public GameStatisticModel[] Esoterics { get; set; }
         public GameStatisticModel[] Perks { get; set; }
         public GameStatisticModel[] Flaws { get; set; }
+        public GameStatisticModel[] Traits { get; set; }
         public GameStatisticModel[] Exoterics { get; set; }
         public GameStatisticModel[] FamilyJobAndHometownSkills { get; set; }
         public GameStatisticModel[] Cultures { get; set; }
@@ -28,6 +29,10 @@ namespace LARPWorks.Cyaniel.Features.Characters
         public GameStatisticModel[] KnightOaths { get; set; }
         public GameStatisticModel[] MageTechniques { get; set; }
         public GameStatisticModel[] Rituals { get; set; }
+        public GameStatisticModel[] BasicFoci { get; set; }
+        public GameStatisticModel[] AdvancedFoci { get; set; }
+        public GameStatisticModel[] BasicManeuvers { get; set; }
+        public GameStatisticModel[] AdvancedManeuvers { get; set; }
         
         public Dictionary<string, List<GameStatisticModel>> CultureSkills { get; set; }
         public Dictionary<string, List<GameStatisticModel>> SocialStatusSkills { get; set; }
@@ -80,7 +85,11 @@ namespace LARPWorks.Cyaniel.Features.Characters
                 KnightOaths = LoadGameStatistics(db, AdvancementListEnum.KnightOaths);
                 MageTechniques = LoadGameStatistics(db, AdvancementListEnum.MageTechniques);
                 Rituals = LoadGameStatistics(db, AdvancementListEnum.Rituals);
-
+                Traits = LoadGameStatistics(db, AdvancementListEnum.Traits);
+                BasicFoci = LoadGameStatistics(db, AdvancementListEnum.BasicFoci);
+                AdvancedFoci = LoadGameStatistics(db, AdvancementListEnum.AdvancedFoci);
+                BasicManeuvers = LoadGameStatistics(db, AdvancementListEnum.BasicManeuvers);
+                AdvancedManeuvers = LoadGameStatistics(db, AdvancementListEnum.AdvancedManeuvers);
 
                 var cultureSkillFacts =
                     db.Fetch<AdvancementListFact>(

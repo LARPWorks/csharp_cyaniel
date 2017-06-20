@@ -32,7 +32,8 @@ namespace LARPWorks.Cyaniel
         Achievements = 17,
         KnightOrders = 18,
         MageGuilds = 19,
-        ReligiousFactions = 20
+        ReligiousFactions = 20,
+        AdvancedFoci = 21
     }
 
     public enum AdvancementListEnum : ushort
@@ -56,6 +57,8 @@ namespace LARPWorks.Cyaniel
         MageGuilds = 17,
         KnightOaths = 18,
         NonCombatSkills = 19,
-        Rituals = 20
+        Rituals = 20,
+        BasicFoci = 21,
+        AdvancedFoci = 22
     }
 }
