@@ -23,6 +23,12 @@ namespace LARPWorks.Cyaniel.Features.Characters
         public GameStatisticModel[] FamilyJobAndHometownSkills { get; set; }
         public GameStatisticModel[] Cultures { get; set; }
         public GameStatisticModel[] SocialStatuses { get; set; }
+        public GameStatisticModel[] MageGuilds { get; set; }
+        public GameStatisticModel[] KnightOrders { get; set; }
+        public GameStatisticModel[] KnightOaths { get; set; }
+        public GameStatisticModel[] MageTechniques { get; set; }
+        public GameStatisticModel[] Rituals { get; set; }
+        
         public Dictionary<string, List<GameStatisticModel>> CultureSkills { get; set; }
         public Dictionary<string, List<GameStatisticModel>> SocialStatusSkills { get; set; }
         
@@ -68,6 +74,13 @@ namespace LARPWorks.Cyaniel.Features.Characters
                 Flaws = LoadGameStatistics(db, AdvancementListEnum.Flaws);
                 Cultures = LoadGameStatistics(db, AdvancementListEnum.Cultures);
                 SocialStatuses = LoadGameStatistics(db, AdvancementListEnum.SocialStatuses);
+                FamilyJobAndHometownSkills = LoadGameStatistics(db, AdvancementListEnum.NonCombatSkills);
+                MageGuilds = LoadGameStatistics(db, AdvancementListEnum.MageGuilds);
+                KnightOrders = LoadGameStatistics(db, AdvancementListEnum.KnightOrders);
+                KnightOaths = LoadGameStatistics(db, AdvancementListEnum.KnightOaths);
+                MageTechniques = LoadGameStatistics(db, AdvancementListEnum.MageTechniques);
+                Rituals = LoadGameStatistics(db, AdvancementListEnum.Rituals);
+
 
                 var cultureSkillFacts =
                     db.Fetch<AdvancementListFact>(
