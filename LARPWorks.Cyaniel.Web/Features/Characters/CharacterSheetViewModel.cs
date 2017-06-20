@@ -12,6 +12,8 @@ namespace LARPWorks.Cyaniel.Features.Characters
 
         public CharacterModel Character { get; set; }
 
+        public bool UseGuidedView { get; set; }
+
         public string[] Sections { get; set; }
 
         public GameStatisticModel[] Skills { get; set; }
@@ -39,6 +41,7 @@ namespace LARPWorks.Cyaniel.Features.Characters
         
         public CharacterSheetViewModel()
         {
+            UseGuidedView = true;
             CultureSkills = new Dictionary<string, List<GameStatisticModel>>();
             SocialStatusSkills = new Dictionary<string, List<GameStatisticModel>>();
 

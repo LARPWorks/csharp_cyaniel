@@ -15,7 +15,19 @@ namespace LARPWorks.Cyaniel.Features.Characters
         public CharacterModule(IDbFactory dbFactory) : base("Characters")
         {
             _dbFactory = dbFactory;
-            Get["/view"] = parameters => View["View.cshtml", GetViewModel<CharacterSheetViewModel>(dbFactory)];
+            Get["/view/{CharacterId:int}/{Stage?Details}"] = parameters =>
+            {
+                bool useGuidedView = true;
+                var model = GetViewModel<CharacterSheetViewModel>(dbFactory);
+
+                ViewBag.Stage = parameters.Stage;
+
+                var stagePage = "Sheets/" + ViewBag.Stage + ".cshtml";
+
+                return
+                    View[useGuidedView ? stagePage : "AdvancedView.cshtml", model];
+            };
+
             Get["/index"] = parameters => View["Index.cshtml", BuildIndexModel()];
             Post["/index"] = parameters =>
             {

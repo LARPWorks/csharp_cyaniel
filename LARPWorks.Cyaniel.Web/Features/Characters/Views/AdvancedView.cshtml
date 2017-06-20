@@ -6,10 +6,8 @@
 
 <div class="content-section">
     <br/>
-
     <div id="myModal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
-
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
@@ -24,17 +22,14 @@
                     <button data-dismiss="modal" class="btn btn-primary">Save Changes</button>
                 </div>
             </div>
-
         </div>
     </div>
-
     <form class="form-horizontal" method="POST">
         <fieldset>
             <div class="center">
                 <!-- Form Name -->
                 <h2>Player Sheet</h2>
                 <hr/>
-
                 <div class="row">
                     <label class="col-md-2 control-label" for="CharacterName">Character Name</label>
                     <div class="col-md-8">
@@ -50,16 +45,15 @@
                     </div>
                     <label class="col-md-2 control-label">Experience Gained on Character</label>
                     <div class="col-md-2">
-                        <label class="form-control input-md"><b>35</b></label>    
+                        <label class="form-control input-md"><b>35</b></label>
                     </div>
                     <label class="col-md-2 control-label">Available Experience</label>
                     <div class="col-md-2">
-                        <label class="form-control input-md"><b>0</b></label>    
+                        <label class="form-control input-md"><b>0</b></label>
                     </div>
                     <div class="col-md-1"></div>
                 </div>
             </div>
-
             <div class="row">
                 <div class="col-md-2"></div>
                 <div class="col-md-8">
@@ -69,14 +63,14 @@
                                 @{ i = 0; }
                                 @foreach (string sectionName in Model.Sections)
                                 {
-                                    if (ViewBag.SelectedSection == sectionName 
+                                    if (ViewBag.SelectedSection == sectionName
                                         || (string.IsNullOrEmpty(ViewBag.SelectedSection) && i == 0))
                                     {
-                                        <li class="active"><a href="@string.Format("#tab{0}", i)" data-toggle="tab">@sectionName</a></li>
+                                        <li class="active"><a href="@string.Format(" #tab{0}", i)" data-toggle="tab">@sectionName</a></li>
                                     }
                                     else
                                     {
-                                        <li><a href="@string.Format("#tab{0}", i)" data-toggle="tab">@sectionName</a></li>
+                                        <li><a href="@string.Format(" #tab{0}", i)" data-toggle="tab">@sectionName</a></li>
                                     }
                                     i++;
                                 }
@@ -90,7 +84,8 @@
                                     if (ViewBag.SelectedSection == sectionName
                                         || (string.IsNullOrEmpty(ViewBag.SelectedSection) && i == 0))
                                     {
-                                        <div class="tab-pane fade in active" id="@string.Format("tab{0}", i)">Controls will go here for section @sectionName
+                                        <div class="tab-pane fade in active" id="@string.Format(" tab{0}", i)">
+                                            Controls will go here for section @sectionName
                                             <h2>Background Nonsense</h2>
                                             <h2>Attributes</h2>
                                             <h2>Reveler's Traits</h2>
@@ -113,16 +108,15 @@
                                             <h2>Knight Rank / Oaths</h2>
                                             <h2>Paladin Powers</h2>
                                             <h2>Leadership Trees I'm In</h2>
-                                            <h2>Leadership People In My Tree</h2>    
+                                            <h2>Leadership People In My Tree</h2>
                                         </div>
                                         i++;
                                         continue;
                                     }
 
-                                    <div class="tab-pane fade" id="@string.Format("tab{0}", i)">
+                                    <div class="tab-pane fade" id="@string.Format(" tab{0}", i)">
                                         @*@RenderSection(sectionName, false)*@
                                         @Html.Partial("Sheets/" + Model.SanitizeSectionName(sectionName), Model)
-
                                         <a href="#" data-toggle="modal" data-target="#myModal">Edit This Sheet</a>
                                     </div>
                                     i++;
@@ -132,7 +126,6 @@
                     </div>
                 </div>
             </div>
-
             <div class="center">
                 <!-- Button (Double) -->
                 <div class="form-group">

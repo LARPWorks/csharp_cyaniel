@@ -1,0 +1,217 @@
+﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Features.Characters.CharacterSheetViewModel>
+@{
+    Layout = "_Layout.cshtml";
+}
+
+@section Head {
+    <style>
+        /**********************************************************/
+/*                      Navigation Guided Charsheet       */
+
+a:focus,a:hover,a{
+    outline:none;
+    text-decoration: none;
+}
+li,ul{
+    list-style: none;
+    padding: 0;
+    margin: 0;
+}
+
+#navigation {
+    background: #0e1a35;
+}
+
+#navigation {
+    padding: 0;
+}
+
+.display-table {
+    display: table;
+    padding: 0;
+    height: 100%;
+    width: 100%;
+}
+
+.display-table-row {
+    display: table-row;
+    height: 100%;
+}
+
+.display-table-cell {
+    display: table-cell;
+    float: none;
+    height: 100%;
+}
+
+.v-align {
+    vertical-align: top;
+}
+.navi i {
+    font-size: 20px;
+}
+.navi a {
+    border-bottom: 1px solid #0d172e;
+    border-top: 1px solid #0d172e;
+    color: #ffffff;
+    display: block;
+    font-size: 17px;
+    font-weight: 500;
+    padding: 8px 20px;
+    text-decoration: none;
+}
+.navi .active a {
+    background: #122143;
+    border-left: 5px solid #5584ff;
+    padding-left: 15px;
+}
+
+.navi a:hover {
+    background: #122143 none repeat scroll 0 0;
+    border-left: 5px solid #5584ff;
+    display: block;
+    padding-left: 15px;
+}
+
+.user-dashboard {
+    padding: 0 20px;
+}
+
+.user-dashboard h1 {
+    color: #0e1a35;
+    font-size: 30px;
+    font-weight: 500;
+    margin: 0;
+    padding: 21px 0;
+}
+
+.hidden-xs{
+    -webkit-transition: all 0.5s ease;
+    -moz-transition: all 0.5s ease;
+    -o-transition: all 0.5s ease;
+    transition: all 0.5s ease;
+}
+
+    </style>
+}
+
+<div class="content-section">
+    <div class="container-fluid display-table">
+        <div class="row display-table-row">
+            <div class="col-md-2 col-sm-1 hidden-xs display-table-cell v-align box" id="navigation">
+                <div class="navi">
+                    <ul>
+                        <li class="@(ViewBag.Stage == "Details" ? "active" : "")">
+                            <a href="Details"><i class="fa" aria-hidden="true"></i>
+                                <span><b>Details</b></span>
+                                <span class="help-block">About your Character</span>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Stage == "Culture" ? "active" : "")">
+                            <a href="Culture">
+                                <i class="fa" aria-hidden="true"></i>
+                                <span><b>Culture</b></span><span class="help-block">Choose your Origin</span>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Stage == "SocialStatus" ? "active" : "")">
+                            <a href="SocialStatus">
+                                <i class="fa" aria-hidden="true"></i>
+                                <span><b>Social Status</b></span>
+                                <span class="help-block">Choose your Social Class</span>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Stage == "Background" ? "active" : "")">
+                            <a href="Background">
+                                <i class="fa" aria-hidden="true"></i>
+                                <span><b>Background</b></span>
+                                <span class="help-block">Where You Come From</span>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Stage == "Attributes" ? "active" : "")">
+                            <a href="Attributes">
+                                <i class="fa" aria-hidden="true"></i>
+                                <span><b>Attributes</b></span>
+                                <span class="help-block">Assign Attribute Scores</span>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Stage == "Skills" ? "active" : "")">
+                            <a href="Skills">
+                                <i class="fa" aria-hidden="true"></i>
+                                <span><b>Skills</b></span>
+                                <span class="help-block">Train in Skills</span>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Stage == "PerksFlaws" ? "active" : "")">
+                            <a href="PerksFlaws">
+                                <i class="fa" aria-hidden="true"></i>
+                                <span><b>Perks & Flaws</b></span>
+                                <span class="help-block">Make them Human</span>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Stage == "Foci" ? "active" : "")">
+                            <a href="Foci">
+                                <i class="fa" aria-hidden="true"></i>
+                                <span><b>Foci</b></span>
+                                <span class="help-block">Knowledge of the World</span>
+                            </a>
+                        </li>
+                        <li class="@(ViewBag.Stage == "Maneuvers" ? "active" : "")">
+                            <a href="Maneuvers">
+                                <i class="fa" aria-hidden="true"></i>
+                                <span><b>Maneuvers</b></span>
+                                <span class="help-block">Train in Combat Prowress</span>
+                            </a>
+                        </li>
+                        @if (false)
+                        {
+                            <li><a href="#"><i class="fa" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Mage Techniques</span></a></li>
+                        }
+                        @if (false)
+                        {
+                            <li><a href="#"><i class="fa" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Knight Oaths</span></a></li>
+                        }
+                        @if (false)
+                        {
+                            <li><a href="#"><i class="fa" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Paladin Powers</span></a></li>
+                        }
+                        @if (false)
+                        {
+                            <li><a href="#"><i class="fa" aria-hidden="true"></i><span class="hidden-xs hidden-sm">Rituals</span></a></li>
+                        }
+                        <li><a href="#"><i class="fa" aria-hidden="true"></i><span>Equipment</span><span class="help-block">Choose # Items</span></a></li>
+                    </ul>
+                </div>
+            </div>
+            <div class="col-md-10 col-sm-11 display-table-cell v-align">
+                <!--<button type="button" class="slide-toggle">Slide Toggle</button> -->
+                <div class="row">
+                    <header>
+                        <div class="col-md-7">
+                            <nav class="navbar-default pull-left">
+                                <div class="navbar-header">
+                                    <button type="button" class="navbar-toggle collapsed" data-toggle="offcanvas" data-target="#side-menu" aria-expanded="false">
+                                        <span class="sr-only">Toggle navigation</span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                        <span class="icon-bar"></span>
+                                    </button>
+                                </div>
+                            </nav>
+                        </div>
+
+                    </header>
+                </div>
+                <div class="user-dashboard">
+                    <h2>Character Editor</h2>
+                    <hr/>
+                    <div class="row">
+                    </div>
+                </div>
+                @RenderBody()
+            </div>
+        </div>
+    </div>
+    <form method="post" action="/characters/toggle_view">
+        <button type="submit" class="btn-link">Use advanced form</button>
+    </form>
+</div>
