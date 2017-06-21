@@ -1,6 +1,85 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Features.Characters.CharacterSheetViewModel>
+﻿@using LARPWorks.Cyaniel.Models.Characters
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Features.Characters.CharacterSheetViewModel>
 @{
     Layout = "GuidedView.cshtml";
 }
 
-This is a sample page.
+<div class="col-md-9">
+    <h2>About Your Character</h2>
+    <hr/>
+
+    <div class="row">
+        <div class="col-md-6 form-horizontal">
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="Name">Name</label>
+                <div class="col-md-8">
+                    <input id="Name" name="Name" type="text" value="" class="form-control input-md" required="">
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 form-horizontal">
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="MothersName">Mother's Name</label>
+                <div class="col-md-8">
+                    <input id="MothersName" name="MothersName" type="text" value="" class="form-control input-md" required="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="FathersName">Father's Name</label>
+                <div class="col-md-8">
+                    <input id="FathersName" name="FathersName" type="text" value="" class="form-control input-md" required="">
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="Hometown">Hometown</label>
+                <div class="col-md-6">
+                    <input id="Hometown" name="Hometown" type="text" value="" class="form-control input-md" required="">
+                </div>
+            </div>
+        </div>
+        <div class="col-md-6">
+            <!-- Multiple Checkboxes -->
+            <div class="form-group">
+                <label class="col-md-2 control-label" for="checkboxes">Concepts</label>
+                <div class="col-md-6">
+                    @foreach (GameStatisticModel concept in Model.Concepts)
+                    {
+                        <div class="checkbox">
+                            <label for="checkboxes-@concept.Name">
+                                <input type="checkbox" name="checkboxes" id="checkboxes-@concept.Name" value="0">
+                                @concept.Name
+                            </label>
+                        </div>
+                    }
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-md-6 form-horizontal">
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="Gender">Gender</label>
+                <div class="col-md-4">
+                    <select id="Gender" name="Gender" class="form-control">
+                        <option value="1">Male</option>
+                        <option value="2">Female</option>
+                        <option value="3">Other</option>
+                    </select>
+                </div>
+            </div>
+
+            <div class="form-group">
+                <label class="col-md-4 control-label" for="Age">Age</label>
+                <div class="col-md-2">
+                    <input id="Age" name="Age" type="text" value="" class="form-control input-md"/>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

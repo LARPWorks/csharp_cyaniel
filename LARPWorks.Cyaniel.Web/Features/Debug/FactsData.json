@@ -627,6 +627,15 @@
       "Virtuoso",
       "War Games",
       "World Trader"
+    ],
+    "Concepts": [
+      "Higher Nobility",
+      "Knighthood",
+      "Arcane Circle Initiation",
+      "Holy Ordination",
+      "Heir Apparent",
+      "Charismata",
+      "Antagonist"
     ]
   },
   "SocialStatusSkills": {
@@ -1523,6 +1532,15 @@
       "Virtuoso",
       "War Games",
       "World Trader"
+    ],
+    "Concepts": [
+      "Higher Nobility",
+      "Knighthood",
+      "Arcane Circle Initiation",
+      "Holy Ordination",
+      "Heir Apparent",
+      "Charismata",
+      "Antagonist"
     ]
   },
   "SkillGates": {

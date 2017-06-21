@@ -1,6 +1,95 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Features.Characters.CharacterSheetViewModel>
+﻿@using System.Linq
+@using LARPWorks.Cyaniel.Models.Characters
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Features.Characters.CharacterSheetViewModel>
 @{
     Layout = "GuidedView.cshtml";
 }
 
-This is a sample page.
+@section Head {
+    <script>
+        $("div.skill").hover(
+            function() {
+                var codex = document.getElementById("codex");
+                codex.innerHTML = $(this).innerHTML;
+            },
+            function() {
+                var codex = document.getElementById("codex");
+                codex.innerHTML = "";
+            }
+        );
+    </script>
+    <style>
+        table, th, td {
+            padding: 5px;
+        }
+
+        th {
+            background-color: black;
+            color: white;
+        }
+
+        th, td {
+            border-bottom: 1px solid #ddd;
+        }
+
+        tr:hover {
+            background-color: #f5f5f5; 
+        }
+    </style>
+}
+
+<div class="col-md-9">
+    <h2>Character Skills</h2>
+    <hr/>
+    <div id="accordion">
+        @foreach (string category in Model.Skills.Select(s => s.Category).Distinct())
+        {
+            <h3><b>@category</b></h3>
+            @*<div class="form-group">
+                    @foreach (GameStatisticModel skill in Model.Skills.Where(s => s.Category == category))
+                    {
+                        <div class="form-control" style="margin-top: 5px;margin-bottom: 5px">
+                            <p>@skill.Name</p>
+
+                        </div>
+                    }
+            </div>*@
+            <div>
+                <table style="width: 100%">
+                    <tr>
+                        <th style="background: black; color: white">Skill</th>
+                        @*<th style="background: black; width: 50px;"></th>*@
+                        <th style="background: black; color: white; width: 150px;text-align: center">Rank</th>
+                        <th style="background: black; width: 50px;"></th>
+                        <th style="background: black; color: white; width: 100px">Experience</th>
+                    </tr>
+                    @foreach (GameStatisticModel skill in Model.Skills.Where(s => s.Category == category))
+                    {
+                        <tr>
+                            <td>@skill.Name</td>
+                            <td>
+                                <div class="input-group" style="width: 100px">
+                                    <span class="input-group-addon">
+                                        <button class="rank" increment="lower" value="@skill.Name">-</button>
+                                    </span> 
+                                    <span class="form-control">
+                                        0
+                                    </span>
+                                    <span class="input-group-addon">
+                                        <button class="rank" increment="raise" value="@skill.Name">+</button>
+                                    </span>
+                                </div>
+                            </td>
+                            <td></td>
+                            <td>0</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        }
+    </div>
+</div>
+
+@section Codex {
+    
+}

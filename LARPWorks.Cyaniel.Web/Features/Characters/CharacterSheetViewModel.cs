@@ -35,6 +35,7 @@ namespace LARPWorks.Cyaniel.Features.Characters
         public GameStatisticModel[] AdvancedFoci { get; set; }
         public GameStatisticModel[] BasicManeuvers { get; set; }
         public GameStatisticModel[] AdvancedManeuvers { get; set; }
+        public GameStatisticModel[] Concepts { get; set; }
         
         public Dictionary<string, List<GameStatisticModel>> CultureSkills { get; set; }
         public Dictionary<string, List<GameStatisticModel>> SocialStatusSkills { get; set; }
@@ -93,6 +94,7 @@ namespace LARPWorks.Cyaniel.Features.Characters
                 AdvancedFoci = LoadGameStatistics(db, AdvancementListEnum.AdvancedFoci);
                 BasicManeuvers = LoadGameStatistics(db, AdvancementListEnum.BasicManeuvers);
                 AdvancedManeuvers = LoadGameStatistics(db, AdvancementListEnum.AdvancedManeuvers);
+                Concepts = LoadGameStatistics(db, AdvancementListEnum.Concepts);
 
                 var cultureSkillFacts =
                     db.Fetch<AdvancementListFact>(

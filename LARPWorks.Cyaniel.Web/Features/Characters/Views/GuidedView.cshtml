@@ -1,98 +1,158 @@
-﻿@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Features.Characters.CharacterSheetViewModel>
+﻿@using Newtonsoft.Json
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Features.Characters.CharacterSheetViewModel>
 @{
     Layout = "_Layout.cshtml";
 }
 
 @section Head {
+    <script>
+        console.log('Experimental CG script loading...');
+
+        console.log('loading model..');
+        var model = @Html.Raw(JsonConvert.SerializeObject(@Model.Character));
+        console.log('done!');
+
+
+        $(function() {
+            $("#accordion").accordion();
+        });
+
+        $(document).ready(function() {
+            
+
+            $("button.rank").click(function() {
+                var increment = $(this).prop("increment");
+                var value = $(this).prop("value");
+
+                console.log('Click: ' + increment + " skill: " + value);
+            });
+        });
+    </script>
     <style>
         /**********************************************************/
 /*                      Navigation Guided Charsheet       */
 
-a:focus,a:hover,a{
-    outline:none;
-    text-decoration: none;
-}
-li,ul{
-    list-style: none;
-    padding: 0;
-    margin: 0;
-}
+        a:focus, a:hover, a {
+            outline: none;
+            text-decoration: none;
+        }
+        li, ul {
+            list-style: none;
+            padding: 0;
+            margin: 0;
+        }
 
-#navigation {
-    background: #0e1a35;
-}
+        #navigation {
+            background: #0e1a35;
+        }
 
-#navigation {
-    padding: 0;
-}
+        #navigation {
+            padding: 0;
+        }
 
-.display-table {
-    display: table;
-    padding: 0;
-    height: 100%;
-    width: 100%;
-}
+        .display-table {
+            display: table;
+            padding: 0;
+            height: 100%;
+            width: 100%;
+        }
 
-.display-table-row {
-    display: table-row;
-    height: 100%;
-}
+        .display-table-row {
+            display: table-row;
+            height: 100%;
+        }
 
-.display-table-cell {
-    display: table-cell;
-    float: none;
-    height: 100%;
-}
+        .display-table-cell {
+            display: table-cell;
+            float: none;
+            height: 100%;
+        }
 
-.v-align {
-    vertical-align: top;
-}
-.navi i {
-    font-size: 20px;
-}
-.navi a {
-    border-bottom: 1px solid #0d172e;
-    border-top: 1px solid #0d172e;
-    color: #ffffff;
-    display: block;
-    font-size: 17px;
-    font-weight: 500;
-    padding: 8px 20px;
-    text-decoration: none;
-}
-.navi .active a {
-    background: #122143;
-    border-left: 5px solid #5584ff;
-    padding-left: 15px;
-}
+        .v-align {
+            vertical-align: top;
+        }
+        .navi i {
+            font-size: 20px;
+        }
+        .navi a {
+            border-bottom: 1px solid #0d172e;
+            border-top: 1px solid #0d172e;
+            color: #ffffff;
+            display: block;
+            font-size: 17px;
+            font-weight: 500;
+            padding: 8px 20px;
+            text-decoration: none;
+        }
+        .navi .active a {
+            background: #122143;
+            border-left: 5px solid #5584ff;
+            padding-left: 15px;
+        }
 
-.navi a:hover {
-    background: #122143 none repeat scroll 0 0;
-    border-left: 5px solid #5584ff;
-    display: block;
-    padding-left: 15px;
-}
+        .navi a:hover {
+            background: #122143 none repeat scroll 0 0;
+            border-left: 5px solid #5584ff;
+            display: block;
+            padding-left: 15px;
+        }
 
-.user-dashboard {
-    padding: 0 20px;
-}
+        .user-dashboard {
+            padding: 0 20px;
+        }
 
-.user-dashboard h1 {
-    color: #0e1a35;
-    font-size: 30px;
-    font-weight: 500;
-    margin: 0;
-    padding: 21px 0;
-}
+        .user-dashboard h1 {
+            color: #0e1a35;
+            font-size: 30px;
+            font-weight: 500;
+            margin: 0;
+            padding: 21px 0;
+        }
 
-.hidden-xs{
-    -webkit-transition: all 0.5s ease;
-    -moz-transition: all 0.5s ease;
-    -o-transition: all 0.5s ease;
-    transition: all 0.5s ease;
-}
+        .hidden-xs {
+            -webkit-transition: all 0.5s ease;
+            -moz-transition: all 0.5s ease;
+            -o-transition: all 0.5s ease;
+            transition: all 0.5s ease;
+        }
 
+        .panel > .list-group
+        {
+            margin-bottom: 0;
+        }
+        .panel > .list-group .list-group-item
+        {
+            border-width: 1px 0;
+        }
+        .panel > .list-group .list-group-item:first-child
+        {
+            border-top-right-radius: 0;
+            border-top-left-radius: 0;
+        }
+        .panel > .list-group .list-group-item:last-child
+        {
+            border-bottom: 0;
+        }
+        .panel-heading + .list-group .list-group-item:first-child
+        {
+            border-top-width: 0;
+        }
+
+        .panel-info .list-group-item.active
+        {
+            color: #31708F;
+            background-color: #D9EDF7;
+            border-color: #BCE8F1;
+        }
+
+        .panel a.list-group-item.active:hover, a.list-group-item.active:focus
+        {
+            color: #000;
+            background-color: #DDD;
+            border-color: #DDD;
+        }
     </style>
+    @RenderSection("Head", false)
 }
 
 <div class="content-section">
@@ -202,12 +262,40 @@ li,ul{
                     </header>
                 </div>
                 <div class="user-dashboard">
-                    <h2>Character Editor</h2>
+                    @*<h2>Character Editor</h2>
                     <hr/>
                     <div class="row">
+                    </div>*@
+                </div>
+
+                @RenderBody()
+
+                <div class="col-md-3" style="padding: 20px;padding-top: 50px">
+                    <div class="col-md-12" id="codex" style="height: 400px; border-style: inset;">
+                        <p>The codex</p>
+                        @RenderSection("Codex", false)
+                        <p>
+                            anything that highlights on the page that the user clicks will fill up with info here
+                            right here
+                        </p>
+                    </div>
+                    <div class="col-md-12">
+                        <div class="col-md-6">
+                            <div>
+                                <b>Character Name</b>
+                            </div>
+                            <div>
+                                34 Experience
+                            </div>
+                        </div>
+                        <div class="col-md-6">
+                            <p>Blah blah blah character stat info</p>
+                            <p>More info goes here</p>
+                            <p>This section of the page is all summary</p>
+                            <p>foo bar baz</p>
+                        </div>
                     </div>
                 </div>
-                @RenderBody()
             </div>
         </div>
     </div>
