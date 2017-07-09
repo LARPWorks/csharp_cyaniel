@@ -280,6 +280,9 @@ namespace LARPWorks.Cyaniel.Features.Debug
                     db.Single<AdvancementListFact>(
                         "SELECT * FROM AdvancementListFacts WHERE FactId=@0 AND AdvancementListId=@1",
                         factKey, (int)advancementList).Id;
+                Console.WriteLine("factKey: " + factKey);
+                Console.WriteLine("(int)advancementList: " + (int)advancementList);
+                Console.WriteLine("advancementFactKey: " + advancementFactKey);
                 foreach (var requirement in gates[fact])
                 {
                     if (!factMappings.ContainsKey(requirement))
@@ -288,6 +291,7 @@ namespace LARPWorks.Cyaniel.Features.Debug
                     }
 
                     var requirementKey = factMappings[requirement];
+                    Console.WriteLine("requirementKey: " + requirementKey);
                     db.Insert(new AdvancementListFactGate
                     {
                         AdvancementListFactId = advancementFactKey,

@@ -15,17 +15,18 @@ namespace LARPWorks.Cyaniel.Features.Characters
         public CharacterModule(IDbFactory dbFactory) : base("Characters")
         {
             _dbFactory = dbFactory;
+            var characterSheetViewModel = GetViewModel<CharacterSheetViewModel>(dbFactory);
+
             Get["/view/{CharacterId:int}/{Stage?Details}"] = parameters =>
             {
                 bool useGuidedView = true;
-                var model = GetViewModel<CharacterSheetViewModel>(dbFactory);
 
                 ViewBag.Stage = parameters.Stage;
 
                 var stagePage = "Sheets/" + ViewBag.Stage + ".cshtml";
 
                 return
-                    View[useGuidedView ? stagePage : "AdvancedView.cshtml", model];
+                    View[useGuidedView ? stagePage : "AdvancedView.cshtml", characterSheetViewModel];
             };
 
             Get["/index"] = parameters => View["Index.cshtml", BuildIndexModel()];
@@ -60,6 +61,17 @@ namespace LARPWorks.Cyaniel.Features.Characters
                 model.NewCharacterName = string.Empty;
                 //return View["Index.cshtml", model];
                 return Response.AsRedirect("/characters/view/" + newCharacterID);
+            };
+            Post["/toggle_view"] = parameters =>
+            {
+                try
+                {
+                    return View["AdvancedView.cshtml", characterSheetViewModel];
+                }
+                catch (Exception e) {
+                    Console.WriteLine(e.Message);
+                }
+                return null;
             };
             Post["/delete/{characterId}"] = parameters =>
             {

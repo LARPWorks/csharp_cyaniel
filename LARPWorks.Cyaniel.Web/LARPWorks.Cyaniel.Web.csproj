@@ -129,6 +129,9 @@
     <None Include="App.config">
       <SubType>Designer</SubType>
     </None>
+    <Content Include="Content\css\advancedview.css">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
     <Content Include="Content\css\jquery-ui.min.css">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>

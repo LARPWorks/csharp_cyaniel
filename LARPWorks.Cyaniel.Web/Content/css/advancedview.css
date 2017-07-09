@@ -1,0 +1,14 @@
+﻿/**********************************************************/
+/*                      Advanced Charsheet                */
+.baseflexdiv {
+    border: 1px solid green;
+    height: 50px;
+    display: inline-flex;
+}
+
+.growflexdiv {
+    border: 1px solid blue;
+    height: 50px;
+    display: inline-flex;
+    flex-grow: 100;
+}

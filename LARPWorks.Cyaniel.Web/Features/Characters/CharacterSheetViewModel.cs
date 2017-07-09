@@ -36,10 +36,14 @@ namespace LARPWorks.Cyaniel.Features.Characters
         public GameStatisticModel[] BasicManeuvers { get; set; }
         public GameStatisticModel[] AdvancedManeuvers { get; set; }
         public GameStatisticModel[] Concepts { get; set; }
-        
+        public GameStatisticModel[] Leaders { get; set; }
+        public GameStatisticModel[] Followers { get; set; }
+
         public Dictionary<string, List<GameStatisticModel>> CultureSkills { get; set; }
         public Dictionary<string, List<GameStatisticModel>> SocialStatusSkills { get; set; }
-        
+
+        public GameStatisticModel NewGameStatisticModel { get; set; }
+
         public CharacterSheetViewModel()
         {
             UseGuidedView = true;
