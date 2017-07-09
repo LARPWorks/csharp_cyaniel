@@ -11,6 +11,14 @@ namespace LARPWorks.Cyaniel
         Complete = 3
     }
 
+    public enum BucketTicketPriorityEnum : ushort
+    {
+        Low = 1,
+        Medium = 2,
+        High = 3,
+        Critical = 4
+    }
+
     public enum FactTypeEnum : ushort
     {
         Attributes = 1,

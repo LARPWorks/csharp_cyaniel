@@ -1,4 +1,6 @@
 ﻿@using System
+@using LARPWorks.Cyaniel
+@using LARPWorks.Cyaniel.Features.Buckets
 @using LARPWorks.Cyaniel.Models
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Features.Buckets.TicketViewModel>
 @{
@@ -7,119 +9,91 @@
 
 
 <div class="content-section">
-    <div class="center">
-        <form class="form-horizontal" method="POST">
-            <fieldset>
-                <!-- Form Name -->
-                <legend>Viewing Ticket</legend>
+    <div class="form">
+        <p>
+            <input type="text" placeholder="Enter subject here...">
+        </p>
+        <div class="btn-toolbar" role="toolbar" aria-label="...">
+            <button type="button" class="btn btn-default">Edit</button>
+            <button type="button" class="btn btn-default">Comment</button>
 
-                <!-- Text input-->
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="TicketSubject">Ticket Subject</label>
-                    <div class="col-md-8">
-                        @if (Model.CanUserEdit())
-                        {
-                            <input id="TicketSubject" name="TicketSubject" type="text" value="@Model.TicketSubject"
-                                   class="form-control input-md" required="">
-                        }
-                        else
-                        {
-                            <label class="form-control input-md">@Model.TicketSubject</label>
-                        }
-                        <span class="help-block">A short summary of what this ticket is in regards to.</span>
-                    </div>
+            <div class="btn-group" role="group" aria-label="...">
+                <button type="button" class="btn btn-default">Resolve Ticket</button>
+                <button type="button" class="btn btn-default">Close Ticket</button>
+            </div>
+        </div>
+        <div class="hr-lalign">
+            <span>Details</span>
+        </div>
+        <p>
+            <label>Bucket</label>
+            <input type="text" id="FundID" name="FundID">
+            <label>Creator</label>
+            <input type="text" id="SpeedKey" name="SpeedKey">
+        </p>
+        <p>
+            <label>Status</label>
+            <input type="text" id="Program" name="Program">
+            <label>Assignee</label>
+            <input type="text" id="Award" name="Award">
+        </p>
+        <div class="hr-lalign">
+            <span>Description</span>
+        </div>
+        <div class="panel panel-default">
+            <div class="panel-body" style="height: 250px; overflow: auto;">
+                <div id="editor-container">
+                    @Model.Description
                 </div>
-
-                <!-- Select Basic -->
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="Bucket">Bucket</label>
-                    <div class="col-md-4">
-                        @if (Model.CanUserEdit())
-                        {
-                            <select id="Bucket" name="Bucket" class="form-control">
-                                @foreach (Bucket bucket in Model.BucketChoices)
-                                {
-                                    <option name="Bucket" value="@bucket.Name">@bucket.Name</option>
-                                }
-                            </select>
-                        }
-                        else
-                        {
-                            <label class="form-control">@Model.Bucket</label>
-                        }
-                    </div>
-                    <label class="col-md-2 control-label" for="Creator">Creator</label>
-                    <div class="col-md-4">
-                        <label class="form-control">@Model.Creator</label>
-                    </div>
-                </div>
-
-                <div class="form-group">
-                    <label class="col-md-2 control-label" for="Status">Status</label>
-                    <div class="col-md-4">
-                        @if (Model.CanUserEdit())
-                        {
-                            <select id="Status" name="Status" class="form-control">
-                                @foreach (BucketTicketStatusEnum status in Enum.GetValues(typeof (BucketTicketStatusEnum)))
-                                {
-                                    <option name="Status" value="@status.ToString()">@status.ToString()</option>
-                                }
-                            </select>
-                        }
-                        else
-                        {
-                            <label class="form-control">@Model.Status</label>
-                        }
-                    </div>
-                    <label class="col-md-2 control-label" for="Assignee">Assignee</label>
-                    <div class="col-md-4">
-                        @if (Model.CanUserEdit())
-                        {
-
-                        }
-                        else
-                        {
-                            <label class="form-control">@Model.Assignee</label>
-                        }
-                    </div>
-                </div>
-                <!-- Horizontal Rule Break -->
-                <p>
-                    <hr/>
-                </p>
-
-                <!-- Textarea -->
-                <div class="form-group">
-                    <div class="row">
-                        <label class="col-md-2 control-label" for="Description">Description</label>
-                    </div>
-                    <div class="col-md-2"></div>
-                    <div class="col-md-8">
-                        @if (Model.CanUserEdit())
-                        {
-                            <textarea class="form-control" rows="10" id="Description" name="Description">@Model.Description</textarea>
-                        }
-                        else
-                        {
-                            <textarea class="form-control" rows="10" id="Description" name="Description" readonly>@Model.Description</textarea>
-                        }
-                    </div>
-                </div>
-
-                @if (Model.CanUserEdit())
+            </div>
+        </div>
+        <div class="hr-lalign">
+            <span>Comments</span>
+        </div>
+        <div class="comment-history">
+            <ul class="form-comments">
+                @foreach (CommentViewModel comment in Model.Comments)
                 {
-                    <div class="form-group">
-                        <div class="col-md-8"></div>
-                        <div class="col-md-4">
-                            <button id="button2id" name="button2id" class="btn btn-primary">Save Changes</button>
-                        </div>
-                    </div>
+                    <li class="commentLi commentstep-1" data-commentid="4">
+                        <table class="form-comments-table">
+                            <tr>
+                                <td>
+                                    <div class="comment-timestamp">12:03 25/4/2016</div>
+                                </td>
+                                <td>
+                                    <div class="comment-user">@comment.Author</div>
+                                </td>
+                                <td>
+                                    <div id="comment-4" data-commentid="4" class="comment comment-step1">
+                                        @comment.Comment
+                                        <div id="commentactions-4" class="comment-actions">
+                                            <div class="btn-group" role="group" aria-label="...">
+                                                <button type="button" class="btn btn-primary btn-sm"><i class="fa fa-edit"></i> Reply</button>
+                                                <button type="button" class="btn btn-default btn-sm"><i class="fa fa-pencil"></i> Edit</button>
+                                                <button type="button" class="btn btn-danger btn-sm"><i class="fa fa-trash"></i>Delete</button>
+                                            </div>
+                                        </div>
+                                    </div>
+                                </td>
+                            </tr>
+                        </table>
+                    </li>
                 }
-
-                <p>
-                    <hr/>
-                </p>
-            </fieldset>
-        </form>
+            </ul>
+        </div>
     </div>
 </div>
+
+<script>
+    var quill = new Quill('#editor-container', {
+        modules: {
+            toolbar: [
+                [{ header: [1, 2, false] }],
+                ['bold', 'italic', 'underline'],
+                ['code-block']
+            ]
+        },
+        //placeholder: 'Compose an epic...',
+        theme: 'snow'  // or 'bubble'
+    });
+</script>

@@ -1,6 +1,7 @@
 ﻿using System;
 using System.Collections.Generic;
 using System.IO;
+using System.Linq;
 using System.Reflection;
 using LARPWorks.Cyaniel.Features.SharedViews;
 using LARPWorks.Cyaniel.Models;
@@ -34,6 +35,19 @@ namespace LARPWorks.Cyaniel.Features.Debug
                 {
                     using (var db = dbFactory.Create())
                     {
+                        // Generate some sample buckets
+                        foreach (
+                            var bucket in
+                                new[]
+                                {
+                                    "Character Submissions", "Bugs", "Character Questions", "Downtime Actions",
+                                    "Payment Questions"
+                                })
+                        {
+                            var bucketOpj = new Bucket {Name = bucket};
+                            db.Insert(bucketOpj);
+                        }
+
                         // This is just an internal cache of how the inserts go
                         // for all facts. It speeds up the rest of the creation process.
                         Dictionary<string,int> factMappings = new Dictionary<string, int>();
@@ -160,6 +174,98 @@ namespace LARPWorks.Cyaniel.Features.Debug
                 var model = this.Bind<BaseCyanielViewModel>();
 
                 ViewBag.ValidationMessage = "New character generated with ID: " + 0;
+                return View["Index.cshtml", model];
+            };
+            Post["/random_users"] = parameters =>
+            {
+                var model = this.Bind<BaseCyanielViewModel>();
+                var random = new Random();
+
+                try
+                {
+                    using (var db = dbFactory.Create())
+                    {
+                        for (int i = 0; i < 20; i++)
+                        {
+                            var user = new User
+                            {
+                                Email = "email_" + random.Next() + "@sample.net",
+                                LastName = "RUSER_" + random.Next(),
+                                FirstName = "RUSER_" + random.Next(),
+                                PasswordHash = "PASSWORDHASH" + random.Next(),
+                                Username = "rUser_" + random.Next()
+                            };
+
+                            db.Insert(user);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    ViewBag.ValidationError = e.Message;
+                    return View["Index.cshtml", model];
+                }
+                
+                ViewBag.ValidationMessage = "Successfully generated 20 new users!";
+                return View["Index.cshtml", model];
+            };
+            Post["/random_ticket"] = parameters =>
+            {
+                var model = this.Bind<BaseCyanielViewModel>();
+                var random = new Random();
+
+                try
+                {
+                    using (var db = dbFactory.Create())
+                    {
+                        var buckets = db.Fetch<Bucket>("SELECT * FROM Buckets");
+                        var users = db.Fetch<User>("SELECT * FROM Users LIMIT 20");
+
+                        var rBucket = buckets.OrderBy(b => Guid.NewGuid()).FirstOrDefault();
+
+                        var ticket = new BucketTicket
+                        {
+                            Title = "R_" + rBucket.Name + " #" + random.Next(),
+                            BucketId = rBucket.Id,
+                            CreatorId = users.OrderBy(u => Guid.NewGuid()).First().Id,
+                            AssigneeId = users.OrderBy(u => Guid.NewGuid()).First().Id,
+                            CreatedOn = DateTime.UtcNow,
+                            Description = "This is a random description",
+                            LastModified = DateTime.UtcNow,
+                            Priority = (int)Enum.GetValues(typeof(BucketTicketPriorityEnum))
+                                .Cast<BucketTicketPriorityEnum>()
+                                .ToArray()
+                                .OrderBy(n => Guid.NewGuid()).First(),
+                            Status =
+                                (int)
+                                    Enum.GetValues(typeof (BucketTicketStatusEnum))
+                                        .Cast<BucketTicketStatusEnum>()
+                                        .ToArray()
+                                        .OrderBy(n => Guid.NewGuid()).First()
+                        };
+
+                        var ticketId = db.Insert(ticket);
+                        for (int i = 0; i < random.Next(0, 10); i++)
+                        {
+                            var comment = new TicketComment
+                            {
+                                AuthorUserId = users.OrderBy(u => Guid.NewGuid()).First().Id,
+                                Comment = "This is a random sample comment",
+                                CreatedOn = DateTime.UtcNow,
+                                TicketId = Int32.Parse(ticketId.ToString())
+                            };
+
+                            db.Insert(comment);
+                        }
+                    }
+                }
+                catch (Exception e)
+                {
+                    ViewBag.ValidationError = e.Message + Environment.NewLine + e.StackTrace;
+                    return View["Index.cshtml", model];
+                }
+
+                ViewBag.ValidationMessage = "Successfully generated new ticket.";
                 return View["Index.cshtml", model];
             };
         }

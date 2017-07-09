@@ -140,8 +140,6 @@ namespace LARPWorks.Cyaniel.Models
 
 
 
-	[PrimaryKey("AdvancementListFactId", AutoIncrement=false)]
-
 
 	[ExplicitColumns]
 
@@ -469,6 +467,18 @@ namespace LARPWorks.Cyaniel.Models
 
 
 		[Column] public DateTime? LastModified { get; set; }
+
+
+
+
+
+		[Column] public string Description { get; set; }
+
+
+
+
+
+		[Column] public int Priority { get; set; }
 
 
 

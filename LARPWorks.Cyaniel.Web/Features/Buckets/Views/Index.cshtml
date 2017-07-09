@@ -7,46 +7,80 @@
 
 
 <div class="content-section">
-    <form class="form-horizontal" method="POST">
-        <fieldset>
-            <div class="form-group">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                    <h1>Buckets</h1>
-                    <p>Below are your active tickets, click one to see more information.</p>    
-                </div>
-            </div>
-            
-
-            <div class="form-group">
-                <div class="col-md-2"></div>
-                <div class="col-md-8">
-                    @foreach (string bucket in Model.Tickets.Keys)
+    <table class="table table-striped table-bordered table-hover">
+        <colgroup>
+            <col span="1" style="width: 15px;"/>
+            <col span="1"/>
+            <col span="1"/>
+            <col span="1"/>
+            <col span="1"/>
+            <col span="1"/>
+        </colgroup>
+        <thead style="background-color: black; color: whitesmoke; font-weight: bold;">
+            <tr>
+                <td></td>
+                <td>ID</td>
+                <td>Subject</td>
+                <td>Status</td>
+                <td>Priority</td>
+                <td>Assigned To</td>
+            </tr>
+        </thead>
+        @foreach (string bucket in Model.Buckets)
+        {
+            <tr class="header" style="background-color:azure">
+                <td colspan="6">
+                    <span class="glyphicon glyphicon-menu-up" name="expand-icon" aria-hidden="true"></span>
+                    @bucket
+                    <span style="float: right"><b>@Model.Tickets[bucket].Count</b> Tickets</span>
+                </td>
+            </tr>
+            foreach (BucketTicket ticket in Model.Tickets[bucket])
+            {
+                <tr class="ticket-row" data-href="/buckets/view/@ticket.Id">
+                    @switch ((BucketTicketPriorityEnum)ticket.Priority)
                     {
-                        <h2>@bucket</h2>
-                        <table class="table table-striped table-bordered table-hover">
-                            <thead>
-                            <tr>
-                                <th>Ticket Subject</th>
-                                <th>Submitter</th>
-                                <th>Status</th>
-                            </tr>
-                            </thead>
-                            <tbody data-link="row" class="rowlink">
-                            @foreach (BucketTicket ticket in Model.Tickets[bucket])
-                            {
-                                <tr>
-                                    <td><a href="#@ticket.Id"><b>@ticket.Title</b></a></td>
-                                    <td>@ticket.CreatorId</td>
-                                    <td>@((BucketTicketStatusEnum) ticket.Status)</td>
-                                </tr>
-                            }
-                            </tbody>
-                        </table>
+                        case BucketTicketPriorityEnum.Low:
+                            <td style="width: 15px; background-color: dodgerblue"></td>
+                            break;
+                        case BucketTicketPriorityEnum.Medium:
+                            <td style="width: 15px; background-color: yellow"></td>
+                            break;
+                        case BucketTicketPriorityEnum.High:
+                            <td style="width: 15px; background-color: orangered"></td>
+                            break;
+                        case BucketTicketPriorityEnum.Critical:
+                            <td style="width: 15px; background-color: red"></td>
+                            break;
                     }
-                </div>
-                <div class="col-md-2"></div>
-            </div>
-        </fieldset>
-    </form>
+                    
+                    <td>@ticket.Id</td>
+                    <td>@ticket.Title</td>
+                    <td>@((BucketTicketStatusEnum) ticket.Status)</td>
+                    <td>@((BucketTicketPriorityEnum) ticket.Priority)</td>
+                    <td>@ticket.AssigneeUser</td>
+                </tr>
+            }
+        }
+    </table>
 </div>
+
+<script>
+    $('.header').click(function () {
+        var icon = $(this)[0].getElementsByTagName('td')[0].getElementsByTagName('span')[0];
+        //console.log(icon);
+        if (icon.classList.contains("glyphicon-menu-down")) {
+            icon.classList.remove("glyphicon-menu-down");
+            icon.classList.add("glyphicon-menu-up");
+        } else {
+            icon.classList.remove("glyphicon-menu-up");
+            icon.classList.add("glyphicon-menu-down");
+        }
+
+        $(this).nextUntil('tr.header').toggle();
+    });
+
+    $('.ticket-row').click(function() {
+        window.location = $(this).data("href");
+    });
+</script>
