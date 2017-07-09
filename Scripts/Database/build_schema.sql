@@ -25,8 +25,7 @@ DROP TABLE IF EXISTS `AdvancementListFactGates`;
 CREATE TABLE `AdvancementListFactGates` (
   `AdvancementListFactId` int(11) NOT NULL,
   `RequiredFactId` int(11) NOT NULL,
-  `MinimumRankRequired` int(11) DEFAULT NULL,
-  PRIMARY KEY (`AdvancementListFactId`)
+  `MinimumRankRequired` int(11) DEFAULT NULL
 ) ENGINE=InnoDB DEFAULT CHARSET=latin1 COMMENT='All gates must be passed for an AdvancementListFact for it to be available for purchase.';
 /*!40101 SET character_set_client = @saved_cs_client */;
 
@@ -57,7 +56,7 @@ CREATE TABLE `AdvancementListFacts` (
   `FactId` int(11) NOT NULL,
   `IsStaffOnly` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=771 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -73,7 +72,7 @@ CREATE TABLE `AdvancementLists` (
   `IsChargenOnly` bit(1) NOT NULL DEFAULT b'0',
   `IsStaffOnly` bit(1) NOT NULL DEFAULT b'0',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -140,8 +139,10 @@ CREATE TABLE `BucketTickets` (
   `Status` int(11) NOT NULL,
   `CreatedOn` datetime NOT NULL,
   `LastModified` datetime DEFAULT NULL,
+  `Description` varchar(4096) DEFAULT NULL,
+  `Priority` int(11) NOT NULL DEFAULT '1',
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -155,7 +156,7 @@ CREATE TABLE `Buckets` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(64) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=6 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -203,7 +204,7 @@ CREATE TABLE `FactTypes` (
   `Id` int(11) NOT NULL AUTO_INCREMENT,
   `Name` varchar(200) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=24 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -219,7 +220,7 @@ CREATE TABLE `Facts` (
   `Description` varchar(1024) DEFAULT NULL,
   `FactTypeId` int(11) NOT NULL,
   PRIMARY KEY (`Id`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=594 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 
 --
@@ -300,7 +301,7 @@ CREATE TABLE `Users` (
   `PasswordHash` varchar(512) NOT NULL,
   PRIMARY KEY (`Id`),
   UNIQUE KEY `Email_UNIQUE` (`Email`)
-) ENGINE=InnoDB DEFAULT CHARSET=latin1;
+) ENGINE=InnoDB AUTO_INCREMENT=21 DEFAULT CHARSET=latin1;
 /*!40101 SET character_set_client = @saved_cs_client */;
 /*!40103 SET TIME_ZONE=@OLD_TIME_ZONE */;
 
@@ -312,4 +313,4 @@ CREATE TABLE `Users` (
 /*!40101 SET COLLATION_CONNECTION=@OLD_COLLATION_CONNECTION */;
 /*!40111 SET SQL_NOTES=@OLD_SQL_NOTES */;
 
--- Dump completed on 2017-06-18 22:42:02
+-- Dump completed on 2017-07-09  6:51:24
