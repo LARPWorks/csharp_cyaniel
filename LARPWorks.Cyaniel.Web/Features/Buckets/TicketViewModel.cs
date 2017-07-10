@@ -39,7 +39,7 @@ namespace LARPWorks.Cyaniel.Features.Buckets
             Assignee = assignee == null ? "Unassigned" : assignee.Username;
             Status = ((BucketTicketStatusEnum)ticket.Status).ToString();
             Description = ticket.Description;
-            TicketSubject = ticket.Title;
+            Title = ticket.Title;
 
             var comments = db.Fetch<TicketComment>("SELECT * FROM TicketComments WHERE TicketId=@0", ticket.Id);
             var commentAuthors = new List<User>();

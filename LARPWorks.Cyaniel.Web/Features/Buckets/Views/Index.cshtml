@@ -1,5 +1,7 @@
-﻿@using LARPWorks.Cyaniel
+﻿@using System.Linq
+@using LARPWorks.Cyaniel
 @using LARPWorks.Cyaniel.Models
+@using LARPWorks.Cyaniel.Util
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Features.Buckets.IndexViewModel>
 @{
     Layout = "_Layout.cshtml";
@@ -7,6 +9,78 @@
 
 
 <div class="content-section">
+    <!-- Modal Ticket Creation Window -->
+    <div id="new-ticket" class="modal fade" role="dialog">
+        <div class="modal-dialog modal-lg">
+            <!-- Modal content-->
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal">&times;</button>
+                    <h4 class="modal-title">Create New Ticket</h4>
+                </div>
+                <div class="modal-body">
+                    <form class="form-horizontal" action="/buckets/create" method="POST">
+                        <fieldset>
+                            <!-- Text input-->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="Title">Ticket Title</label>
+                                <div class="col-md-8">
+                                    <input id="Title" name="Title" type="text" 
+                                           placeholder="Enter subject here..." class="form-control input-md">
+                                    <span class="help-block">Describe in a few words the subject of this ticket</span>
+                                </div>
+                            </div>
+
+                            <!-- Select Bucket -->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="Bucket">Bucket</label>
+                                <div class="col-md-4">
+                                    <select id="Bucket" name="Bucket" class="form-control">
+                                        <option name="Bucket" value=""></option>
+                                        @foreach (string bucket in Model.Buckets)
+                                        {
+                                            <option name="Bucket" value="@bucket">@bucket</option>
+                                        }
+                                    </select>
+                                    <span class="help-block">Select the closest category this ticket fits under</span>
+                                </div>
+                            </div>
+
+                            <!-- Select Priority -->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="Priority">Priority</label>
+                                <div class="col-md-4">
+                                    <select id="Priority" name="Priority" class="form-control">
+                                        @foreach (string priority in Model.Priorities)
+                                        {
+                                            <option name="Priority" value="@priority">@priority</option>
+                                        }
+                                    </select>
+                                </div>
+                            </div>
+
+                            <!-- Textarea -->
+                            <div class="form-group">
+                                <label class="col-md-2 control-label" for="editor-container">Description</label>
+                                <div class="col-md-10">
+                                    <div id="editor-container" class="form-control" name="textarea" style="height: 300px">
+                                        @*@Model.Description*@
+                                    </div>
+                                </div>
+                            </div>
+
+                            <div class="modal-footer">
+                                <button type="button" class="btn btn-danger" data-dismiss="modal">Close</button>
+                                <button type="submit" class="btn btn-primary">Create</button>
+                            </div>
+                        </fieldset>
+                    </form>
+                </div>
+            </div>
+
+        </div>
+    </div>
+
     <table class="table table-striped table-bordered table-hover">
         <colgroup>
             <col span="1" style="width: 15px;"/>
@@ -15,21 +89,32 @@
             <col span="1"/>
             <col span="1"/>
             <col span="1"/>
+            <col span="1"/>
         </colgroup>
         <thead style="background-color: black; color: whitesmoke; font-weight: bold;">
-            <tr>
-                <td></td>
-                <td>ID</td>
-                <td>Subject</td>
-                <td>Status</td>
-                <td>Priority</td>
-                <td>Assigned To</td>
-            </tr>
+        <tr>
+            <td></td>
+            <td>ID</td>
+            <td>Subject</td>
+            <td>Status</td>
+            <td>Priority</td>
+            <td>Assigned To</td>
+            <td>Age</td>
+        </tr>
+        </thead>
+        <thead>
+        <tr>
+            <td colspan="7" style="background-color: lightgray">
+                <div class="btn-toolbar" role="toolbar" aria-label="...">
+                    <button type="button" class="btn btn-default" data-toggle="modal" data-target="#new-ticket">Add New</button>
+                </div>
+            </td>
+        </tr>
         </thead>
         @foreach (string bucket in Model.Buckets)
         {
-            <tr class="header" style="background-color:azure">
-                <td colspan="6">
+            <tr class="header" style="background-color: azure">
+                <td colspan="7">
                     <span class="glyphicon glyphicon-menu-up" name="expand-icon" aria-hidden="true"></span>
                     @bucket
                     <span style="float: right"><b>@Model.Tickets[bucket].Count</b> Tickets</span>
@@ -38,7 +123,7 @@
             foreach (BucketTicket ticket in Model.Tickets[bucket])
             {
                 <tr class="ticket-row" data-href="/buckets/view/@ticket.Id">
-                    @switch ((BucketTicketPriorityEnum)ticket.Priority)
+                    @switch ((BucketTicketPriorityEnum) ticket.Priority)
                     {
                         case BucketTicketPriorityEnum.Low:
                             <td style="width: 15px; background-color: dodgerblue"></td>
@@ -53,12 +138,18 @@
                             <td style="width: 15px; background-color: red"></td>
                             break;
                     }
-                    
+
                     <td>@ticket.Id</td>
                     <td>@ticket.Title</td>
                     <td>@((BucketTicketStatusEnum) ticket.Status)</td>
                     <td>@((BucketTicketPriorityEnum) ticket.Priority)</td>
                     <td>@ticket.AssigneeUser</td>
+                    @{
+                        DateTime now = DateTime.Now;
+                        DateTime then = ticket.CreatedOn.ToLocalTime();
+
+                        <td>@((now - then).ToAgeFormat())</td>
+                    }
                 </tr>
             }
         }
@@ -82,5 +173,17 @@
 
     $('.ticket-row').click(function() {
         window.location = $(this).data("href");
+    });
+
+    var quill = new Quill('#editor-container', {
+        modules: {
+            toolbar: [
+                [{ header: [1, 2, false] }],
+                ['bold', 'italic', 'underline'],
+                ['code-block']
+            ]
+        },
+        //placeholder: 'Compose an epic...',
+        theme: 'snow'  // or 'bubble'
     });
 </script>

@@ -1,8 +1,10 @@
-﻿using System.Collections.Generic;
+﻿using System;
+using System.Collections.Generic;
 using System.Linq;
 using LARPWorks.Cyaniel.Models;
 using LARPWorks.Cyaniel.Models.Factories;
 using Nancy;
+using Nancy.ModelBinding;
 
 namespace LARPWorks.Cyaniel.Features.Buckets
 {
@@ -14,10 +16,32 @@ namespace LARPWorks.Cyaniel.Features.Buckets
             _dbFactory = dbFactory;
 
             Get["/index"] = parameters => View["Index.cshtml", GetIndexModel()];
-            Get["/create"] = parameters => View["Create.cshtml", BuildModel()];
             Post["/create"] = parameters =>
             {
-                return Response.AsRedirect(string.Format("/buckets/view/{0}", 1));
+                var model = GetViewModel<CreateViewModel>();
+                string newTicketId = string.Empty;
+
+                using (var db = dbFactory.Create())
+                {
+                    var bucket = db.SingleOrDefault<Bucket>("SELECT * FROM Buckets WHERE Name=@0",
+                        model.Bucket);
+
+                    var ticket = new BucketTicket
+                    {
+                        Title = model.Title,
+                        Description = model.Description,
+                        CreatorId = model.CurrentUser.Id,
+                        BucketId = bucket.Id,
+                        Priority = (int)Enum.GetValues(typeof(BucketTicketPriorityEnum)).Cast<BucketTicketPriorityEnum>()
+                            .First(b => b.ToString() == model.Priority),
+                        CreatedOn = DateTime.Now,
+                        LastModified = DateTime.Now
+                    };
+
+                    newTicketId = db.Insert(ticket).ToString();
+                }
+
+                return Response.AsRedirect(string.Format("/buckets/view/{0}", Int32.Parse(newTicketId)));
             };
 
             Get["/view/{Id:int}"] = parameters =>
@@ -50,24 +74,7 @@ namespace LARPWorks.Cyaniel.Features.Buckets
 
             return baseModel;
         }
-
-        private CreateViewModel BuildModel()
-        {
-            var baseModel = GetViewModel<CreateViewModel>();
-            using (var db = _dbFactory.Create())
-            {
-                var buckets = db.Fetch<Bucket>("SELECT * FROM Buckets");
-                if (buckets == null)
-                {
-                    return baseModel;
-                }
-
-                baseModel.BucketChoices = buckets.ToArray();
-            }
-
-            return baseModel;
-        }
-
+        
         private IndexViewModel GetIndexModel()
         {
             var model = GetViewModel<IndexViewModel>();
@@ -81,8 +88,11 @@ namespace LARPWorks.Cyaniel.Features.Buckets
                 foreach (var ticket in tickets)
                 {
                     ticket.Bucket = buckets.First(b => b.Id == ticket.BucketId).Name;
-                    ticket.AssigneeUser =
-                        db.SingleOrDefault<User>("SELECT * FROM Users WHERE Id=@0", ticket.AssigneeId).Username;
+                    if (ticket.AssigneeId.HasValue)
+                    {
+                        ticket.AssigneeUser =
+                            db.SingleOrDefault<User>("SELECT * FROM Users WHERE Id=@0", ticket.AssigneeId).Username;
+                    }
                 }
 
                 foreach (var bucket in buckets)

@@ -4,6 +4,7 @@ using LARPWorks.Cyaniel.Features.Users.Authentication;
 using LARPWorks.Cyaniel.Models;
 using LARPWorks.Cyaniel.Models.Factories;
 using Nancy;
+using Nancy.ModelBinding;
 
 namespace LARPWorks.Cyaniel.Features
 {
@@ -33,7 +34,7 @@ namespace LARPWorks.Cyaniel.Features
 
         protected TViewModel GetViewModel<TViewModel>(TViewModel instance = null) where TViewModel : BaseCyanielViewModel, new()
         {
-            var viewModel = instance ?? new TViewModel();
+            var viewModel = instance ?? this.Bind<TViewModel>();
             viewModel.CurrentUser = CurrentUser;
 
             return viewModel;
