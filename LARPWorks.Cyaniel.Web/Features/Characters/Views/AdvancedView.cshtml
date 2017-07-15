@@ -1,39 +1,24 @@
 ﻿@using LARPWorks.Cyaniel.Models.Characters
+@using LARPWorks.Cyaniel.Features.Characters.Views
 @inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Features.Characters.CharacterSheetViewModel>
 @{
     Layout = "_Layout.cshtml";
 }
 @{ int i = 0; }
 @section Head {
-    @*<style>
-        /**********************************************************/
-        /*                      Advanced Charsheet                */
-
-        .baseflexdiv {
-            border: 1px solid green;
-            height: 50px;
-            display: inline-flex;
-        }
-
-        .growflexdiv {
-            border: 1px solid blue;
-            height: 50px;
-            display: inline-flex;
-            flex-grow: 100;
-        }
-    </style>*@
     <link href="\Content\css\advancedview.css" rel="stylesheet">
     @RenderSection("Head", false)
 }
 <div class="content-section">
+
     <!-- Add Option Dialog -->
-    <div id="addOptionModal" class="modal fade" role="dialog">
+    <div id="addoptionalmodal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
             <div class="modal-content">
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal">&times;</button>
-                    <h4 class="modal-title">Modal Header</h4>
+                    <h4 class="modal-title">Add New</h4>
                 </div>
                 <form class="form-horizontal" method="POST">
                     <fieldset>
@@ -41,8 +26,9 @@
                             <div class="form-group">
                                 <label class="col-md-2 control-label" for="NewGameStatisticModel"></label>
                                 <div class="col-md-8">
-                                    <input id="NewGameStatisticModel" name="NewGameStatisticModel" type="text" value="@Model.NewGameStatisticModel"
-                                           class="form-control input-md">
+                                    <input id="NewGameStatisticModel" name="NewGameStatisticModel" type="text" value="@Model.NewGameStatisticModel.Name"
+                                           class="form-control input-md" placeholder="Type in the new name here...">
+                                    <div>Name</div>
                                 </div>
                             </div>
                         </div>
@@ -57,7 +43,9 @@
             </div>
         </div>
     </div>
-    
+
+
+
     <form class="form-horizontal" method="POST">
         <fieldset>
             <div class="center">
@@ -135,28 +123,36 @@
                                             <div class="growflexdiv"><h3>Life Skills</h3></div>
                                             <div class="growflexdiv"><h3>Craft Skills</h3></div>
                                             <div class="growflexdiv"><h3>Gathering Skills</h3></div>
-                                            <div class="growflexdiv">
-                                                <h2>Perks</h2>
-                                                @foreach (GameStatisticModel gsm in Model.Perks)
-                                                {
-                                                    <p>@gsm.Name</p>
-                                                }
-                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOptionModal">Add</button>
+                                            <div class="growflexdiv"><h2>Perks</h2>
+                                                @Model.Perks.List(@<li>@item.Name</li>)
+                                                <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOptionModal" data-newgsmtype="perks">Add</button>
                                             </div>
                                             <div class="growflexdiv"><h2>Flaws</h2></div>
                                             <div class="growflexdiv"><h2>Maneuvers</h2></div>
                                             <div class="growflexdiv"><h2>Miscellaneous</h2></div>
                                             <div class="growflexdiv"><h2>Priest/Rituals</h2></div>
                                             <div class="growflexdiv"><h2>Mage Techniques</h2></div>
-                                            <div class="growflexdiv"><h2>Knight Rank / Oaths</h2></div>
-                                            <div class="growflexdiv"><h2>Paladin Powers</h2></div>
-                                            <div class="growflexdiv"><h2>Leadership Trees I'm In</h2></div>
-                                                @foreach (GameStatisticModel gsm in Model.Leaders)
+                                            <div class="growflexdiv"><h2>Knight Rank / Oaths</h2>
+                                                @Model.KnightOrders.List(@<li>@item.Name</li>)
+                                            </div>
+                                            <div class="growflexdiv"><h2>Paladin Powers</h2>
+                                            </div>
+                                            <div class="growflexdiv">
+                                                <h2>Leadership Trees I'm In</h2>
+                                                @*@foreach (GameStatisticModel gsm in Model.Leaders)
                                                 {
                                                     <p>@gsm.Name</p>
-                                                }
-                                            <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOptionModal">Add</button>
-                                            <div class="growflexdiv"><h2>Leadership People In My Tree</h2></div>
+                                                }*@
+                                                @Model.Leaders.List(@<li>@item.Name</li>)
+                                                <button type="button" onclick="setObjectType()" data-toggle="modal" data-target="#addoptionalmodal">Open Modal</button>
+                                                @*<button type="button" id="wtf" class="btn btn-primary" data-toggle="modal" data-target="#addOptionModal" data-newgsmtype="leader">Add</button>*@
+                                                @*<a href="#addOptionModal" data-toggle="modal" data-book-id="my_id_value">Open Modal</a>*@
+                                                @*<button type="button" class="btn btn-default" data-toggle="modal" data-target="#addOptionModal_@item.ContentId" data-id="@item.ContentiId">Add</button>*@
+                                                @*<button id type="button" class="btn btn-default" data-toggle="modal" data-gsmtype="Leader">Add</button>*@
+                                            </div>
+                                            <div class="growflexdiv"><h2>Leadership People In My Tree</h2>
+                                                @Model.Followers.List(@<li>@item.Name</li>)
+                                            </div>
                                         </div>
                                         i++;
                                         continue;
@@ -178,4 +174,11 @@
             </div>
         </fieldset>
     </form>
+
+    <script>
+        function setObjectType() {
+            alert("wtf");
+        }
+    </script>
+
 </div>

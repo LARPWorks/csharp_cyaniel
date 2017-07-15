@@ -94,6 +94,7 @@
     <Compile Include="Features\Characters\CharacterListViewModel.cs" />
     <Compile Include="Features\Characters\CharacterModule.cs" />
     <Compile Include="Features\Characters\CharacterSheetViewModel.cs" />
+    <Compile Include="Features\Characters\Views\ViewRazerExtensions.cs" />
     <Compile Include="Features\CyanielModule.cs" />
     <Compile Include="Features\Debug\DebugFactsData.cs" />
     <Compile Include="Features\Debug\DebugModule.cs" />
@@ -187,6 +188,7 @@
     <Content Include="Features\Characters\Views\Sheets\Equipment.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
+    <None Include="Features\Characters\Views\AddOptionPartial.cshtml" />
     <None Include="Models\Generated\PetaPoco.Core.ttinclude" />
     <None Include="Models\Generated\PetaPoco.Generator.ttinclude" />
     <None Include="packages.config" />

@@ -19,10 +19,9 @@ namespace LARPWorks.Cyaniel.Features.Characters
 
             Get["/view/{CharacterId:int}/{Stage?Details}"] = parameters =>
             {
-                bool useGuidedView = true;
+                bool useGuidedView = false;
 
                 ViewBag.Stage = parameters.Stage;
-
                 var stagePage = "Sheets/" + ViewBag.Stage + ".cshtml";
 
                 return

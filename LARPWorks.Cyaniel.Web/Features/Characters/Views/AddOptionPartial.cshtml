@@ -1,0 +1,42 @@
+﻿using LARPWorks.Cyaniel.Models.Characters
+@inherits Nancy.ViewEngines.Razor.NancyRazorViewBase<LARPWorks.Cyaniel.Features.Characters.CharacterSheetViewModel>
+@{
+    Layout = "_Layout.cshtml";
+}
+@section Head {
+    <link href="\Content\css\advancedview.css" rel="stylesheet">
+    @RenderSection("Head", false)
+}
+
+<!-- Add Option Dialog -->
+<div id="addoptionalmodal" class="modal fade" role="dialog">
+    <div class="modal-dialog modal-lg">
+        <!-- Modal content-->
+        <div class="modal-content">
+            <div class="modal-header">
+                <button type="button" class="close" data-dismiss="modal">&times;</button>
+                <h4 class="modal-title">Add New</h4>
+            </div>
+            <form class="form-horizontal" method="POST">
+                <fieldset>
+                    <div class="modal-body">
+                        <div class="form-group">
+                            <label class="col-md-2 control-label" for="NewGameStatisticModel"></label>
+                            <div class="col-md-8">
+                                <input id="NewGameStatisticModel" name="NewGameStatisticModel" type="text" value="@Model.NewGameStatisticModel.Name"
+                                       class="form-control input-md" placeholder="Type in the new name here...">
+                                <div>Name</div>
+                            </div>
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <div class="form-group">
+                            <button data-dismiss="modal" class="btn btn-danger" type="button">Cancel</button>
+                            <button class="btn btn-primary">Create</button>
+                        </div>
+                    </div>
+                </fieldset>
+            </form>
+        </div>
+    </div>
+</div>

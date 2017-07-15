@@ -67,6 +67,7 @@ namespace LARPWorks.Cyaniel.Features.Characters
             };
 
             Character = new CharacterModel();
+            NewGameStatisticModel = new GameStatisticModel();
         }
 
         public string SanitizeSectionName(string sectionName)
@@ -99,6 +100,7 @@ namespace LARPWorks.Cyaniel.Features.Characters
                 BasicManeuvers = LoadGameStatistics(db, AdvancementListEnum.BasicManeuvers);
                 AdvancedManeuvers = LoadGameStatistics(db, AdvancementListEnum.AdvancedManeuvers);
                 Concepts = LoadGameStatistics(db, AdvancementListEnum.Concepts);
+                Leaders = new GameStatisticModel[1] { new GameStatisticModel() { Name = "test"} };
 
                 var cultureSkillFacts =
                     db.Fetch<AdvancementListFact>(
