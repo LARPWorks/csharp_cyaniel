@@ -15,7 +15,8 @@ namespace LARPWorks.Cyaniel.Features.Characters
         public CharacterModule(IDbFactory dbFactory) : base("Characters")
         {
             _dbFactory = dbFactory;
-            var characterSheetViewModel = GetViewModel<CharacterSheetViewModel>(dbFactory);
+            CharacterSheetViewModel characterSheetViewModel = null;// = GetViewModel<CharacterSheetViewModel>(dbFactory);
+            CharacterListViewModel characterListViewModel = BuildIndexModel();
 
             Get["/view/{CharacterId:int}/{Stage?Details}"] = parameters =>
             {
@@ -24,11 +25,24 @@ namespace LARPWorks.Cyaniel.Features.Characters
                 ViewBag.Stage = parameters.Stage;
                 var stagePage = "Sheets/" + ViewBag.Stage + ".cshtml";
 
+                if (null == characterSheetViewModel) { BuildCharacterSheetViewModel(parameters.CharacterId); }
+
                 return
                     View[useGuidedView ? stagePage : "AdvancedView.cshtml", characterSheetViewModel];
             };
 
-            Get["/index"] = parameters => View["Index.cshtml", BuildIndexModel()];
+            Get["/addNewGSM/{characterId}"] = parameters =>
+            {
+                var gameStatisticModelName = parameters.gameStatisticModelName;
+                var characterId = Int32.Parse(parameters.characterId);
+
+                if (null == characterSheetViewModel) { BuildCharacterSheetViewModel(parameters.characterId); }
+
+                return View["AddOptionPartial.cshtml", characterSheetViewModel];
+            };
+
+            Get["/index"] = parameters => View["Index.cshtml", characterListViewModel];
+
             Post["/index"] = parameters =>
             {
                 var model = GetViewModel(this.Bind<CharacterListViewModel>());
@@ -61,8 +75,10 @@ namespace LARPWorks.Cyaniel.Features.Characters
                 //return View["Index.cshtml", model];
                 return Response.AsRedirect("/characters/view/" + newCharacterID);
             };
+
             Post["/toggle_view"] = parameters =>
             {
+                if (null == characterSheetViewModel) { BuildCharacterSheetViewModel(); }
                 try
                 {
                     return View["AdvancedView.cshtml", characterSheetViewModel];
@@ -72,6 +88,7 @@ namespace LARPWorks.Cyaniel.Features.Characters
                 }
                 return null;
             };
+
             Post["/delete/{characterId}"] = parameters =>
             {
                 var characterId = Int32.Parse(parameters.characterId);
@@ -85,6 +102,16 @@ namespace LARPWorks.Cyaniel.Features.Characters
 
                 return Response.AsRedirect("/characters/index");
             };
+
+            void BuildCharacterSheetViewModel(int characterId = -1)
+            {
+                characterSheetViewModel = GetViewModel<CharacterSheetViewModel>(dbFactory);
+                if (characterId != -1)
+                {
+                    characterSheetViewModel.Character = characterListViewModel.Characters.SingleOrDefault(character => character.Id == characterId);
+                }
+                Console.WriteLine("blah");
+            }
         }
 
         public CharacterListViewModel BuildIndexModel()

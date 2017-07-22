@@ -11,7 +11,7 @@
 }
 <div class="content-section">
 
-    <!-- Add Option Dialog -->
+    @*<!-- Add Option Dialog -->
     <div id="addoptionalmodal" class="modal fade" role="dialog">
         <div class="modal-dialog modal-lg">
             <!-- Modal content-->
@@ -42,9 +42,7 @@
                 </form>
             </div>
         </div>
-    </div>
-
-
+    </div>*@
 
     <form class="form-horizontal" method="POST">
         <fieldset>
@@ -55,7 +53,7 @@
                 <div class="row">
                     <label class="col-md-2 control-label" for="CharacterName">Character Name</label>
                     <div class="col-md-8">
-                        <input id="CharacterName" name="CharacterName" type="text" value=""
+                        <input id="CharacterName" name="CharacterName" type="text" value="@Model.Character.Name"
                                class="form-control input-md" required="">
                     </div>
                 </div>
@@ -124,7 +122,7 @@
                                             <div class="growflexdiv"><h3>Craft Skills</h3></div>
                                             <div class="growflexdiv"><h3>Gathering Skills</h3></div>
                                             <div class="growflexdiv"><h2>Perks</h2>
-                                                @Model.Perks.List(@<li>@item.Name</li>)
+                                                @*@Model.Perks.List(@<li>@item.Name</li>)*@
                                                 <button type="button" class="btn btn-primary" data-toggle="modal" data-target="#addOptionModal" data-newgsmtype="perks">Add</button>
                                             </div>
                                             <div class="growflexdiv"><h2>Flaws</h2></div>
@@ -145,6 +143,11 @@
                                                 }*@
                                                 @Model.Leaders.List(@<li>@item.Name</li>)
                                                 <button type="button" onclick="setObjectType()" data-toggle="modal" data-target="#addoptionalmodal">Open Modal</button>
+                                                <button class="btn btn-primary" formmethod="POST" formaction="/addgsm/leader/@Model.Character.Id">Add</button>
+                                                @*/add/Leader/@Model.Character.Id*@
+                                                @*formmethod="GET" formaction="/add/Leader"*@
+                                                @*http://localhost:5000/add/Leader?CharacterName=Blank+Character*@
+                                                @*http://localhost:5000/add/Leader?CharacterName=Blank+Character*@
                                                 @*<button type="button" id="wtf" class="btn btn-primary" data-toggle="modal" data-target="#addOptionModal" data-newgsmtype="leader">Add</button>*@
                                                 @*<a href="#addOptionModal" data-toggle="modal" data-book-id="my_id_value">Open Modal</a>*@
                                                 @*<button type="button" class="btn btn-default" data-toggle="modal" data-target="#addOptionModal_@item.ContentId" data-id="@item.ContentiId">Add</button>*@
