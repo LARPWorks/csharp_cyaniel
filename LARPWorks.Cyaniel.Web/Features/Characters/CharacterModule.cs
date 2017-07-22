@@ -74,6 +74,24 @@ namespace LARPWorks.Cyaniel.Features.Characters
 
                 return Response.AsRedirect("/characters/index");
             };
+
+            Post["/upload/{characterId}"] = parameters =>
+            {
+                var postedFile = Request.Files.FirstOrDefault();
+                var queryInfo = Request.Form;
+
+                if (postedFile == null)
+                {
+                    Session["TempData"] = "No file was provided!";
+                    Session["TempType"] = "ERROR";
+                    return Response.AsRedirect("characters/index");
+                }
+
+                // Parse the excel file here.
+
+                
+                return Response.AsRedirect("characters/index");
+            };
         }
 
         public CharacterListViewModel BuildIndexModel()
@@ -87,6 +105,12 @@ namespace LARPWorks.Cyaniel.Features.Characters
                 {
                     model.Characters.Add(CharacterModel.BuildFromDatabase(_dbFactory, character.Id));
                 }
+            }
+
+            if (Session["TempType"] != null && 
+                Session["TempType"].ToString() == "ERROR")
+            {
+                ViewBag.ValidationError = Session["TempData"].ToString();
             }
 
             return model;

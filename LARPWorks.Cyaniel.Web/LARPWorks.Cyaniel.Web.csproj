@@ -94,6 +94,8 @@
     <Compile Include="Features\Characters\CharacterListViewModel.cs" />
     <Compile Include="Features\Characters\CharacterModule.cs" />
     <Compile Include="Features\Characters\CharacterSheetViewModel.cs" />
+    <Compile Include="Features\Characters\Downtime\DowntimeIndexViewModel.cs" />
+    <Compile Include="Features\Characters\Downtime\DowntimeModule.cs" />
     <Compile Include="Features\CyanielModule.cs" />
     <Compile Include="Features\Debug\DebugFactsData.cs" />
     <Compile Include="Features\Debug\DebugModule.cs" />
@@ -134,6 +136,9 @@
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Content\js\jquery-ui.min.js">
+      <CopyToOutputDirectory>Always</CopyToOutputDirectory>
+    </Content>
+    <Content Include="Features\Characters\Downtime\Views\Index.cshtml">
       <CopyToOutputDirectory>Always</CopyToOutputDirectory>
     </Content>
     <Content Include="Features\Characters\Views\AdvancedView.cshtml">
