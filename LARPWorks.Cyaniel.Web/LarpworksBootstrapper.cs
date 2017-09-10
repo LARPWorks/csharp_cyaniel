@@ -39,6 +39,19 @@ namespace LARPWorks.Cyaniel
                     CryptographyConfiguration = cryptographyConfiguration
                 };
             FormsAuthentication.Enable(pipelines, formsAuthConfiguration);
+
+            // This code exists to 'hack' in a tempdata standin. This allows
+            // some data to transfer between requests.
+            //pipelines.BeforeRequest += (ctx) =>
+            //{
+            //    if (ctx.Request.Session["TempData"] != null && !string.IsNullOrEmpty(ctx.Request.Session["TempData"] as string))
+            //    {
+            //        ctx.ViewBag.TempData = ctx.Request.Session["TempData"];
+            //        ctx.ViewBag.TempType = ctx.Request.Session["TempType"];
+            //        ctx.Request.Session.DeleteAll();
+            //    }
+            //    return null;
+            //};
         }
 
         protected override void ConfigureApplicationContainer(IContainer existingContainer)

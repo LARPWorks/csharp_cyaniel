@@ -86,6 +86,18 @@
     <Reference Include="System.Xml" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Data\Attribute.cs" />
+    <Compile Include="Data\Character.cs" />
+    <Compile Include="Data\Downtime\DowntimeAction.cs" />
+    <Compile Include="Data\Downtime\LeadershipNode.cs" />
+    <Compile Include="Data\Foci.cs" />
+    <Compile Include="Data\FociType.cs" />
+    <Compile Include="Data\IPurchaseable.cs" />
+    <Compile Include="Data\Rank.cs" />
+    <Compile Include="Data\Skill.cs" />
+    <Compile Include="Data\SkillType.cs" />
+    <Compile Include="Data\Trait.cs" />
+    <Compile Include="Data\TraitType.cs" />
     <Compile Include="Features\Admin\AdminModule.cs" />
     <Compile Include="Features\Buckets\BucketModule.cs" />
     <Compile Include="Features\Buckets\CreateViewModel.cs" />
@@ -108,11 +120,7 @@
     <Compile Include="Features\SharedViews\BaseCyanielViewModel.cs" />
     <Compile Include="Features\Users\UserModule.cs" />
     <Compile Include="LarpworksBootstrapper.cs" />
-    <Compile Include="Models\Characters\AttributeModel.cs" />
-    <Compile Include="Models\Characters\CharacterModel.cs" />
     <Compile Include="Models\Characters\GameStatisticModel.cs" />
-    <Compile Include="Models\Characters\PerkAndFlawModel.cs" />
-    <Compile Include="Models\Characters\SkillModel.cs" />
     <Compile Include="Models\Factories\CyanielDatabaseFactory.cs" />
     <Compile Include="Models\Factories\IDbFactory.cs" />
     <Compile Include="Models\Generated\Database.cs">

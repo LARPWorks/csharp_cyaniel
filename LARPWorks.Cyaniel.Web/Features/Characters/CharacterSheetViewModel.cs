@@ -3,6 +3,7 @@ using System.Linq;
 using LARPWorks.Cyaniel.Features.SharedViews;
 using LARPWorks.Cyaniel.Models;
 using LARPWorks.Cyaniel.Models.Characters;
+//using LARPWorks.Cyaniel.Models.Characters;
 using LARPWorks.Cyaniel.Models.Factories;
 
 namespace LARPWorks.Cyaniel.Features.Characters
@@ -10,7 +11,7 @@ namespace LARPWorks.Cyaniel.Features.Characters
     public class CharacterSheetViewModel : BaseCyanielViewModel
     {
 
-        public CharacterModel Character { get; set; }
+        //public CharacterModel Character { get; set; }
 
         public bool UseGuidedView { get; set; }
 
@@ -62,7 +63,7 @@ namespace LARPWorks.Cyaniel.Features.Characters
                 //"Notes"
             };
 
-            Character = new CharacterModel();
+            //Character = new CharacterModel();
         }
 
         public string SanitizeSectionName(string sectionName)

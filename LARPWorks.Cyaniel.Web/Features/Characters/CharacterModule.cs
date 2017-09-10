@@ -53,7 +53,7 @@ namespace LARPWorks.Cyaniel.Features.Characters
                     var characters = db.Fetch<Character>("SELECT * FROM Characters WHERE IsDeleted=0");
                     foreach (var character in characters)
                     {
-                        model.Characters.Add(CharacterModel.BuildFromDatabase(_dbFactory, character.Id));
+                        //model.Characters.Add(CharacterModel.BuildFromDatabase(_dbFactory, character.Id));
                     }
                 }
 
@@ -103,7 +103,7 @@ namespace LARPWorks.Cyaniel.Features.Characters
                 var characters = db.Fetch<Character>("SELECT * FROM Characters WHERE IsDeleted=0");
                 foreach (var character in characters)
                 {
-                    model.Characters.Add(CharacterModel.BuildFromDatabase(_dbFactory, character.Id));
+                    //model.Characters.Add(CharacterModel.BuildFromDatabase(_dbFactory, character.Id));
                 }
             }
 

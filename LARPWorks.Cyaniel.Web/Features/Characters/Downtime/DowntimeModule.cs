@@ -1,4 +1,6 @@
-﻿using LARPWorks.Cyaniel.Features.SharedViews;
+﻿using System.Collections.Generic;
+using LARPWorks.Cyaniel.Data;
+using LARPWorks.Cyaniel.Features.SharedViews;
 
 namespace LARPWorks.Cyaniel.Features.Characters.Downtime
 {
@@ -8,7 +10,18 @@ namespace LARPWorks.Cyaniel.Features.Characters.Downtime
         {
             Get["/index"] = parameters =>
             {
-                return View["Index.cshtml", new DowntimeIndexViewModel("Edward Fitzdrake", 1, 1)];
+                var model = new DowntimeIndexViewModel(CurrentUser, new Character
+                {
+                    Name = "Edward Fitzdrake",
+                    Id = 1,
+                    UserId = 1,
+                    Traits = new List<Trait>
+                    {
+                        new Trait { Name = "Retainer", Notes = "Trevor Beaumond", Type = TraitType.Perk },
+                        new Trait { Name = "Retainer", Notes = "Arthur LeCarde", Type = TraitType.Perk }
+                    }
+                });
+                return View["Index.cshtml", model];
             };
         }
     }
