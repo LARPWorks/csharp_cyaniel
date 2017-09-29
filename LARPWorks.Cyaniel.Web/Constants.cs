@@ -43,6 +43,7 @@ namespace LARPWorks.Cyaniel
         ReligiousFactions = 20,
         AdvancedFoci = 21,
         Concepts = 22,
+        Leaders = 23
     }
 
     public enum AdvancementListEnum : ushort

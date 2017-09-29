@@ -111,6 +111,7 @@
     <Compile Include="Models\Characters\CharacterModel.cs" />
     <Compile Include="Models\Characters\GameStatisticModel.cs" />
     <Compile Include="Models\Characters\PerkAndFlawModel.cs" />
+    <Compile Include="Models\Characters\LeaderModel.cs" />
     <Compile Include="Models\Characters\SkillModel.cs" />
     <Compile Include="Models\Factories\CyanielDatabaseFactory.cs" />
     <Compile Include="Models\Factories\IDbFactory.cs" />

@@ -76,6 +76,21 @@ namespace LARPWorks.Cyaniel.Features.Characters
                 return Response.AsRedirect("/characters/view/" + newCharacterID);
             };
 
+            Post["/view/{CharacterId:int}"] = parameters =>
+            {
+                if (null == characterSheetViewModel) { BuildCharacterSheetViewModel(parameters.CharacterId); }
+                var model = GetViewModel(this.Bind<CharacterListViewModel>());
+
+                using (var db = dbFactory.Create())
+                {
+                    //characterSheetViewModel.Character.Leaders.Add(new LeaderModel() { Name = "new" });
+                    //characterSheetViewModel.Character.AddFact(dbFactory, new Fact() { Name = "name", Description = "desc", FactTypeId = (int)FactTypeEnum.Leaders});
+                    characterSheetViewModel.Character.Skills.Add(new SkillModel() { Name = characterSheetViewModel.NewFactName });
+                }
+
+                return Response.AsRedirect("/characters/view/" + characterSheetViewModel.Character.Id);
+            };
+
             Post["/toggle_view"] = parameters =>
             {
                 if (null == characterSheetViewModel) { BuildCharacterSheetViewModel(); }
@@ -110,7 +125,6 @@ namespace LARPWorks.Cyaniel.Features.Characters
                 {
                     characterSheetViewModel.Character = characterListViewModel.Characters.SingleOrDefault(character => character.Id == characterId);
                 }
-                Console.WriteLine("blah");
             }
         }
 

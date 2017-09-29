@@ -11,6 +11,7 @@ namespace LARPWorks.Cyaniel.Models.Characters
         public string Name { get { return _backingCharacter.Name; } set { _backingCharacter.Name = value; } }
         public List<SkillModel> Skills { get; protected set; }
         public List<AttributeModel> Attributes { get; protected set; }
+        public List<LeaderModel> Leaders { get; protected set; }
 
         public DateTime CreationDate
         {
@@ -26,13 +27,30 @@ namespace LARPWorks.Cyaniel.Models.Characters
         {
             Skills = new List<SkillModel>();
             Attributes = new List<AttributeModel>();
+            Leaders = new List<LeaderModel>();
 
             _backingCharacter = new Character();
             Name = "Blank Character";
             Id = -1;
             CreationDate = DateTime.UtcNow;
         }
-        
+
+
+        //public bool AddFact(IDbFactory factory, Fact fact) {
+        //    using (var db = factory.Create())
+        //    {
+        //        db.Insert(fact);
+        //        return true;
+        //    }
+        //}
+
+        // Returns true if the write is successful, false otherwise
+        public bool UpdateCharacterToDatabase(IDbFactory factory) {
+            using (var db = factory.Create()) {
+                return (db.Update(_backingCharacter) == 1); // returns true if 1 row is updated (expected), returns false otherwise
+            }
+        }
+
         public static CharacterModel BuildFromDatabase(IDbFactory factory, int characterId)
         {
             var model = new CharacterModel();
