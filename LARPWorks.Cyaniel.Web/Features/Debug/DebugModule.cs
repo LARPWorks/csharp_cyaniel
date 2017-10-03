@@ -84,47 +84,47 @@ namespace LARPWorks.Cyaniel.Features.Debug
                             }
                         }
 
-                        // Working on adding all the 'modifiers' in the advancement lists
-                        // for all social statuses.
-                        foreach (var socialStatus in data.SocialStatusSkills.Keys)
-                        {
-                            var factKey = factMappings[socialStatus];
-                            foreach (var skill in data.SocialStatusSkills[socialStatus])
-                            {
-                                var skillKey = factMappings[skill];
-                                var advancementListFactKey =
-                                    db.Single<AdvancementListFact>(
-                                        "SELECT * FROM AdvancementListFacts WHERE FactId=@0 AND AdvancementListId=@1", skillKey,
-                                        (int)AdvancementListEnum.SocialStatusSkills).Id;
+                        //// Working on adding all the 'modifiers' in the advancement lists
+                        //// for all social statuses.
+                        //foreach (var socialStatus in data.SocialStatusSkills.Keys)
+                        //{
+                        //    var factKey = factMappings[socialStatus];
+                        //    foreach (var skill in data.SocialStatusSkills[socialStatus])
+                        //    {
+                        //        var skillKey = factMappings[skill];
+                        //        var advancementListFactKey =
+                        //            db.Single<AdvancementListFact>(
+                        //                "SELECT * FROM AdvancementListFacts WHERE FactId=@0 AND AdvancementListId=@1", skillKey,
+                        //                (int)AdvancementListEnum.SocialStatusSkills).Id;
 
-                                db.Insert(new AdvancementListFactModifier
-                                {
-                                    AdvancementListFactId = advancementListFactKey,
-                                    FactRequirementId = factKey
-                                });
-                            }
-                        }
+                        //        db.Insert(new AdvancementListFactModifier
+                        //        {
+                        //            AdvancementListFactId = advancementListFactKey,
+                        //            FactRequirementId = factKey
+                        //        });
+                        //    }
+                        //}
 
                         // Working on adding all the 'modifiers' in the advancement lists
                         // for all cultures
-                        foreach (var culture in data.CultureSkills.Keys)
-                        {
-                            var factKey = factMappings[culture];
-                            foreach (var skill in data.CultureSkills[culture])
-                            {
-                                var skillKey = factMappings[skill];
-                                var advancementListFactKey =
-                                    db.Single<AdvancementListFact>(
-                                        "SELECT * FROM AdvancementListFacts WHERE FactId=@0 AND AdvancementListId=@1", skillKey,
-                                        (int)AdvancementListEnum.CultureSkills).Id;
+                        //foreach (var culture in data.CultureSkills.Keys)
+                        //{
+                        //    var factKey = factMappings[culture];
+                        //    foreach (var skill in data.CultureSkills[culture])
+                        //    {
+                        //        var skillKey = factMappings[skill];
+                        //        var advancementListFactKey =
+                        //            db.Single<AdvancementListFact>(
+                        //                "SELECT * FROM AdvancementListFacts WHERE FactId=@0 AND AdvancementListId=@1", skillKey,
+                        //                (int)AdvancementListEnum.CultureSkills).Id;
 
-                                db.Insert(new AdvancementListFactModifier
-                                {
-                                    AdvancementListFactId = advancementListFactKey,
-                                    FactRequirementId = factKey
-                                });
-                            }
-                        }
+                        //        db.Insert(new AdvancementListFactModifier
+                        //        {
+                        //            AdvancementListFactId = advancementListFactKey,
+                        //            FactRequirementId = factKey
+                        //        });
+                        //    }
+                        //}
 
                         // This code is for adding all the gates.
                         AddGates(db, factMappings, data.EsotericGates, AdvancementListEnum.Esoterics);
@@ -273,28 +273,28 @@ namespace LARPWorks.Cyaniel.Features.Debug
         public void AddGates(Database db, Dictionary<string, int> factMappings, 
             Dictionary<string, string[]> gates, AdvancementListEnum advancementList)
         {
-            foreach (var fact in gates.Keys)
-            {
-                var factKey = factMappings[fact];
-                var advancementFactKey =
-                    db.Single<AdvancementListFact>(
-                        "SELECT * FROM AdvancementListFacts WHERE FactId=@0 AND AdvancementListId=@1",
-                        factKey, (int)advancementList).Id;
-                foreach (var requirement in gates[fact])
-                {
-                    if (!factMappings.ContainsKey(requirement))
-                    {
-                        throw new Exception("Unable to find fact mapping for " + requirement);
-                    }
+            //foreach (var fact in gates.Keys)
+            //{
+            //    var factKey = factMappings[fact];
+            //    //var advancementFactKey =
+            //    //    db.Single<AdvancementListFact>(
+            //    //        "SELECT * FROM AdvancementListFacts WHERE FactId=@0 AND AdvancementListId=@1",
+            //    //        factKey, (int)advancementList).Id;
+            //    foreach (var requirement in gates[fact])
+            //    {
+            //        if (!factMappings.ContainsKey(requirement))
+            //        {
+            //            throw new Exception("Unable to find fact mapping for " + requirement);
+            //        }
 
-                    var requirementKey = factMappings[requirement];
-                    db.Insert(new AdvancementListFactGate
-                    {
-                        AdvancementListFactId = advancementFactKey,
-                        RequiredFactId = requirementKey
-                    });
-                }
-            }
+            //        var requirementKey = factMappings[requirement];
+            //        db.Insert(new AdvancementListFactGate
+            //        {
+            //            AdvancementListFactId = advancementFactKey,
+            //            RequiredFactId = requirementKey
+            //        });
+            //    }
+            //}
         }
     }
 #endif
