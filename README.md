@@ -4,14 +4,12 @@
 
 <h3>Setting up a Working Dev Environment</h3>
 
-1. Install MariaDB (latest version) ( https://downloads.mariadb.org/ )
-2. Install a MySQL client of choice ( IE: MySQL Workbench )
-3. Clone the project, change directory to the project root.
-4. From the Script/Database directory, run the file 'build_schema.sql' on your database.
-5. Create user 'larpworks_admin' with password 'larpworks'.
-6. Open the project in Visual Studio
-7. Make sure the compiler is in "Debug" mode, and run the project.
-8. Navigate to http://localhost:5000/
+1. Create a GitHub account.
+2. Get access added by contacting Scott Spalding.
+3. Clone the repo from this page: https://github.com/LARPWorks/csharp_cyaniel .  If you're a novice, you should probably do it in a tool like SourceTree.
+4. Open the project (.sln file) in Visual Studio.
+5. Make sure the compiler is in "Debug" mode, and run the project.
+6. Navigate to http://localhost:5000/
 
 <h3>Development Guidelines</h3>
 1. New features should go into feature branches.</br>
