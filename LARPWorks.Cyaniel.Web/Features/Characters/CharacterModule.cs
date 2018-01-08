@@ -107,11 +107,11 @@ namespace LARPWorks.Cyaniel.Features.Characters
                 }
             }
 
-            if (Session["TempType"] != null && 
-                Session["TempType"].ToString() == "ERROR")
-            {
-                ViewBag.ValidationError = Session["TempData"].ToString();
-            }
+            //if (Session["TempType"] != null && 
+            //    Session["TempType"].ToString() == "ERROR")
+            //{
+            //    ViewBag.ValidationError = Session["TempData"].ToString();
+            //}
 
             return model;
         }
